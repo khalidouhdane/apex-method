@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX METHOD — Un corps fort. Un mental solide. Une vie maîtrisée.</title>
+  <meta name="description" content="APEX METHOD par Alexandre Monteiro. Programmes de transformation physique et mentale pour hommes. ORION, Papa Strong, LÉO — atteins ton sommet.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Prevent FOUC before GSAP loads */
+    .hero-text-block, .phase-stats, .phase-pillars { opacity: 0; }
+    #nav { visibility: hidden; opacity: 0; }
+    .character-wrap, .orbital-rings {
+      visibility: hidden;
+      opacity: 0;
+      transform: scale(0.72);
+      transform-origin: center bottom;
+    }  </style>
+</head>
+<body>
+  <!-- Global Background / Studio Lighting -->
+  <div class="global-bg">
+    <div class="global-gradient"></div>
+    <div class="global-grain"></div>
+    <div class="global-glow" id="hero-glow"></div>
+    <div class="global-glow-bottom"></div>
+  </div>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div id="trail-container" style="position: absolute; inset: 0; pointer-events: none; z-index: 1;">
+      <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+        <defs>
+          <linearGradient id="trail-grad" x1="0%" y1="100%" x2="50%" y2="0%">
+            <stop offset="0%" stop-color="transparent" />
+            <stop offset="100%" stop-color="#CC8E66" />
+          </linearGradient>
+        </defs>
+        <path id="trail-left" class="trail-path" d="M 200 800 L 500 200" fill="none" stroke="url(#trail-grad)" stroke-width="2" style="opacity: 0;" />
+        <path id="trail-right" class="trail-path" d="M 800 800 L 500 200" fill="none" stroke="url(#trail-grad)" stroke-width="2" style="opacity: 0;" />
+      </svg>
+    </div>
+
+    <div class="loader-inner" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 60px;">
+      <svg width="140" height="42" viewBox="0 0 66 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="loader-logo-svg">
+        <path class="loader-logo-path" d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="white"/>
+        <path class="loader-logo-path" d="M29.5851 0H21.1414L22.7665 1.88766V20H27.5243V12.0214H29.6154C31.5246 12.0214 33.0398 11.475 34.1573 10.3745C35.2748 9.2778 35.8316 7.80283 35.8316 5.95338C35.8316 4.10394 35.3051 2.57929 34.2558 1.54757C33.2065 0.515858 31.6496 0 29.5851 0ZM30.445 7.35575C30.1419 7.69201 29.7214 7.86397 29.1835 7.86397H27.5243V4.16507H29.1835C29.7214 4.16507 30.1419 4.32556 30.445 4.65418C30.7518 4.9828 30.9033 5.42606 30.9033 5.98395C30.9033 6.54184 30.7518 7.01949 30.445 7.35575Z" fill="white"/>
+        <path class="loader-logo-path" d="M41.9607 15.491H46.658V20H37.1801V1.88766L35.5513 0H46.5746V4.50898H41.9607V7.60413H46.4345V12.052H41.9607V15.491Z" fill="white"/>
+        <path class="loader-logo-path" d="M66 20H60.4694L56.5449 13.9014C55.9312 14.807 55.3592 15.6859 54.8251 16.5304C54.291 17.3787 53.8137 18.1391 53.3932 18.8154C52.9727 19.488 52.7227 19.8854 52.647 20H47.2906L53.7948 9.68284L47.5217 0H53.3364L56.8025 5.49102L60.155 0H65.7689L59.5527 9.82805L66 20Z" fill="white"/>
+      </svg>
+      <div id="loader-percent" style="font-family: 'Platform', sans-serif; font-size: 14px; letter-spacing: 0.4em; color: #CC8E66; opacity: 0;">0%</div>
+    </div>
+  </div>
+
+  <!-- Cursor -->
+  <div id="cursor" class="custom-cursor"></div>
+  <div id="cursor-follower" class="cursor-follower"></div>
+
+  <!-- Navigation (Restructured: logo center, links left) -->
+  <nav id="nav">
+    <div class="nav-left">
+      <a href="#programmes" class="nav-link">Programmes</a>
+      <a href="#methode" class="nav-link">La Méthode</a>
+      <a href="#blog" class="nav-link">Blog</a>
+    </div>
+    <a href="#" class="nav-logo">
+      <svg width="66" height="20" viewBox="0 0 66 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="apex-svg-logo">
+        <path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/>
+        <path d="M29.5851 0H21.1414L22.7665 1.88766V20H27.5243V12.0214H29.6154C31.5246 12.0214 33.0398 11.475 34.1573 10.3745C35.2748 9.2778 35.8316 7.80283 35.8316 5.95338C35.8316 4.10394 35.3051 2.57929 34.2558 1.54757C33.2065 0.515858 31.6496 0 29.5851 0ZM30.445 7.35575C30.1419 7.69201 29.7214 7.86397 29.1835 7.86397H27.5243V4.16507H29.1835C29.7214 4.16507 30.1419 4.32556 30.445 4.65418C30.7518 4.9828 30.9033 5.42606 30.9033 5.98395C30.9033 6.54184 30.7518 7.01949 30.445 7.35575Z" fill="currentColor"/>
+        <path d="M41.9607 15.491H46.658V20H37.1801V1.88766L35.5513 0H46.5746V4.50898H41.9607V7.60413H46.4345V12.052H41.9607V15.491Z" fill="currentColor"/>
+        <path d="M66 20H60.4694L56.5449 13.9014C55.9312 14.807 55.3592 15.6859 54.8251 16.5304C54.291 17.3787 53.8137 18.1391 53.3932 18.8154C52.9727 19.488 52.7227 19.8854 52.647 20H47.2906L53.7948 9.68284L47.5217 0H53.3364L56.8025 5.49102L60.155 0H65.7689L59.5527 9.82805L66 20Z" fill="currentColor"/>
+      </svg>
+    </a>
+    <div class="nav-right">
+      <a href="#quiz" class="nav-cta">Trouver mon programme</a>
+    </div>
+    <button id="menu-toggle" class="menu-toggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-inner">
+      <a href="#programmes" class="mobile-link">Programmes</a>
+      <a href="#methode" class="mobile-link">La Méthode</a>
+      <a href="#blog" class="mobile-link">Blog</a>
+      <a href="#quiz" class="mobile-cta">Trouver mon programme</a>
+    </div>
+  </div>
+
+  <!-- ============================================
+       HERO SCROLL — Pinned 3-Phase Animation
+       ============================================ -->
+  <section id="hero-scroll" class="hero-scroll">
+    <div class="hero-scene">
+
+      <!-- Orbital rings — BACK half (behind character) -->
+      <div class="orbital-rings orbital-rings-back" id="orbital-rings-back">
+        <svg viewBox="0 0 1080 1920" preserveAspectRatio="xMidYMax meet" class="light-trail-svg">
+          <defs>
+            <linearGradient id="back-core-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1080" y2="0">
+              <stop offset="10%" stop-color="#A66840" stop-opacity="0.1"/>
+              <stop offset="50%" stop-color="#CC8E66" stop-opacity="0.5"/>
+              <stop offset="90%" stop-color="#A66840" stop-opacity="0.1"/>
+            </linearGradient>
+          </defs>
+          
+          <!-- B1: Top loop behind neck -->
+          <path class="tx-b1 trail-glow-2" d="M 1130 500 C 1130 400, -50 550, -50 650" stroke="url(#back-core-grad)" />
+          <path class="tx-b1 trail-core" d="M 1130 500 C 1130 400, -50 550, -50 650" stroke="url(#back-core-grad)" />
+      
+          <!-- B2: Middle loop behind torso -->
+          <path class="tx-b2 trail-glow-2" d="M 1130 800 C 1130 700, -50 850, -50 950" stroke="url(#back-core-grad)" />
+          <path class="tx-b2 trail-core" d="M 1130 800 C 1130 700, -50 850, -50 950" stroke="url(#back-core-grad)" />
+      
+          <!-- B3: Bottom loop behind legs -->
+          <path class="tx-b3 trail-glow-2" d="M 1130 1100 C 1130 1000, -50 1150, -50 1250" stroke="url(#back-core-grad)" />
+          <path class="tx-b3 trail-core" d="M 1130 1100 C 1130 1000, -50 1150, -50 1250" stroke="url(#back-core-grad)" />
+        </svg>
+      </div>
+
+      <!-- Front half rendered AFTER character (higher z-index) -->
+      <!-- Inserted after character-wrap in DOM, see CSS for z-index -->
+
+      <!-- Character container -->
+      <div class="character-wrap" id="character-wrap">
+        <!-- Canvas perfectly matched to 9:16 frame source size -->
+        <canvas id="hero-canvas" width="1080" height="1920" style="display:none;"></canvas>
+
+        <!-- Placeholder silhouette (removed when real frames arrive) -->
+        <div class="character-placeholder" id="character-placeholder">
+          <svg viewBox="0 0 500 750" class="silhouette-svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="silGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2a2420"/>
+                <stop offset="40%" stop-color="#1e1a16"/>
+                <stop offset="100%" stop-color="#121010"/>
+              </linearGradient>
+              <radialGradient id="edgeGlow" cx="50%" cy="30%" r="60%">
+                <stop offset="0%" stop-color="rgba(204,142,102,0.06)"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </radialGradient>
+            </defs>
+            <!-- Body / Hoodie -->
+            <path d="M 100 280 Q 100 235 170 235 L 220 235 L 220 230 L 280 230 L 280 235 L 330 235 Q 400 235 400 280 L 410 750 L 90 750 Z" fill="url(#silGrad)"/>
+            <!-- Neck -->
+            <rect x="222" y="197" width="56" height="38" rx="12" fill="url(#silGrad)"/>
+            <!-- Head -->
+            <ellipse cx="250" cy="135" rx="62" ry="72" fill="url(#silGrad)"/>
+            <!-- Headphone band -->
+            <path d="M 188 105 Q 250 30 312 105" stroke="rgba(204,142,102,0.15)" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <!-- Headphone cups -->
+            <rect x="168" y="100" width="28" height="42" rx="10" fill="#1a1714" stroke="rgba(204,142,102,0.1)" stroke-width="1"/>
+            <rect x="304" y="100" width="28" height="42" rx="10" fill="#1a1714" stroke="rgba(204,142,102,0.1)" stroke-width="1"/>
+            <!-- Hoodie collar line -->
+            <path d="M 220 235 L 250 280 L 280 235" stroke="rgba(204,142,102,0.08)" stroke-width="1.5" fill="none"/>
+            <!-- Glow overlay -->
+            <ellipse cx="250" cy="300" rx="200" ry="300" fill="url(#edgeGlow)"/>
+          </svg>
+          <div class="placeholder-label">
+            <span class="placeholder-initials">AM</span>
+            <span class="placeholder-note">Alexandre Monteiro</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orbital rings — FRONT half (in front of character) -->
+      <div class="orbital-rings orbital-rings-front" id="orbital-rings-front">
+        <svg viewBox="0 0 1080 1920" preserveAspectRatio="xMidYMax meet" class="light-trail-svg">
+          <defs>
+            <linearGradient id="front-core-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1080" y2="0">
+              <stop offset="12%" stop-color="#CC8E66" stop-opacity="0.2"/>
+              <stop offset="25%" stop-color="#FFF2E0" stop-opacity="1"/>
+              <stop offset="75%" stop-color="#FFF2E0" stop-opacity="1"/>
+              <stop offset="88%" stop-color="#CC8E66" stop-opacity="0.2"/>
+            </linearGradient>
+            <linearGradient id="front-glow-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1080" y2="0">
+               <stop offset="10%" stop-color="#A66840" stop-opacity="0"/>
+               <stop offset="25%" stop-color="#E6B599" stop-opacity="0.8"/>
+               <stop offset="75%" stop-color="#E6B599" stop-opacity="0.8"/>
+               <stop offset="90%" stop-color="#A66840" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="front-wide-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1080" y2="0">
+               <stop offset="0%" stop-color="#A66840" stop-opacity="0"/>
+               <stop offset="20%" stop-color="#CC8E66" stop-opacity="0.5"/>
+               <stop offset="80%" stop-color="#CC8E66" stop-opacity="0.5"/>
+               <stop offset="100%" stop-color="#A66840" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          
+          <!-- F1: Front loop across chest -->
+          <path class="tx-f1 trail-glow-3" d="M -50 650 C -50 750, 1130 700, 1130 800" stroke="url(#front-wide-grad)" />
+          <path class="tx-f1 trail-glow-2" d="M -50 650 C -50 750, 1130 700, 1130 800" stroke="url(#front-glow-grad)" />
+          <path class="tx-f1 trail-glow-1" d="M -50 650 C -50 750, 1130 700, 1130 800" stroke="url(#front-glow-grad)" />
+          <path class="tx-f1 trail-core" d="M -50 650 C -50 750, 1130 700, 1130 800" stroke="url(#front-core-grad)" />
+          <path class="tx-f1 trail-stardust" d="M -50 650 C -50 750, 1130 700, 1130 800" />
+      
+          <!-- F2: Front loop across waist -->
+          <path class="tx-f2 trail-glow-3" d="M -50 950 C -50 1050, 1130 1000, 1130 1100" stroke="url(#front-wide-grad)" />
+          <path class="tx-f2 trail-glow-2" d="M -50 950 C -50 1050, 1130 1000, 1130 1100" stroke="url(#front-glow-grad)" />
+          <path class="tx-f2 trail-glow-1" d="M -50 950 C -50 1050, 1130 1000, 1130 1100" stroke="url(#front-glow-grad)" />
+          <path class="tx-f2 trail-core" d="M -50 950 C -50 1050, 1130 1000, 1130 1100" stroke="url(#front-core-grad)" />
+          <path class="tx-f2 trail-stardust" d="M -50 950 C -50 1050, 1130 1000, 1130 1100" />
+      
+          <!-- F3: Trails off bottom right -->
+          <path class="tx-f3 trail-glow-2" d="M -50 1250 C -50 1350, 1130 1300, 1130 1400" stroke="url(#front-glow-grad)" />
+          <path class="tx-f3 trail-core" d="M -50 1250 C -50 1350, 1130 1300, 1130 1400" stroke="url(#front-core-grad)" />
+        </svg>
+      </div>
+
+      <!-- PHASE 1: Hero Text (3 headlines around character) -->
+      <div class="phase phase-text" id="phase-text">
+        <div class="hero-text-block text-top-center">
+          <span class="text-pill"><span class="pill-dot"></span>L'identification</span>
+          <h2 class="hero-headline" data-split>UN CORPS <em>FORT</em></h2>
+        </div>
+        <div class="hero-text-block text-right-middle">
+          <span class="text-pill"><span class="pill-dot"></span>L'identification</span>
+          <h2 class="hero-headline" data-split>UN MENTAL <em>SOLIDE</em></h2>
+        </div>
+        <div class="hero-text-block text-bottom-left">
+          <span class="text-pill"><span class="pill-dot"></span>L'identification</span>
+          <h2 class="hero-headline" data-split>UNE VIE <em>MAÎTRISÉE</em></h2>
+        </div>
+      </div>
+
+      <!-- PHASE 2: Stats (glassmorphism cards) -->
+      <div class="phase phase-stats" id="phase-stats">
+        <div class="glass-card stat-card card-top-right">
+          <div class="card-pattern"></div>
+          <div class="card-content">
+            <div class="reveal-mask"><span class="stat-big">90 <span class="stat-unit">JOURS</span></span></div>
+            <div class="reveal-mask"><span class="stat-desc">DE TRANSFORMATION</span></div>
+          </div>
+        </div>
+        <div class="glass-card stat-card card-left-middle">
+          <div class="card-pattern"></div>
+          <div class="card-content">
+            <div class="reveal-mask"><span class="stat-big">230+</span></div>
+            <div class="reveal-mask"><span class="stat-desc">VIDÉOS D'ENTRAÎNEMENT</span></div>
+          </div>
+        </div>
+        <div class="glass-card stat-card card-bottom-right">
+          <div class="card-pattern"></div>
+          <div class="card-content">
+            <div class="reveal-mask"><span class="stat-big">100%</span></div>
+            <div class="reveal-mask"><span class="stat-desc">MACROS PERSONNALISÉS</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 3: Pillars -->
+      <div class="phase phase-pillars" id="phase-pillars">
+
+        <div class="glass-card pillar-hero-card card-tl">
+          <div class="card-pattern"></div>
+          <div class="card-content">
+            <div class="ph-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6.5 6.5a4 4 0 1 1 5 6.2l-.3.2A4 4 0 0 1 6.5 6.5Zm7 0a4 4 0 0 1 5.3 5.8M7.5 14.1A6 6 0 0 0 3 20h8m5-6a6 6 0 0 1 6 6h-6"/></svg>
+            </div>
+            <div class="reveal-mask"><h3>CORPS</h3></div>
+            <div class="reveal-mask"><p>Entraînements structurés. Supersets, circuits, AMRAP, TABATA.</p></div>
+          </div>
+        </div>
+
+        <div class="glass-card pillar-hero-card card-tr">
+          <div class="card-pattern"></div>
+          <div class="card-content">
+            <div class="ph-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="reveal-mask"><h3>VIE</h3></div>
+            <div class="reveal-mask"><p>Deviens le pilier que ta famille mérite. Père. Homme. Leader.</p></div>
+          </div>
+        </div>
+
+        <div class="glass-card pillar-hero-card card-bl">
+          <div class="card-pattern"></div>
+          <div class="card-content">
+            <div class="ph-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="reveal-mask"><h3>MENTAL</h3></div>
+            <div class="reveal-mask"><p>Discipline. Constance. Résilience. Le changement commence dans la tête.</p></div>
+          </div>
+        </div>
+
+        <div class="glass-card pillar-hero-card card-br">
+          <div class="card-pattern"></div>
+          <div class="card-content">
+            <div class="ph-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="reveal-mask"><h3>NUTRITION</h3></div>
+            <div class="reveal-mask"><p>Plans 100% personnalisés. Macros, recettes, grammages exacts.</p></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section id="programmes" class="programs">
+    <div class="container">
+      
+      <!-- Top Row: Title | Image | Orion -->
+      <div class="programs-showcase-new">
+        <div class="prog-title-col">
+          <h2 class="nos-offres" data-split-prog>NOS <span class="text-accent">OFFRES</span></h2>
+        </div>
+
+        <div class="prog-visual-col">
+          <div class="prog-char-wrap">
+            <img src="./Assets/Alex Image.jpeg" alt="APEX Transformation" class="prog-char-img">
+            <!-- Circling Light Ring (Transition Anchor) -->
+            <div class="prog-light-ring"></div>
+          </div>
+        </div>
+
+        <div class="prog-card-col">
+          <div class="glass-card prog-card-featured">
+            <div class="card-content">
+              <span class="pill-badge">La transformation absolue en 90 jours.</span>
+              <h3 class="prog-card-title">ORION</h3>
+              <p class="prog-card-desc">Que tu sois chez toi ou en salle, ORION est le moteur principal de la méthode APEX. 3 cycles de progression pour détruire tes limites, fondre le gras superflu et forger un corps athlétique et fonctionnel. C'est la fondation.</p>
+              
+              <ul class="prog-features-list">
+                <li><span class="icon-apex"></span> 90 Jours de progression structurée</li>
+                <li><span class="icon-apex"></span> Format Maison ou Salle de sport</li>
+                <li><span class="icon-apex"></span> L'expérience APEX complète</li>
+                <li><span class="icon-apex"></span> Access Complet a l'app Apex.</li>
+              </ul>
+
+              <a href="#quiz" class="btn btn-primary btn-full">EN SAVOIR PLUS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row: Grid of 3 -->
+      <div class="programs-grid-new">
+        <!-- LEO -->
+        <div class="glass-card prog-card-grid">
+          <div class="card-content">
+            <span class="pill-badge">INTENSIF</span>
+            <h3 class="prog-card-title">LEO</h3>
+            <p class="prog-card-desc">Un format court, brutal et redoutable. Conçu pour relancer la machine, briser un plateau et transpirer un maximum depuis ton salon.</p>
+            <ul class="prog-features-list">
+              <li><span class="icon-apex"></span> Un physique affûté 365 jours</li>
+              <li><span class="icon-apex"></span> 1 cycle toutes les 4 semaines</li>
+            </ul>
+            <a href="#quiz" class="btn btn-outline-alt btn-full">EN SAVOIR PLUS</a>
+          </div>
+        </div>
+
+        <!-- PAPA STRONG -->
+        <div class="glass-card prog-card-grid">
+          <div class="card-content">
+            <span class="pill-badge">PREMIUM 1:1</span>
+            <h3 class="prog-card-title">PAPA STRONG</h3>
+            <p class="prog-card-desc">Réservé aux pères débordés qui veulent retrouver leur énergie, perdre du poids et redevenir le pilier de leur famille, sans sacrifier leur emploi du temps.</p>
+            <ul class="prog-features-list">
+              <li><span class="icon-apex"></span> L'accompagnement sur-mesure de 4 mois.</li>
+              <li><span class="icon-apex"></span> Perdre 4 à 12 kg de gras</li>
+            </ul>
+            <a href="#quiz" class="btn btn-outline-alt btn-full">EN SAVOIR PLUS</a>
+          </div>
+        </div>
+
+        <!-- AMT -->
+        <div class="glass-card prog-card-grid">
+          <div class="card-content">
+            <span class="pill-badge">ABONNEMENT CONTINU</span>
+            <h3 class="prog-card-title">APEX METHOD TRAINING</h3>
+            <p class="prog-card-desc">Un nouveau programme débloqué chaque mois. Délègue la conception de tes séances et reste affûté 365 jours par an.</p>
+            <ul class="prog-features-list">
+              <li><span class="icon-apex"></span> Un physique affûté 365 jours</li>
+              <li><span class="icon-apex"></span> 5 séances par semaine</li>
+            </ul>
+            <a href="#quiz" class="btn btn-outline-alt btn-full">EN SAVOIR PLUS</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- APP PREVIEW -->
+  <section id="app" class="app-section">
+    <div class="container">
+      <div class="app-content">
+        <div class="app-text">
+          <span class="section-tag">L'application</span>
+          <h2 class="section-title">Ton coach.<br><span class="text-accent">Dans ta poche.</span></h2>
+          <p class="app-desc">L'app APEX METHOD te guide du premier jour au dernier. Séances détaillées, timers intégrés, suivi de tes charges, nutrition personnalisée, scanner de repas IA.</p>
+          <div class="app-features-list">
+            <div class="app-feature">
+              <div class="af-icon">📱</div>
+              <div>
+                <h4>Séances guidées</h4>
+                <p>Chaque exercice avec vidéo démo, séries, reps, tempo et temps de repos</p>
+              </div>
+            </div>
+            <div class="app-feature">
+              <div class="af-icon">🍽️</div>
+              <div>
+                <h4>Nutrition IA</h4>
+                <p>Plans personnalisés auto-générés. Scanner un repas pour connaître ses macros</p>
+              </div>
+            </div>
+            <div class="app-feature">
+              <div class="af-icon">📊</div>
+              <div>
+                <h4>Suivi intelligent</h4>
+                <p>Progression, records personnels, photos avant/après, historique complet</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="app-visual">
+          <div class="phone-mockup">
+            <div class="phone-screen">
+              <div class="mock-header">
+                <span class="mock-time">09:41</span>
+                <span class="mock-title">APEX METHOD</span>
+              </div>
+              <div class="mock-welcome">Bonjour, Alexandre</div>
+              <div class="mock-card">
+                <div class="mock-card-label">Séance du jour</div>
+                <div class="mock-card-title">ORION — Séance 3</div>
+                <div class="mock-card-sub">Jambes / Abdos · 45 min</div>
+                <div class="mock-progress-bar"><div class="mock-progress-fill"></div></div>
+              </div>
+              <div class="mock-stats-row">
+                <div class="mock-stat">
+                  <div class="mock-stat-val">68%</div>
+                  <div class="mock-stat-label">Progression</div>
+                </div>
+                <div class="mock-stat">
+                  <div class="mock-stat-val">12</div>
+                  <div class="mock-stat-label">Séances</div>
+                </div>
+                <div class="mock-stat">
+                  <div class="mock-stat-val">3</div>
+                  <div class="mock-stat-label">PRs</div>
+                </div>
+              </div>
+              <div class="mock-exercises">
+                <div class="mock-exercise">
+                  <div class="mock-ex-num">1</div>
+                  <div class="mock-ex-info">
+                    <div class="mock-ex-name">Soulevé de terre</div>
+                    <div class="mock-ex-detail">4×8 · Tempo 3010 · 2'00 repos</div>
+                  </div>
+                </div>
+                <div class="mock-exercise">
+                  <div class="mock-ex-num">2</div>
+                  <div class="mock-ex-info">
+                    <div class="mock-ex-name">Fentes marchées</div>
+                    <div class="mock-ex-detail">3×12 · 1'30 repos</div>
+                  </div>
+                </div>
+                <div class="mock-exercise mock-triset">
+                  <div class="mock-ex-badge">TRISET</div>
+                  <div class="mock-ex-info">
+                    <div class="mock-ex-name">Leg Press + Squats sautés + Pompes Tyson</div>
+                    <div class="mock-ex-detail">3×15 · 1'00 repos</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS / SOCIAL PROOF -->
+  <section id="resultats" class="results">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Les résultats</span>
+        <h2 class="section-title">Ils ont atteint<br><span class="text-accent">leur sommet.</span></h2>
+      </div>
+      <div class="testimonials-track">
+        <div class="testimonial">
+          <div class="testimonial-quote">"En 90 jours, j'ai perdu 12kg et gagné en confiance. La méthode est claire, structurée. Tu suis, tu progresses."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div>
+              <div class="author-name">Mehdi, 34 ans</div>
+              <div class="author-program">Programme ORION — Salle</div>
+            </div>
+          </div>
+          <div class="testimonial-stat">-12kg en 90 jours</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-quote">"Papa de 3 enfants, je pensais que c'était trop tard. Papa Strong m'a prouvé le contraire. Alex est un vrai mentor."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">T</div>
+            <div>
+              <div class="author-name">Thomas, 41 ans</div>
+              <div class="author-program">Papa Strong — 4 mois</div>
+            </div>
+          </div>
+          <div class="testimonial-stat">Transformation complète</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-quote">"Le programme LÉO m'a montré qu'on n'a pas besoin de salle. 28 jours, 30 minutes par jour, et les résultats sont là."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">Y</div>
+            <div>
+              <div class="author-name">Youssef, 29 ans</div>
+              <div class="author-program">Programme LÉO — Maison</div>
+            </div>
+          </div>
+          <div class="testimonial-stat">-8kg · +masse musculaire</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ALEX -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-layout">
+        <div class="about-image">
+          <div class="about-img-frame">
+            <img src="./Assets/Alex Image.jpeg" alt="Alexandre Monteiro" class="about-img">
+          </div>
+          <div class="about-float-card">
+            <span class="float-number">500+</span>
+            <span class="float-label">Vies transformées</span>
+          </div>
+        </div>
+        <div class="about-text">
+          <span class="section-tag">Le fondateur</span>
+          <h2 class="section-title">Alexandre<br><span class="text-accent">Monteiro</span></h2>
+          <div class="about-story">
+            <p>APEX, c'est le sommet. Le niveau le plus haut que tu puisses atteindre.</p>
+            <p>Alexandre a créé APEX METHOD avec une conviction simple : <strong>chaque homme a un potentiel inexploité</strong>. Pas seulement physique — mental, émotionnel, dans sa vie de père, de leader.</p>
+            <p>Sa méthode ne te vend pas du rêve. Elle te donne un cadre. Des entraînements structurés. Une nutrition personnalisée. Un accompagnement qui ne te lâche pas.</p>
+            <blockquote class="about-quote">
+              "Je ne forme pas des sportifs. Je forge des hommes qui maîtrisent leur vie."
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASSESSMENT QUIZ CTA -->
+  <section id="quiz" class="quiz-section">
+    <div class="container">
+      <div class="quiz-card">
+        <div class="quiz-bg-pattern"></div>
+        <div class="quiz-content">
+          <span class="section-tag section-tag-light">Quiz d'orientation</span>
+          <h2 class="quiz-title">Quel programme<br>est fait pour <span class="text-accent">toi</span> ?</h2>
+          <p class="quiz-desc">Réponds à 7 questions simples. On t'oriente vers le programme qui correspond à ton profil, tes objectifs, et ton mode de vie.</p>
+          <div class="quiz-steps">
+            <div class="quiz-step">
+              <div class="step-num">1</div>
+              <span>Ton profil</span>
+            </div>
+            <div class="quiz-step-line"></div>
+            <div class="quiz-step">
+              <div class="step-num">2</div>
+              <span>Tes objectifs</span>
+            </div>
+            <div class="quiz-step-line"></div>
+            <div class="quiz-step">
+              <div class="step-num">3</div>
+              <span>Ton programme</span>
+            </div>
+          </div>
+          <a href="#" class="btn btn-primary btn-large" id="quiz-cta">
+            <span>Commencer le quiz</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <p class="quiz-note">2 minutes · 100% gratuit · Résultat immédiat</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="logo-text">APEX</span>
+            <span class="logo-accent">METHOD</span>
+          </div>
+          <p class="footer-tagline">Un corps fort. Un mental solide. Une vie maîtrisée.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Programmes</h4>
+            <a href="#">ORION</a>
+            <a href="#">Papa Strong</a>
+            <a href="#">LÉO</a>
+            <a href="#">AMT</a>
+          </div>
+          <div class="footer-col">
+            <h4>Ressources</h4>
+            <a href="#">Quiz d'orientation</a>
+            <a href="#">L'application</a>
+            <a href="#">Blog</a>
+          </div>
+          <div class="footer-col">
+            <h4>Légal</h4>
+            <a href="#">CGV</a>
+            <a href="#">Politique de confidentialité</a>
+            <a href="#">Mentions légales</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 APEX METHOD. Tous droits réservés.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.6c1.72.44 8.6.44 8.6.44s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP 3.15.0 + Plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
