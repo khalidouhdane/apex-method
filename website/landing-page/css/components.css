@@ -1,0 +1,182 @@
+/* ========================================
+   APEX METHOD — Components & Utils
+   Shared UI: Buttons, Headers, Cursor, Masks
+   ======================================== */
+
+/* ========================================
+   CUSTOM CURSOR
+   ======================================== */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--bronze-500);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10001;
+  mix-blend-mode: difference;
+}
+
+.cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--bronze-500);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0.5;
+  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), opacity 0.3s;
+}
+
+body:hover .cursor-follower.hovering {
+  width: 60px;
+  height: 60px;
+  opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+  .custom-cursor,
+  .cursor-follower {
+    display: none;
+  }
+  body {
+    cursor: auto;
+  }
+}
+
+/* ========================================
+   SHARED: Section Headers, Tags, Buttons
+   ======================================== */
+.section-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bronze-base);
+  margin-bottom: 32px;
+  position: relative;
+  padding-left: 24px;
+}
+
+.section-tag::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 14px;
+  height: 1px;
+  background: var(--bronze-base);
+}
+
+.section-tag-light::before {
+  background: var(--bronze-light);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.section-title {
+  font-family: var(--font-sans);
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.text-accent {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-sub {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--text-dim);
+  margin-top: 16px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 16px 32px;
+  border-radius: var(--radius-xl);
+  border: none;
+  cursor: none;
+  transition: all 0.35s var(--ease-out);
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--bronze-base);
+  color: var(--surface-base);
+}
+
+.btn-primary:hover {
+  background: var(--bronze-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(196, 149, 106, 0.25);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border-dim);
+}
+
+.btn-ghost:hover {
+  border-color: var(--text-muted);
+  color: var(--white);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--bronze-base);
+  border: 1px solid rgba(196, 149, 106, 0.3);
+  padding: 12px 24px;
+  font-size: 14px;
+}
+
+.btn-outline:hover {
+  border-color: var(--bronze-base);
+  background: var(--bronze-glow-soft);
+}
+
+.btn-large {
+  padding: 20px 44px;
+  font-size: 17px;
+}
+
+/* ========================================
+   SPLIT TEXT OVERFLOW WRAPPER
+   ======================================== */
+.split-line-wrap {
+  overflow: hidden;
+  display: block;
+}
+
+/* ========================================
+   REVEAL MASK (Inside Cards)
+   ======================================== */
+.reveal-mask {
+  overflow: hidden;
+  display: block;
+}

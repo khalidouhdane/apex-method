@@ -1,56 +1,56 @@
-# APEX METHOD — Design System
+# APEX METHOD — Design System (3-Tier Architecture)
 
-This document serves as the master **Figma-driven Design System** reference for all AI agents and developers working on the APEX METHOD ecosystem.
+This document is the master source of truth for the APEX METHOD visual language. It uses a 3-tier token system to ensure cinematic consistency and effortless theming.
 
-## 1. CSS Custom Properties (:root) Stack
+## Tier 1: Primitives (Fixed)
+Primitives are raw values that never change. They define our palette but carry no meaning on their own.
 
-### Surface & Canvas
-*   `--surface-base`: `#0F0D0B` (Primary Background)
-*   `--surface-raised`: `#1A1614` (Cards, Stat blocks, Modules)
-*   `--surface-floating`: `rgba(26, 22, 20, 0.85)` (Navbar with backdrop-blur support)
+### Core Grays (The "Obsidian" Scale)
+*   `--gray-50`: `#F8F7F7`
+*   `--gray-100`: `#EEEDEC`
+*   `--gray-200`: `#DED6CE`
+*   `--gray-800`: `#1D1815`
+*   `--gray-900`: `#1A1614`
+*   `--gray-950`: `#0F0D0B`
 
-### Borders & Dividing Lines
-*   `--border-dim`: `#1D1815` (Subtle structural borders)
-*   `--border-subtle`: `#2A231E` (Component structural borders)
+### Core Bronzes (The "Apex" Scale)
+*   `--bronze-100`: `#E6B599`
+*   `--bronze-500`: `#CC8E66`
+*   `--bronze-700`: `#A66840`
+*   `--bronze-900`: `#70401F`
 
-### Base Typography Extents
-*   `--text-primary`: `rgba(255, 255, 255, 0.9)` (Off-white vs pure white to eliminate harsh contrast)
-*   `--text-dim`: `#A8A49C` (Secondary paragraphs and stats)
-*   `--text-muted`: `#6B6762` (Micro-copy, labels, and metadata)
+## Tier 2: Semantic System (Theme-Driven)
+Semantic tokens assign meaning to primitives based on the active theme (`[data-theme]`).
 
-### The "Apex Bronze" System
-Do NOT use generic gold hues (e.g. #C4956A). Rely strictly on these semantic scales.
-*   `--bronze-base`: `#CC8E66` (Primary accent hue, solid interactions)
-*   `--bronze-light`: `#E6B599` (Hover states)
-*   `--bronze-dark`: `#A66840` (Active states)
-*   `--bronze-glow-soft`: `rgba(204, 142, 102, 0.08)` (Background glows for pills and cards)
-*   `--bronze-glow-strong`: `rgba(204, 142, 102, 0.2)` (Hover borders, pronounced halos)
+| Token | Dark (Default) | Light (Lumière) |
+| :--- | :--- | :--- |
+| `--sys-bg` | `--gray-950` | `--gray-100` |
+| `--sys-surface` | `--gray-900` | `--gray-50` |
+| `--sys-text-pri` | `rgba(255, 255, 255, 0.9)` | `--gray-950` |
+| `--sys-text-dim` | `--text-dim` (Current) | `--gray-800` |
+| `--sys-border` | `--gray-800` | `rgba(0, 0, 0, 0.08)` |
 
-### Premium Gradients
-*   `--bronze-gradient`: `linear-gradient(90deg, #C07133 0%, #D1935B 100%)` (Used for text highlights and primary typographic emphasis)
-*   `--cta-gradient`: `linear-gradient(90deg, #98572A 0%, #CA783F 50%, #70401F 100%)` (Used strictly for Call To Action buttons)
+## Tier 3: Component Tokens (Specific)
+Component tokens are the final layer used in CSS classes. They reference Tier 2.
 
-## 2. Typography Rules
-*   **Headlines & Display:** `Platform`
-    *   Variables: `var(--font-display)`
-    *   Weight: Bold (700) or Regular (400).
-    *   Style: Must be `font-style: italic` with GSAP `padding` / `margin` rendering corrections when coupled with `webkit-background-clip: text`!
-    *   Letter-spacing: `-0.02em` (-2%).
-    *   Line-Height: `1.2em`.
-    *   Max Size (Hero): `56px`.
-*   **Body, CTAs & UI Labels:** `Aeonik`
-    *   Variables: `var(--font-sans)`
-    *   Weight: Medium (500) or Regular (400).
-    *   Line-Height: `1.2em` to `1.6em` depending on context.
+### Global Glass Dynamics
+| Token | Obsidian (Vivid) | Crystal (Dark) | Lumière (Light) |
+| :--- | :--- | :--- | :--- |
+| `--comp-glass-bg` | `rgba(15, 13, 11, 0.85)` | `rgba(251, 247, 244, 0.05)` | `#F8F7F7` |
+| `--comp-glass-border` | `rgba(255, 255, 255, 0.1)` | `rgba(251, 247, 244, 0.1)` | `rgba(255, 255, 255, 1)` |
+| `--comp-glass-blur` | `16px` | `22px` | `0px` |
+| `--comp-glass-saturate` | `180%` | `100%` | `100%` |
+| `--comp-card-shadow` | `0 16px 40px rgba(0,0,0,0.5)` | `0 10px 40px rgba(0,0,0,0.2)` | `0 20px 50px rgba(0,0,0,0.08)` |
 
-*(Note: Webfonts `Platform.woff2` and `Aeonik.otf` are physically located in `/assets/fonts/` and tethered via native `@font-face` bindings at the top of the CSS file!)*
+### Navigation
+*   `--comp-nav-bg`: References `--comp-glass-bg`
+*   `--comp-nav-text`: References `--sys-text-pri`
 
-## 3. Spacing & Geometry
-*   Hero text pills must sit completely centered above the headlines directly via `.phase-text` Flexbox column layouts.
-*   Pill Radiuses: Defined natively as `var(--radius-xl)` (`28px` base scaling).
-*   The primary mobile/desktop scaling locks `transform-origin` behaviors to the bottom for any heroic imagery to avoid scaling clipping (Currently scaling from `0.75` to `0.85` dynamically against GSAP anchors).
+### Buttons
+*   `--comp-btn-pri-bg`: `--bronze-500`
+*   `--comp-btn-outline-text`: References `--sys-text-pri`
 
-## 4. Agent Instructions
-*   Whenever assigning colors or fonts in CSS/Flutter, **MUST** refer to this sheet to avoid generic colors mapping to `#000000` or `#C4956A` directly, opting instead for the strict `var(--surface-)` and `var(--bronze-)` maps.
-*   **NEVER Hardcode Hues.**
-*   **ALWAYS Apply Fallbacks** if a layout element requires an esoteric external render pass.
+## Usage Instructions
+1.  **NEVER** hardcode hex values in component CSS.
+2.  **NEVER** use Primitives (Tier 1) directly in component CSS.
+3.  **ALWAYS** use Component Tokens (Tier 3) or Semantic Tokens (Tier 2).

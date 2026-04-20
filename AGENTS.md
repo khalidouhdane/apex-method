@@ -42,10 +42,11 @@ apex-method/
 │       ├── CHALLENGE_PAPA_STRONG.pdf         # Papa Strong 14-day challenge PDF
 │       └── papa_strong_challenge_text.md     # Extracted text from PDF
 ├── website/
-│   └── landing-page/                  # Awwwards-level landing page draft
+│   └── landing-page/                  # Awwwards-level landing page (Modular)
+│       ├── ARCHITECTURE.md            # Technical map & Animation rules
 │       ├── index.html
-│       ├── style.css
-│       └── script.js
+│       ├── css/                       # Modular styles (base, hero, sections, etc.)
+│       └── js/                        # Modular logic (config, frames, animations, ui)
 ├── app-design/                        # Mobile app UX/UI (Figma references, specs)
 └── brand/                             # Brand identity assets (logos, guidelines)
 ```
@@ -92,10 +93,11 @@ apex-method/
 
 ### When working on website/landing pages:
 1. **CRITICAL:** Always use `docs/DESIGN_SYSTEM.md` as the absolute source of truth for UI colors and typographies. Avoid generic colors.
-2. Use GSAP 3.15.0 with all premium plugins (DrawSVG, SplitText, ScrollSmoother).
-3. SplitText with subtle stagger for text reveal animations.
-4. All content in French.
-5. Follow the design philosophy: dark, premium, animated, interactive.
+2. **CRITICAL:** Refer to `website/landing-page/ARCHITECTURE.md` before editing any code. The landing page is modular; do not create monolithic files.
+3. Use GSAP 3.15.0 with all premium plugins (DrawSVG, SplitText, ScrollSmoother).
+4. Follow the "Handover Rule" (Entrance before Scroll) to prevent animation glitches.
+5. All content in French.
+6. Follow the design philosophy: dark, premium, animated, interactive.
 
 ### When working on documentation:
 1. Always check `context.md` first for latest decisions and pricing history

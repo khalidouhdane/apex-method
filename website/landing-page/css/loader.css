@@ -1,0 +1,20 @@
+/* ========================================
+   APEX METHOD — Loader
+   Celestial Intro + Straight Trails
+   ======================================== */
+
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--surface-base);
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.loader-logo-path {
+  fill: #FFF2E0;
+  opacity: 0;
+}

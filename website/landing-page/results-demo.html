@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX METHOD — Results Demo</title>
+  <link rel="stylesheet" href="./css/sections.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/animations.js"></script>
+  <style>
+    body { background: #0F0D0B; color: white; font-family: sans-serif; padding: 50px; }
+    .demo-controls { margin-bottom: 50px; text-align: center; }
+    .toggle-btn { 
+      background: #1A1714; border: 1px solid #CC8E66; color: white; padding: 12px 24px; 
+      border-radius: 100px; cursor: pointer; margin: 0 10px; transition: all 0.3s;
+    }
+    .toggle-btn.active { background: #CC8E66; }
+    .demo-section { display: none; }
+    .demo-section.active { display: block; }
+    
+    /* Approach 2 specific styles for demo */
+    .approach-2-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+    .dual-card { height: 500px; opacity: 1 !important; transform: none !important; }
+    .linked-hint { text-align: center; color: #CC8E66; font-size: 12px; margin-top: 10px; text-transform: uppercase; letter-spacing: 2px; }
+  </style>
+</head>
+<body>
+
+  <div class="demo-controls">
+    <button class="toggle-btn active" onclick="switchDemo(1)">APPROACH 1: SPLIT SLIDER</button>
+    <button class="toggle-btn" onclick="switchDemo(2)">APPROACH 2: DUAL JOURNEY</button>
+  </div>
+
+  <!-- APPROACH 1 -->
+  <div id="demo-1" class="demo-section active">
+    <div style="max-width: 400px; margin: 0 auto;">
+      <div class="result-card" style="opacity: 1; transform: none;">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="split-slider">
+              <div class="slider-img img-after" style="background-image: url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop');"></div>
+              <div class="slider-img img-before" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop');"></div>
+              <div class="slider-label label-before">AVANT</div>
+              <div class="slider-label label-after">APRÈS</div>
+              <div class="slider-handle"></div>
+            </div>
+          </div>
+          <div class="card-back">
+            <h3 class="res-name">JOHN DOE</h3>
+            <p class="res-story">Slide to see transformation, click button to flip.</p>
+          </div>
+        </div>
+        <button class="flip-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPROACH 2 -->
+  <div id="demo-2" class="demo-section">
+    <div class="approach-2-grid">
+      <!-- BEFORE -->
+      <div class="result-card dual-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="slider-img" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop');"></div>
+            <div class="slider-label label-before">LE DÉPART</div>
+          </div>
+          <div class="card-back">
+            <h3 class="res-name">POINT A</h3>
+            <p class="res-story">Struggling with consistency and energy.</p>
+          </div>
+        </div>
+        <button class="flip-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
+      </div>
+      <!-- AFTER -->
+      <div class="result-card dual-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="slider-img" style="background-image: url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop');"></div>
+            <div class="slider-label label-after">L'ARRIVÉE</div>
+          </div>
+          <div class="card-back">
+            <h3 class="res-name">POINT B</h3>
+            <p class="res-story">Elite physique and mental force.</p>
+          </div>
+        </div>
+        <button class="flip-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
+      </div>
+    </div>
+    <p class="linked-hint">TRANSFORMATION COMPLÈTE</p>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      APEX.initResultsSlider();
+    });
+
+    function switchDemo(num) {
+      document.querySelectorAll('.demo-section').forEach(d => d.classList.remove('active'));
+      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('demo-' + num).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+/* ========================================
+   APEX METHOD — Style Studio
+   Floating Control UI for Live Previews
+   ======================================== */
+
+.style-studio {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.studio-trigger {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--comp-glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--comp-glass-border);
+  color: var(--bronze-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  transition: transform 0.3s var(--ease-out), background 0.3s;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.studio-trigger:hover {
+  transform: rotate(90deg) scale(1.1);
+  background: var(--bronze-glow-strong);
+}
+
+.studio-panel {
+  width: 240px;
+  background: var(--sys-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--sys-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transition: var(--theme-transition);
+}
+
+.studio-panel.active {
+  display: flex;
+  animation: panelIn 0.4s var(--ease-out) forwards;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.studio-header {
+  border-bottom: 1px solid var(--sys-border);
+  padding-bottom: 12px;
+}
+
+.studio-header h4 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  margin: 0;
+  letter-spacing: 0.1em;
+  color: var(--bronze-base);
+}
+
+.studio-subtitle {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--sys-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.studio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.studio-group label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--sys-text-dim);
+  letter-spacing: 0.1em;
+}
+
+.studio-toggles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.studio-btn {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--sys-text-muted);
+  border-radius: 6px;
+  cursor: none;
+  transition: all 0.3s;
+}
+
+.studio-btn.active {
+  background: var(--bronze-500);
+  color: var(--gray-950);
+}
+
+.studio-btn:hover:not(.active) {
+  color: var(--sys-text-pri);
+  background: rgba(255, 255, 255, 0.05);
+}

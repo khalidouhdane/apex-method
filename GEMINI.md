@@ -18,10 +18,11 @@ This workspace manages the **APEX METHOD** project — a premium fitness transfo
 - **Figma MCP** — Access design files when available.
 
 ## Working Style
-- Website code is in `website/` — HTML/CSS/JS with GSAP 3.15.0.
+- **CRITICAL (Design):** UI colors, typographies, and gradients MUST strictly follow `docs/DESIGN_SYSTEM.md`. For example: Background is `#0F0D0B` (not regular black), text gradients are specific bronze arrays.
+- **CRITICAL (Code):** Website code is in `website/landing-page/`. This directory is **modular**. You MUST refer to `website/landing-page/ARCHITECTURE.md` before making any changes.
+- **Animation:** GSAP 3.15.0 with ScrollTrigger, DrawSVG, and SplitText. Follow the "Handover Rule" documented in the architecture map.
 - All content in **French**.
-- **CRITICAL:** UI colors, typographies, and gradients MUST strictly follow `docs/DESIGN_SYSTEM.md`. For example: Background is `#0F0D0B` (not regular black), text gradients are specific bronze arrays.
-- Design: Awwwards-level, GSAP scroll animations, SplitText reveals, cinematic feel.
+- Design: Awwwards-level, cinematic feel.
 - Always check `context.md` before making decisions about scope, pricing, or features.
 
 ## Current Status (April 2026)

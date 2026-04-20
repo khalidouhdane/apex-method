@@ -1,0 +1,197 @@
+/* ========================================
+   APEX METHOD — Landing Page
+   Base Styles: Fonts, Variables, Reset
+   ======================================== */
+
+/* FONTS */
+@font-face {
+  font-family: 'Platform';
+  src: url('../Assets/fonts/Platform-Regular.woff2') format('woff2'),
+    url('../Assets/fonts/Platform-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Platform';
+  src: url('../Assets/fonts/Platform-Bold.woff2') format('woff2'),
+    url('../Assets/fonts/Platform-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Platform';
+  src: url('../Assets/fonts/Platform-BoldItalic.woff2') format('woff2'),
+    url('../Assets/fonts/Platform-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('../Assets/fonts/Aeonik-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('../Assets/fonts/Aeonik-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('../Assets/fonts/Aeonik-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ==========================================================================
+   APEX 3-TIER DESIGN SYSTEM
+   ========================================================================== */
+
+:root {
+  /* --- TIER 1: PRIMITIVES --- */
+  --gray-50: #FFFFFF;
+  --gray-100: #EEEDEC;
+  --gray-200: #DED6CE;
+  --gray-700: #4B4643;
+  --gray-800: #1D1815;
+  --gray-900: #1A1614;
+  --gray-950: #0F0D0B;
+
+  --bronze-100: #E6B599;
+  --bronze-500: #CC8E66;
+  --bronze-700: #A66840;
+  --bronze-900: #70401F;
+
+  --bronze-gradient: linear-gradient(90deg, #C07133 0%, #D1935B 100%);
+  --cta-gradient: linear-gradient(90deg, #98572A 0%, #CA783F 50%, #70401F 100%);
+  --accent-gradient: linear-gradient(90deg, #C07133 0%, #D1935B 100%);
+  --surface-base: var(--gray-900);
+
+  --bronze-base: var(--bronze-500);
+  --bronze-light: var(--bronze-100);
+  --bronze-glow-soft: rgba(204, 142, 102, 0.15);
+  --bronze-glow-strong: rgba(204, 142, 102, 0.4);
+
+  --surface-raised: #1A1614;
+  --border-dim: rgba(255, 255, 255, 0.08);
+  --white: #F0ECE4;
+  --text-dim: #A8A49C;
+  --text-muted: #66605C;
+
+  /* Tier 1 Geometry */
+  --container-max: 1280px;
+  --container-pad: clamp(24px, 5vw, 60px);
+  --section-pad: clamp(80px, 12vw, 160px);
+
+  /* Static Geometry */
+  --font-sans: 'Aeonik', -apple-system, sans-serif;
+  --font-display: 'Platform', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --theme-transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- TIER 2: SEMANTICS --- */
+
+/* DARK THEME */
+html,
+[data-theme="dark"] {
+  --sys-bg: var(--gray-950);
+  --sys-surface: var(--gray-900);
+  --sys-text-pri: rgba(255, 255, 255, 0.9);
+  --sys-text-dim: #a8a49c;
+  --sys-text-muted: #6b6762;
+  --sys-border: var(--gray-800);
+  --sys-glow-intensity: 0.08;
+
+  /* Tier 3: Component Defaults (Dark / Vivid Obsidian) */
+  --comp-glass-bg: rgba(15, 13, 11, 0.85);
+  --comp-glass-border: rgba(255, 255, 255, 0.1);
+  --comp-glass-blur: 16px;
+  --comp-glass-saturate: 180%;
+  --comp-card-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* LIGHT THEME (Lumière) */
+html[data-theme="light"] {
+  --sys-bg: var(--gray-100);
+  --sys-surface: var(--gray-50);
+  --sys-text-pri: #181716;
+  --sys-text-dim: var(--gray-700);
+  --sys-text-muted: #66605C;
+  --sys-border: rgba(0, 0, 0, 0.08);
+  --sys-glow-intensity: 0.01;
+
+  --comp-glass-bg: var(--gray-50);
+  --comp-glass-border: rgba(255, 255, 255, 1);
+  --comp-glass-blur: 0px;
+  --comp-glass-saturate: 100%;
+  --comp-card-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+}
+
+/* TIER 3: GLASS OVERRIDES (Dark Mode Toggle) */
+html[data-theme="dark"][data-glass="crystal"] {
+  --comp-glass-bg: rgba(251, 247, 244, 0.05);
+  --comp-glass-border: rgba(251, 247, 244, 0.1);
+  --comp-glass-blur: 22px;
+  --comp-glass-saturate: 100%;
+}
+
+/* RESET */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--sys-bg);
+  color: var(--sys-text-pri);
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+  transition: var(--theme-transition);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+em {
+  font-family: var(--font-sans);
+  font-style: italic;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}

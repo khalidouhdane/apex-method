@@ -6,7 +6,14 @@
   <title>APEX METHOD — Un corps fort. Un mental solide. Une vie maîtrisée.</title>
   <meta name="description" content="APEX METHOD par Alexandre Monteiro. Programmes de transformation physique et mentale pour hommes. ORION, Papa Strong, LÉO — atteins ton sommet.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/loader.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/studio.css">
   <style>
     /* Prevent FOUC before GSAP loads */
     .hero-text-block, .phase-stats, .phase-pillars { opacity: 0; }
@@ -22,8 +29,6 @@
   <!-- Global Background / Studio Lighting -->
   <div class="global-bg">
     <div class="global-gradient"></div>
-    <div class="global-grain"></div>
-    <div class="global-glow" id="hero-glow"></div>
     <div class="global-glow-bottom"></div>
   </div>
 
@@ -303,85 +308,147 @@
     </div>
   </section>
 
+  <!-- BRAND DIVIDER -->
+  <section class="brand-divider-bar">
+    <div class="divider-track">
+      <span class="divider-statement">L'ADN DE LA <span class="highlight">MÉTHODE</span></span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+      <span class="divider-statement">LA TRANSFORMATION <span class="highlight">ABSOLUE</span></span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+      <span class="divider-statement">FORCE • <span class="highlight">MENTAL</span> • DISCIPLINE</span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+      <span class="divider-statement">CONSTELLATION <span class="highlight">APEX</span></span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+      <span class="divider-statement">L'ÉLITE DU <span class="highlight">PHYSIQUE</span></span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+      <span class="divider-statement">DÉPASSER SES <span class="highlight">LIMITES</span></span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+      <!-- Duplicate for infinite loop -->
+      <span class="divider-statement">L'ADN DE LA <span class="highlight">MÉTHODE</span></span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+      <span class="divider-statement">LA TRANSFORMATION <span class="highlight">ABSOLUE</span></span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+      <span class="divider-statement">FORCE • <span class="highlight">MENTAL</span> • DISCIPLINE</span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+      <span class="divider-statement">CONSTELLATION <span class="highlight">APEX</span></span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+      <span class="divider-statement">L'ÉLITE DU <span class="highlight">PHYSIQUE</span></span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+      <span class="divider-statement">DÉPASSER SES <span class="highlight">LIMITES</span></span> <svg class="divider-icon" viewBox="0 0 66 20"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/></svg>
+    </div>
+  </section>
+
   <!-- PROGRAMS -->
   <section id="programmes" class="programs">
     <div class="container">
       
       <!-- Top Row: Title | Image | Orion -->
       <div class="programs-showcase-new">
+        <!-- Column 1: Intro & Toggle -->
         <div class="prog-title-col">
-          <h2 class="nos-offres" data-split-prog>NOS <span class="text-accent">OFFRES</span></h2>
+          <!-- Environment Toggle (Screenshot exact design) -->
+          <div class="program-filters-new">
+            <div class="filter-track-new">
+              <div class="filter-slider-new"></div>
+              <button class="filter-btn-new active" data-location="maison">MAISON</button>
+              <button class="filter-btn-new" data-location="salle">SALLE</button>
+            </div>
+          </div>
+          
+          <h2 class="nos-offres" data-split-prog>NOS<br><span class="text-accent" style="font-style: italic;">PROGRAMS</span></h2>
+          <p class="prog-intro-text">La Fondation APEX. Choisis ton environnement, suis la méthode, et construis un corps athlétique et un mental d'acier.</p>
         </div>
 
+        <!-- Column 2: Visual -->
         <div class="prog-visual-col">
-          <div class="prog-char-wrap">
-            <img src="./Assets/Alex Image.jpeg" alt="APEX Transformation" class="prog-char-img">
-            <!-- Circling Light Ring (Transition Anchor) -->
-            <div class="prog-light-ring"></div>
+          <div class="prog-char-wrap-new">
+            <img src="./Assets/Alex Image.jpeg" alt="APEX Transformation" class="prog-char-img-new" id="orion-img">
           </div>
         </div>
 
+        <!-- Column 3: ORION Card -->
         <div class="prog-card-col">
-          <div class="glass-card prog-card-featured">
-            <div class="card-content">
-              <span class="pill-badge">La transformation absolue en 90 jours.</span>
-              <h3 class="prog-card-title">ORION</h3>
-              <p class="prog-card-desc">Que tu sois chez toi ou en salle, ORION est le moteur principal de la méthode APEX. 3 cycles de progression pour détruire tes limites, fondre le gras superflu et forger un corps athlétique et fonctionnel. C'est la fondation.</p>
+          <div class="glass-card-new prog-card-featured-new">
+            <div class="card-content-new flex-col">
+              <div class="pill-row-new">
+                <span class="pill-badge-new"><span class="pill-dot"></span>La transformation absolue en 90 jours.</span>
+              </div>
+              <h3 class="prog-card-title-new">ORION</h3>
+              <p class="prog-card-desc-new" id="orion-desc">Que tu sois chez toi ou en salle, ORION est le moteur principal de la méthode APEX. 3 cycles de progression pour détruire tes limites, fondre le gras superflu et forger un corps athlétique et fonctionnel. C'est la fondation.</p>
               
-              <ul class="prog-features-list">
-                <li><span class="icon-apex"></span> 90 Jours de progression structurée</li>
-                <li><span class="icon-apex"></span> Format Maison ou Salle de sport</li>
-                <li><span class="icon-apex"></span> L'expérience APEX complète</li>
-                <li><span class="icon-apex"></span> Access Complet a l'app Apex.</li>
+              <ul class="prog-features-list-new">
+                <li><span class="icon-apex"></span> <span id="orion-spec-1">Programmation Force & Hypertrophie</span></li>
+                <li><span class="icon-apex"></span> <span id="orion-spec-2">Optimisation morpho-anatomique</span></li>
+                <li><span class="icon-apex"></span> <span>5 séances par semaine</span></li>
+                <li><span class="icon-apex"></span> <span>L'expérience APEX complète</span></li>
               </ul>
 
-              <a href="#quiz" class="btn btn-primary btn-full">EN SAVOIR PLUS</a>
+              <div class="mt-auto">
+                <a href="#quiz" class="btn-solid-bronze">EN SAVOIR PLUS</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Bottom Row: Grid of 3 -->
-      <div class="programs-grid-new">
+      <!-- Bottom Row: Dynamic Flex Grid -->
+      <div class="programs-flex-row">
         <!-- LEO -->
-        <div class="glass-card prog-card-grid">
-          <div class="card-content">
-            <span class="pill-badge">INTENSIF</span>
-            <h3 class="prog-card-title">LEO</h3>
-            <p class="prog-card-desc">Un format court, brutal et redoutable. Conçu pour relancer la machine, briser un plateau et transpirer un maximum depuis ton salon.</p>
-            <ul class="prog-features-list">
-              <li><span class="icon-apex"></span> Un physique affûté 365 jours</li>
-              <li><span class="icon-apex"></span> 1 cycle toutes les 4 semaines</li>
+        <div class="glass-card-new sub-card" data-location-type="maison">
+          <div class="card-content-new flex-col">
+            <div class="pill-row-new">
+              <span class="pill-badge-new"><span class="pill-dot"></span>INTENSIF</span>
+            </div>
+            <h3 class="prog-card-title-new">LÉO</h3>
+            <p class="prog-card-desc-new">L'intensif "Home". Brise tes plateaux et relance ton métabolisme avec un format court et brutal. Transpire un maximum depuis ton salon.</p>
+            <ul class="prog-features-list-new">
+              <li><span class="icon-apex"></span> Perte de gras accélérée</li>
+              <li><span class="icon-apex"></span> 1 cycle de 4 semaines</li>
             </ul>
-            <a href="#quiz" class="btn btn-outline-alt btn-full">EN SAVOIR PLUS</a>
-          </div>
-        </div>
-
-        <!-- PAPA STRONG -->
-        <div class="glass-card prog-card-grid">
-          <div class="card-content">
-            <span class="pill-badge">PREMIUM 1:1</span>
-            <h3 class="prog-card-title">PAPA STRONG</h3>
-            <p class="prog-card-desc">Réservé aux pères débordés qui veulent retrouver leur énergie, perdre du poids et redevenir le pilier de leur famille, sans sacrifier leur emploi du temps.</p>
-            <ul class="prog-features-list">
-              <li><span class="icon-apex"></span> L'accompagnement sur-mesure de 4 mois.</li>
-              <li><span class="icon-apex"></span> Perdre 4 à 12 kg de gras</li>
-            </ul>
-            <a href="#quiz" class="btn btn-outline-alt btn-full">EN SAVOIR PLUS</a>
+            <div class="mt-auto">
+              <a href="#quiz" class="btn-outline-bronze">EN SAVOIR PLUS</a>
+            </div>
           </div>
         </div>
 
         <!-- AMT -->
-        <div class="glass-card prog-card-grid">
-          <div class="card-content">
-            <span class="pill-badge">ABONNEMENT CONTINU</span>
-            <h3 class="prog-card-title">APEX METHOD TRAINING</h3>
-            <p class="prog-card-desc">Un nouveau programme débloqué chaque mois. Délègue la conception de tes séances et reste affûté 365 jours par an.</p>
-            <ul class="prog-features-list">
+        <div class="glass-card-new sub-card">
+          <div class="card-content-new flex-col">
+            <div class="pill-row-new">
+              <span class="pill-badge-new"><span class="pill-dot"></span>ABONNEMENT CONTINU</span>
+            </div>
+            <h3 class="prog-card-title-new">APEX METHOD TRAINING</h3>
+            <p class="prog-card-desc-new">Un nouveau programme débloqué chaque mois. Délègue la conception de tes séances et reste affûté 365 jours par an.</p>
+            <ul class="prog-features-list-new">
               <li><span class="icon-apex"></span> Un physique affûté 365 jours</li>
               <li><span class="icon-apex"></span> 5 séances par semaine</li>
             </ul>
-            <a href="#quiz" class="btn btn-outline-alt btn-full">EN SAVOIR PLUS</a>
+            <div class="mt-auto">
+              <a href="#quiz" class="btn-outline-bronze">EN SAVOIR PLUS</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ATHENA -->
+        <div class="glass-card-new sub-card">
+          <div class="card-content-new flex-col">
+            <div class="pill-row-new">
+              <span class="pill-badge-new"><span class="pill-dot"></span>POUR ELLE</span>
+            </div>
+            <h3 class="prog-card-title-new">ATHENA</h3>
+            <p class="prog-card-desc-new">La puissance au féminin. Une méthode structurée pour sculpter un physique fort et dessiné, avec la philosophie APEX.</p>
+            <ul class="prog-features-list-new">
+              <li><span class="icon-apex"></span> Programmation Force & Tonicité</li>
+              <li><span class="icon-apex"></span> 5 séances par semaine</li>
+            </ul>
+            <div class="mt-auto">
+              <a href="#quiz" class="btn-outline-bronze">EN SAVOIR PLUS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- PAPA STRONG (The Premium Closer) -->
+      <div class="glass-card-new premium-card" style="margin-top: 24px;">
+        <div class="card-content-new flex-col" style="padding: 40px;">
+          <div class="premium-layout" style="display: flex; justify-content: space-between; align-items: center; gap: 40px; width: 100%;">
+            <div class="premium-header">
+              <span class="pill-badge-new" style="margin-bottom: 12px; display: inline-flex;"><span class="pill-dot"></span>ACCOMPAGNEMENT ÉLITE</span>
+              <h3 class="prog-card-title-new" style="margin-bottom: 0;">PAPA STRONG</h3>
+            </div>
+            <p class="prog-card-desc-new" style="max-width: 500px; margin-bottom: 0;">Réservé aux hommes et pères qui veulent une transformation radicale. Coaching privé, nutrition millimétrée et mentorat direct.</p>
+            <div class="premium-cta">
+              <a href="#quiz" class="btn-solid-bronze">REJOINDRE L'ÉLITE</a>
+            </div>
           </div>
         </div>
       </div>
@@ -390,87 +457,97 @@
   </section>
 
   <!-- APP PREVIEW -->
-  <section id="app" class="app-section">
+  <section id="app" class="app-section-new">
     <div class="container">
-      <div class="app-content">
-        <div class="app-text">
-          <span class="section-tag">L'application</span>
-          <h2 class="section-title">Ton coach.<br><span class="text-accent">Dans ta poche.</span></h2>
-          <p class="app-desc">L'app APEX METHOD te guide du premier jour au dernier. Séances détaillées, timers intégrés, suivi de tes charges, nutrition personnalisée, scanner de repas IA.</p>
-          <div class="app-features-list">
-            <div class="app-feature">
-              <div class="af-icon">📱</div>
-              <div>
-                <h4>Séances guidées</h4>
-                <p>Chaque exercice avec vidéo démo, séries, reps, tempo et temps de repos</p>
+      <div class="app-content-new">
+        <!-- Left Col: Text & Feature Cards -->
+        <div class="app-text-col">
+          <div class="pill-row-new">
+            <span class="pill-badge-new" style="border-color: rgba(255,255,255,0.05); background: rgba(255,255,255,0.02);"><span class="pill-dot"></span>Ton Coach</span>
+          </div>
+          <h2 class="app-title-new">L'APPLICATION</h2>
+          <p class="app-desc-new">L'app APEX METHOD te guide du premier jour au dernier. Séances détaillées, timers intégrés, suivi de tes charges, nutrition personnalisée, scanner de repas IA.</p>
+          
+          <div class="app-features-grid">
+            <!-- Feature 1 -->
+            <div class="glass-card-new app-feature-card">
+              <div class="af-icon-new">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
               </div>
+              <h4 class="af-title">SÉANCES GUIDÉES</h4>
+              <p class="af-desc">Chaque exercice avec vidéo démo, séries, reps, tempo et temps de repos</p>
             </div>
-            <div class="app-feature">
-              <div class="af-icon">🍽️</div>
-              <div>
-                <h4>Nutrition IA</h4>
-                <p>Plans personnalisés auto-générés. Scanner un repas pour connaître ses macros</p>
+            <!-- Feature 2 -->
+            <div class="glass-card-new app-feature-card">
+              <div class="af-icon-new">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
               </div>
+              <h4 class="af-title">NUTRITION IA</h4>
+              <p class="af-desc">Plans personnalisés auto-générés. Scanner un repas pour connaître ses macros</p>
             </div>
-            <div class="app-feature">
-              <div class="af-icon">📊</div>
-              <div>
-                <h4>Suivi intelligent</h4>
-                <p>Progression, records personnels, photos avant/après, historique complet</p>
+            <!-- Feature 3 (Full width) -->
+            <div class="glass-card-new app-feature-card full-width">
+              <div class="af-icon-new">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
               </div>
+              <h4 class="af-title">SUIVI INTELLIGENT</h4>
+              <p class="af-desc">Progression, records personnels, photos avant/après, historique complet</p>
             </div>
           </div>
         </div>
-        <div class="app-visual">
-          <div class="phone-mockup">
-            <div class="phone-screen">
-              <div class="mock-header">
-                <span class="mock-time">09:41</span>
-                <span class="mock-title">APEX METHOD</span>
+
+        <!-- Right Col: Visual -->
+        <div class="app-visual-col">
+          <div class="app-backdrop"></div>
+          <div class="phone-mockup-new">
+            <!-- Phone Screen Content -->
+            <div class="phone-screen-new">
+              <!-- Top Image Graphic -->
+              <div class="mock-hero-img">
+                <img src="./Assets/Alex Image.jpeg" alt="Workout" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: grayscale(20%);">
+                <div class="mock-hero-gradient"></div>
               </div>
-              <div class="mock-welcome">Bonjour, Alexandre</div>
-              <div class="mock-card">
-                <div class="mock-card-label">Séance du jour</div>
-                <div class="mock-card-title">ORION — Séance 3</div>
-                <div class="mock-card-sub">Jambes / Abdos · 45 min</div>
-                <div class="mock-progress-bar"><div class="mock-progress-fill"></div></div>
-              </div>
-              <div class="mock-stats-row">
-                <div class="mock-stat">
-                  <div class="mock-stat-val">68%</div>
-                  <div class="mock-stat-label">Progression</div>
+              
+              <!-- Content overlapping image -->
+              <div class="mock-content-layer">
+                <h3 class="mock-h3">Back Day</h3>
+                <div class="mock-date-pill">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Completed • Nov 16
                 </div>
-                <div class="mock-stat">
-                  <div class="mock-stat-val">12</div>
-                  <div class="mock-stat-label">Séances</div>
+                
+                <div class="mock-tags-row">
+                  <div class="mock-tag">⚡ 6 exercises</div>
+                  <div class="mock-tag">🕒 45 min</div>
+                  <div class="mock-tag">🏆 2 new PRs</div>
                 </div>
-                <div class="mock-stat">
-                  <div class="mock-stat-val">3</div>
-                  <div class="mock-stat-label">PRs</div>
+                <div class="mock-tags-row">
+                  <div class="mock-tag">↗ +8% volume</div>
                 </div>
-              </div>
-              <div class="mock-exercises">
-                <div class="mock-exercise">
-                  <div class="mock-ex-num">1</div>
-                  <div class="mock-ex-info">
-                    <div class="mock-ex-name">Soulevé de terre</div>
-                    <div class="mock-ex-detail">4×8 · Tempo 3010 · 2'00 repos</div>
+                
+                <div class="mock-section-label">QUICK STATS</div>
+                
+                <div class="mock-stats-grid">
+                  <div class="mock-stat-card">
+                    <span class="msc-label">Total Time</span>
+                    <span class="msc-val">47 <span class="msc-unit">min</span></span>
+                  </div>
+                  <div class="mock-stat-card">
+                    <span class="msc-label">Total Volume</span>
+                    <span class="msc-val">12,480 <span class="msc-unit">kg</span></span>
                   </div>
                 </div>
-                <div class="mock-exercise">
-                  <div class="mock-ex-num">2</div>
-                  <div class="mock-ex-info">
-                    <div class="mock-ex-name">Fentes marchées</div>
-                    <div class="mock-ex-detail">3×12 · 1'30 repos</div>
-                  </div>
-                </div>
-                <div class="mock-exercise mock-triset">
-                  <div class="mock-ex-badge">TRISET</div>
-                  <div class="mock-ex-info">
-                    <div class="mock-ex-name">Leg Press + Squats sautés + Pompes Tyson</div>
-                    <div class="mock-ex-detail">3×15 · 1'00 repos</div>
-                  </div>
-                </div>
+                
+                <a href="#" class="mock-btn-bronze">Log Next Session</a>
+              </div>
+              
+              <!-- Bottom Tab Bar -->
+              <div class="mock-tab-bar">
+                <div class="tab-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span style="font-size:8px; margin-top:4px;">Home</span></div>
+                <div class="tab-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><span style="font-size:8px; margin-top:4px;">Plan</span></div>
+                <div class="tab-item active"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z"/></svg><span style="font-size:8px; margin-top:2px;">Train</span></div>
+                <div class="tab-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg><span style="font-size:8px; margin-top:4px;">Stats</span></div>
+                <div class="tab-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span style="font-size:8px; margin-top:4px;">Profile</span></div>
               </div>
             </div>
           </div>
@@ -479,47 +556,207 @@
     </div>
   </section>
 
-  <!-- RESULTS / SOCIAL PROOF -->
+  <!-- RESULTS / TRANSFORMATIONS -->
   <section id="resultats" class="results">
     <div class="container">
       <div class="section-header">
         <span class="section-tag">Les résultats</span>
         <h2 class="section-title">Ils ont atteint<br><span class="text-accent">leur sommet.</span></h2>
       </div>
-      <div class="testimonials-track">
-        <div class="testimonial">
-          <div class="testimonial-quote">"En 90 jours, j'ai perdu 12kg et gagné en confiance. La méthode est claire, structurée. Tu suis, tu progresses."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar">M</div>
-            <div>
-              <div class="author-name">Mehdi, 34 ans</div>
-              <div class="author-program">Programme ORION — Salle</div>
+
+      <div class="results-grid">
+        <!-- Card 1: John -->
+        <div class="result-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="split-slider">
+                <div class="slider-img img-after" style="background-image: url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-img img-before" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-label label-before">AVANT</div>
+                <div class="slider-label label-after">APRÈS</div>
+                <div class="slider-handle"></div>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3 class="res-name">JOHN D.</h3>
+              <p class="res-story">"Une transformation physique qui a redéfini mon mental. Alex m'a donné les clés du succès."</p>
+              <div class="res-stats">
+                <div class="res-stat-item"><span class="icon-apex"></span> -10 kg</div>
+                <div class="res-stat-item"><span class="icon-apex"></span> MG: 20% → 16%</div>
+              </div>
             </div>
           </div>
-          <div class="testimonial-stat">-12kg en 90 jours</div>
+          <button class="flip-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
         </div>
-        <div class="testimonial">
-          <div class="testimonial-quote">"Papa de 3 enfants, je pensais que c'était trop tard. Papa Strong m'a prouvé le contraire. Alex est un vrai mentor."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar">T</div>
-            <div>
-              <div class="author-name">Thomas, 41 ans</div>
-              <div class="author-program">Papa Strong — 4 mois</div>
+
+        <!-- Card 2: Mehdi -->
+        <div class="result-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="split-slider">
+                <div class="slider-img img-after" style="background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-img img-before" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-label label-before">AVANT</div>
+                <div class="slider-label label-after">APRÈS</div>
+                <div class="slider-handle"></div>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3 class="res-name">MEHDI B.</h3>
+              <p class="res-story">"La méthode Orion est d'une efficacité redoutable. Je ne me suis jamais senti aussi fort."</p>
+              <div class="res-stats">
+                <div class="res-stat-item"><span class="icon-apex"></span> -12 kg en 90j</div>
+                <div class="res-stat-item"><span class="icon-apex"></span> Programme Orion</div>
+              </div>
             </div>
           </div>
-          <div class="testimonial-stat">Transformation complète</div>
+          <button class="flip-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
         </div>
-        <div class="testimonial">
-          <div class="testimonial-quote">"Le programme LÉO m'a montré qu'on n'a pas besoin de salle. 28 jours, 30 minutes par jour, et les résultats sont là."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar">Y</div>
-            <div>
-              <div class="author-name">Youssef, 29 ans</div>
-              <div class="author-program">Programme LÉO — Maison</div>
+
+        <!-- Card 3: Thomas -->
+        <div class="result-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="split-slider">
+                <div class="slider-img img-after" style="background-image: url('https://images.unsplash.com/photo-1491752355422-92931665a911?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-img img-before" style="background-image: url('https://images.unsplash.com/photo-1550345332-09e3ac987658?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-label label-before">AVANT</div>
+                <div class="slider-label label-after">APRÈS</div>
+                <div class="slider-handle"></div>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3 class="res-name">THOMAS L.</h3>
+              <p class="res-story">"En tant que papa, Papa Strong m'a permis de retrouver une forme athlétique pour mes enfants."</p>
+              <div class="res-stats">
+                <div class="res-stat-item"><span class="icon-apex"></span> Force multipliée</div>
+                <div class="res-stat-item"><span class="icon-apex"></span> Discipline APEX</div>
+              </div>
             </div>
           </div>
-          <div class="testimonial-stat">-8kg · +masse musculaire</div>
+          <button class="flip-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
         </div>
+
+        <!-- Card 4: Youssef -->
+        <div class="result-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="split-slider">
+                <div class="slider-img img-after" style="background-image: url('https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-img img-before" style="background-image: url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-label label-before">AVANT</div>
+                <div class="slider-label label-after">APRÈS</div>
+                <div class="slider-handle"></div>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3 class="res-name">YOUSSEF K.</h3>
+              <p class="res-story">"Léo m'a prouvé qu'on peut se transformer n'importe où. Les résultats sont là."</p>
+              <div class="res-stats">
+                <div class="res-stat-item"><span class="icon-apex"></span> -8 kg</div>
+                <div class="res-stat-item"><span class="icon-apex"></span> Programme Léo</div>
+              </div>
+            </div>
+          </div>
+          <button class="flip-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
+        </div>
+
+        <!-- Card 5: Marc -->
+        <div class="result-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="split-slider">
+                <div class="slider-img img-after" style="background-image: url('https://images.unsplash.com/photo-1507398941214-572c25f4b1dc?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-img img-before" style="background-image: url('https://images.unsplash.com/photo-1510671054245-efd4727144be?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-label label-before">AVANT</div>
+                <div class="slider-label label-after">APRÈS</div>
+                <div class="slider-handle"></div>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3 class="res-name">MARC S.</h3>
+              <p class="res-story">"Une clarté mentale absolue et un physique dont je n'osais rêver."</p>
+              <div class="res-stats">
+                <div class="res-stat-item"><span class="icon-apex"></span> +5 kg muscles</div>
+                <div class="res-stat-item"><span class="icon-apex"></span> Sommet atteint</div>
+              </div>
+            </div>
+          </div>
+          <button class="flip-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
+        </div>
+
+        <!-- Card 6: Sophie -->
+        <div class="result-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="split-slider">
+                <div class="slider-img img-after" style="background-image: url('https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-img img-before" style="background-image: url('https://images.unsplash.com/photo-1548690312-e3b507d17a12?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-label label-before">AVANT</div>
+                <div class="slider-label label-after">APRÈS</div>
+                <div class="slider-handle"></div>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3 class="res-name">SOPHIE V.</h3>
+              <p class="res-story">"Athena a sculpté mon corps comme jamais. La discipline est la clé."</p>
+              <div class="res-stats">
+                <div class="res-stat-item"><span class="icon-apex"></span> Silhouette athlétique</div>
+                <div class="res-stat-item"><span class="icon-apex"></span> Programme Athena</div>
+              </div>
+            </div>
+          </div>
+          <button class="flip-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
+        </div>
+
+        <!-- Card 7: David -->
+        <div class="result-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="split-slider">
+                <div class="slider-img img-after" style="background-image: url('https://images.unsplash.com/photo-1532384748853-8f54a9f472e3?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-img img-before" style="background-image: url('https://images.unsplash.com/photo-1520334298038-403197609271?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-label label-before">AVANT</div>
+                <div class="slider-label label-after">APRÈS</div>
+                <div class="slider-handle"></div>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3 class="res-name">DAVID R.</h3>
+              <p class="res-story">"De sédentaire à athlète. Le changement est radical."</p>
+              <div class="res-stats">
+                <div class="res-stat-item"><span class="icon-apex"></span> -15 kg</div>
+                <div class="res-stat-item"><span class="icon-apex"></span> Transformation Totale</div>
+              </div>
+            </div>
+          </div>
+          <button class="flip-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
+        </div>
+
+        <!-- Card 8: Luc -->
+        <div class="result-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="split-slider">
+                <div class="slider-img img-after" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-img img-before" style="background-image: url('https://images.unsplash.com/photo-1518611012118-2969c6314c62?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="slider-label label-before">AVANT</div>
+                <div class="slider-label label-after">APRÈS</div>
+                <div class="slider-handle"></div>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3 class="res-name">LUC M.</h3>
+              <p class="res-story">"La rigueur d'Alex est ce qui fait la différence. Pas de compromis."</p>
+              <div class="res-stats">
+                <div class="res-stat-item"><span class="icon-apex"></span> Puissance décuplée</div>
+                <div class="res-stat-item"><span class="icon-apex"></span> Mentalité APEX</div>
+              </div>
+            </div>
+          </div>
+          <button class="flip-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
+        </div>
+
       </div>
     </div>
   </section>
@@ -638,11 +875,45 @@
     </div>
   </footer>
 
+  <!-- STYLE STUDIO (Client Feedback UI) -->
+  <div class="style-studio" id="style-studio">
+    <button class="studio-trigger" id="studio-trigger" aria-label="Open Style Studio">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </button>
+    
+    <div class="studio-panel" id="studio-panel">
+      <div class="studio-header">
+        <h4>STYLE STUDIO</h4>
+        <span class="studio-subtitle">Live Preview Control</span>
+      </div>
+      
+      <div class="studio-group">
+        <label>PAGE THEME</label>
+        <div class="studio-toggles">
+          <button class="studio-btn active" data-theme-set="dark">SOMBRE</button>
+          <button class="studio-btn" data-theme-set="light">CLAIR</button>
+        </div>
+      </div>
+
+      <div class="studio-group">
+        <label>GLASS STYLE</label>
+        <div class="studio-toggles">
+          <button class="studio-btn active" data-glass-set="obsidian">OBSIDIENNE</button>
+          <button class="studio-btn" data-glass-set="crystal">CRISTAL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- GSAP 3.15.0 + Plugins -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
-  <script src="script.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/frame-processor.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
