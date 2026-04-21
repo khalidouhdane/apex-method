@@ -327,132 +327,278 @@
     </div>
   </section>
 
+  <!-- METRICS / REELS -->
+  <section class="apex-metrics-section">
+    <div class="container">
+      <div class="programs-header-text" style="text-align: center; margin-bottom: 40px;">
+        <h2 class="nos-offres" style="margin-bottom: 16px;">VOTRE<br><span class="text-gradient-prog" style="font-style: italic;">ÉVOLUTION</span></h2>
+      </div>
+
+      <div class="metrics-grid">
+        <!-- CARD 1: Grinders -->
+        <div class="metric-card">
+          <video class="metric-video-bg" autoplay loop muted playsinline disablePictureInPicture>
+            <source src="Assets/Reels/Sources/APEX GRINDERS.webm" type="video/webm">
+            <source src="Assets/Reels/Sources/APEX GRINDERS.mp4" type="video/mp4">
+          </video>
+          <div class="metric-content">
+            <div class="metric-number">600+</div>
+            <div class="metric-label">GRINDERS</div>
+          </div>
+        </div>
+
+        <!-- CARD 2: Nutrition -->
+        <div class="metric-card">
+          <video class="metric-video-bg" autoplay loop muted playsinline disablePictureInPicture>
+            <source src="Assets/Reels/Sources/APEX NUTRITION.webm" type="video/webm">
+            <source src="Assets/Reels/Sources/APEX NUTRITION.mp4" type="video/mp4">
+          </video>
+          <div class="metric-content">
+            <div class="metric-number">2100+</div>
+            <div class="metric-label">RECETTES</div>
+          </div>
+        </div>
+
+        <!-- CARD 3: Training -->
+        <div class="metric-card">
+          <video class="metric-video-bg" autoplay loop muted playsinline disablePictureInPicture>
+            <source src="Assets/Reels/Sources/APEX TRAINING.webm" type="video/webm">
+            <source src="Assets/Reels/Sources/APEX TRAINING.mp4" type="video/mp4">
+          </video>
+          <div class="metric-content">
+            <div class="metric-number">200+</div>
+            <div class="metric-label">ENTRAÎNEMENTS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PROGRAMS -->
   <section id="programmes" class="programs">
     <div class="container">
       
-      <!-- Top Row: Title | Image | Orion -->
-      <div class="programs-showcase-new">
-        <!-- Column 1: Intro & Toggle -->
-        <div class="prog-title-col">
-          <!-- Environment Toggle (Screenshot exact design) -->
-          <div class="program-filters-new">
-            <div class="filter-track-new">
-              <div class="filter-slider-new"></div>
-              <button class="filter-btn-new active" data-location="maison">MAISON</button>
-              <button class="filter-btn-new" data-location="salle">SALLE</button>
-            </div>
-          </div>
-          
-          <h2 class="nos-offres" data-split-prog>NOS<br><span class="text-accent" style="font-style: italic;">PROGRAMS</span></h2>
-          <p class="prog-intro-text">La Fondation APEX. Choisis ton environnement, suis la méthode, et construis un corps athlétique et un mental d'acier.</p>
+      <div class="programs-header-layout" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; flex-wrap: wrap; gap: 24px;">
+        <div class="programs-header-text">
+          <h2 class="nos-offres" data-split-prog style="margin-bottom: 16px;">NOS<br><span class="text-gradient-prog" style="font-style: italic;">PROGRAMMES</span></h2>
+          <p class="prog-intro-text" style="max-width: 500px; margin: 0;">Trouve la méthode qui correspond à ton niveau d'engagement. Maison, salle, abonnement ou coaching élite.</p>
         </div>
-
-        <!-- Column 2: Visual -->
-        <div class="prog-visual-col">
-          <div class="prog-char-wrap-new">
-            <img src="./Assets/Alex Image.jpeg" alt="APEX Transformation" class="prog-char-img-new" id="orion-img">
-          </div>
-        </div>
-
-        <!-- Column 3: ORION Card -->
-        <div class="prog-card-col">
-          <div class="glass-card-new prog-card-featured-new">
-            <div class="card-content-new flex-col">
-              <div class="pill-row-new">
-                <span class="pill-badge-new"><span class="pill-dot"></span>La transformation absolue en 90 jours.</span>
-              </div>
-              <h3 class="prog-card-title-new">ORION</h3>
-              <p class="prog-card-desc-new" id="orion-desc">Que tu sois chez toi ou en salle, ORION est le moteur principal de la méthode APEX. 3 cycles de progression pour détruire tes limites, fondre le gras superflu et forger un corps athlétique et fonctionnel. C'est la fondation.</p>
-              
-              <ul class="prog-features-list-new">
-                <li><span class="icon-apex"></span> <span id="orion-spec-1">Programmation Force & Hypertrophie</span></li>
-                <li><span class="icon-apex"></span> <span id="orion-spec-2">Optimisation morpho-anatomique</span></li>
-                <li><span class="icon-apex"></span> <span>5 séances par semaine</span></li>
-                <li><span class="icon-apex"></span> <span>L'expérience APEX complète</span></li>
-              </ul>
-
-              <div class="mt-auto">
-                <a href="#quiz" class="btn-solid-bronze">EN SAVOIR PLUS</a>
-              </div>
-            </div>
+        
+        <!-- Filter Tabs -->
+        <div class="program-filters-new" style="margin-bottom: 0;">
+          <div class="filter-track-new">
+            <div class="filter-slider-new"></div>
+            <button class="filter-btn-new active" data-location="tous">TOUS</button>
+            <button class="filter-btn-new" data-location="maison">MAISON</button>
+            <button class="filter-btn-new" data-location="salle">SALLE</button>
           </div>
         </div>
       </div>
 
-      <!-- Bottom Row: Dynamic Flex Grid -->
-      <div class="programs-flex-row">
-        <!-- LEO -->
-        <div class="glass-card-new sub-card" data-location-type="maison">
-          <div class="card-content-new flex-col">
-            <div class="pill-row-new">
-              <span class="pill-badge-new"><span class="pill-dot"></span>INTENSIF</span>
+      <!-- PROGRAMS SLIDER -->
+      <div class="programs-slider-new">
+        
+        <!-- ORION SALLE -->
+        <div class="prog-hero-card card-large" data-location-type="salle" data-tier="fondation">
+          <div class="prog-hero-img">
+            <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1000&auto=format&fit=crop" alt="Orion Salle">
+            <div class="prog-hero-overlay"></div>
+          </div>
+          <div class="prog-hero-content flex-col">
+            <div class="prog-hero-header">
+              <div class="pill-row-new">
+                <span class="pill-badge-new"><span class="pill-dot"></span>FONDATION</span>
+                <span class="pill-badge-new">SALLE</span>
+                <span class="pill-badge-new">90 JOURS</span>
+              </div>
+              <div class="prog-price-tag">
+                <span class="price-val">97€</span>
+                <span class="price-type">Paiement unique</span>
+              </div>
             </div>
-            <h3 class="prog-card-title-new">LÉO</h3>
-            <p class="prog-card-desc-new">L'intensif "Home". Brise tes plateaux et relance ton métabolisme avec un format court et brutal. Transpire un maximum depuis ton salon.</p>
+            <h3 class="prog-card-title-new mt-auto">ORION SALLE</h3>
+            <p class="prog-card-desc-new">La transformation absolue en salle. Machines, haltères et poids du corps pour sculpter un physique d'élite.</p>
             <ul class="prog-features-list-new">
-              <li><span class="icon-apex"></span> Perte de gras accélérée</li>
-              <li><span class="icon-apex"></span> 1 cycle de 4 semaines</li>
+              <li><span class="icon-apex"></span> Machines & poids libres</li>
+              <li><span class="icon-apex"></span> Analyse morpho-anatomique</li>
+              <li><span class="icon-apex"></span> IA Nutrition intégrée</li>
+              <li><span class="icon-apex"></span> Suivi métabolique</li>
+              <li><span class="icon-apex"></span> 3, 4 ou 5 séances par semaine</li>
             </ul>
-            <div class="mt-auto">
-              <a href="#quiz" class="btn-outline-bronze">EN SAVOIR PLUS</a>
-            </div>
+            <a href="#quiz" class="btn btn-solid-bronze w-full text-center mt-4">Découvrir ORION Salle</a>
           </div>
         </div>
 
-        <!-- AMT -->
-        <div class="glass-card-new sub-card">
-          <div class="card-content-new flex-col">
-            <div class="pill-row-new">
-              <span class="pill-badge-new"><span class="pill-dot"></span>ABONNEMENT CONTINU</span>
+        <!-- ORION MAISON / OUTDOOR -->
+        <div class="prog-hero-card card-large" data-location-type="maison" data-tier="fondation">
+          <div class="prog-hero-img">
+            <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=1000&auto=format&fit=crop" alt="Orion Maison">
+            <div class="prog-hero-overlay"></div>
+          </div>
+          <div class="prog-hero-content flex-col">
+            <div class="prog-hero-header">
+              <div class="pill-row-new">
+                <span class="pill-badge-new"><span class="pill-dot"></span>FONDATION</span>
+                <span class="pill-badge-new">MAISON / OUTDOOR</span>
+                <span class="pill-badge-new">90 JOURS</span>
+              </div>
+              <div class="prog-price-tag">
+                <span class="price-val">97€</span>
+                <span class="price-type">Paiement unique</span>
+              </div>
             </div>
-            <h3 class="prog-card-title-new">APEX METHOD TRAINING</h3>
-            <p class="prog-card-desc-new">Un nouveau programme débloqué chaque mois. Délègue la conception de tes séances et reste affûté 365 jours par an.</p>
+            <h3 class="prog-card-title-new mt-auto">ORION MAISON</h3>
+            <p class="prog-card-desc-new">Le moteur principal de la méthode APEX adapté pour la maison ou l'extérieur avec des élastiques de résistance.</p>
             <ul class="prog-features-list-new">
-              <li><span class="icon-apex"></span> Un physique affûté 365 jours</li>
-              <li><span class="icon-apex"></span> 5 séances par semaine</li>
+              <li><span class="icon-apex"></span> Élastiques de résistance</li>
+              <li><span class="icon-apex"></span> Masterclass mensuelle</li>
+              <li><span class="icon-apex"></span> IA Nutrition + Analyse repas</li>
+              <li><span class="icon-apex"></span> 3, 4 ou 5 séances par semaine</li>
+              <li><span class="icon-apex"></span> Progression Débutant à Avancé</li>
             </ul>
-            <div class="mt-auto">
-              <a href="#quiz" class="btn-outline-bronze">EN SAVOIR PLUS</a>
+            <a href="#quiz" class="btn btn-solid-bronze w-full text-center mt-4">Découvrir ORION Maison</a>
+          </div>
+        </div>
+
+        <!-- LÉO -->
+        <div class="prog-hero-card card-medium" data-location-type="maison" data-tier="intensifs">
+          <div class="prog-hero-img">
+            <img src="https://images.unsplash.com/photo-1598136490937-f77b0ce520fe?q=80&w=800&auto=format&fit=crop" alt="Léo">
+            <div class="prog-hero-overlay"></div>
+          </div>
+          <div class="prog-hero-content flex-col">
+            <div class="prog-hero-header">
+              <div class="pill-row-new">
+                <span class="pill-badge-new"><span class="pill-dot"></span>INTENSIF (HOMMES)</span>
+                <span class="pill-badge-new">28 JOURS</span>
+              </div>
+              <div class="prog-price-tag">
+                <span class="price-val">49€</span>
+              </div>
             </div>
+            <h3 class="prog-card-title-new mt-auto">LÉO</h3>
+            <p class="prog-card-desc-new">L'intensif "Home". Brise tes plateaux et relance ton métabolisme avec un format court et brutal. 100% poids du corps.</p>
+            <ul class="prog-features-list-new">
+              <li><span class="icon-apex"></span> Sans matériel (poids du corps)</li>
+              <li><span class="icon-apex"></span> Séances guidées de 30 min</li>
+              <li><span class="icon-apex"></span> Perte de gras accélérée</li>
+              <li><span class="icon-apex"></span> Nutrition & Calcul BMR inclus</li>
+            </ul>
+            <a href="#quiz" class="btn btn-outline-bronze w-full text-center mt-4">Découvrir LÉO</a>
           </div>
         </div>
 
         <!-- ATHENA -->
-        <div class="glass-card-new sub-card">
-          <div class="card-content-new flex-col">
-            <div class="pill-row-new">
-              <span class="pill-badge-new"><span class="pill-dot"></span>POUR ELLE</span>
+        <div class="prog-hero-card card-medium" data-location-type="maison" data-tier="intensifs">
+          <div class="prog-hero-img">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=800&auto=format&fit=crop" alt="Athena">
+            <div class="prog-hero-overlay"></div>
+          </div>
+          <div class="prog-hero-content flex-col">
+            <div class="prog-hero-header">
+              <div class="pill-row-new">
+                <span class="pill-badge-new"><span class="pill-dot"></span>INTENSIF (FEMMES)</span>
+                <span class="pill-badge-new">28 JOURS</span>
+              </div>
+              <div class="prog-price-tag">
+                <span class="price-val">49€</span>
+              </div>
             </div>
-            <h3 class="prog-card-title-new">ATHENA</h3>
+            <h3 class="prog-card-title-new mt-auto">ATHENA</h3>
             <p class="prog-card-desc-new">La puissance au féminin. Une méthode structurée pour sculpter un physique fort et dessiné, avec la philosophie APEX.</p>
             <ul class="prog-features-list-new">
               <li><span class="icon-apex"></span> Programmation Force & Tonicité</li>
-              <li><span class="icon-apex"></span> 5 séances par semaine</li>
+              <li><span class="icon-apex"></span> Élastiques de résistance</li>
+              <li><span class="icon-apex"></span> 4 à 5 séances par semaine</li>
+              <li><span class="icon-apex"></span> Philosophie APEX adaptée</li>
             </ul>
-            <div class="mt-auto">
-              <a href="#quiz" class="btn-outline-bronze">EN SAVOIR PLUS</a>
-            </div>
+            <a href="#quiz" class="btn btn-outline-bronze w-full text-center mt-4">Découvrir ATHENA</a>
           </div>
         </div>
-      </div>
-      
-      <!-- PAPA STRONG (The Premium Closer) -->
-      <div class="glass-card-new premium-card" style="margin-top: 24px;">
-        <div class="card-content-new flex-col" style="padding: 40px;">
-          <div class="premium-layout" style="display: flex; justify-content: space-between; align-items: center; gap: 40px; width: 100%;">
-            <div class="premium-header">
-              <span class="pill-badge-new" style="margin-bottom: 12px; display: inline-flex;"><span class="pill-dot"></span>ACCOMPAGNEMENT ÉLITE</span>
-              <h3 class="prog-card-title-new" style="margin-bottom: 0;">PAPA STRONG</h3>
+
+      </div> <!-- End programs-slider-new -->
+
+      <!-- AMT SUBSCRIPTION BANNER -->
+      <div class="amt-banner-new mt-12">
+        <div class="prog-hero-card card-full" data-tier="abonnement">
+          <div class="prog-hero-img">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop" alt="AMT">
+            <div class="prog-hero-overlay"></div>
+          </div>
+          <div class="prog-hero-content flex-col">
+            <div class="prog-hero-header">
+              <div class="pill-row-new">
+                <span class="pill-badge-new"><span class="pill-dot"></span>ÉVOLUTION CONTINUE</span>
+                <span class="pill-badge-new">SANS ENGAGEMENT</span>
+              </div>
+              <div class="prog-price-tag price-sub">
+                <span class="price-val">29€<span class="price-period">/mois</span></span>
+              </div>
             </div>
-            <p class="prog-card-desc-new" style="max-width: 500px; margin-bottom: 0;">Réservé aux hommes et pères qui veulent une transformation radicale. Coaching privé, nutrition millimétrée et mentorat direct.</p>
-            <div class="premium-cta">
-              <a href="#quiz" class="btn-solid-bronze">REJOINDRE L'ÉLITE</a>
+            <h3 class="prog-card-title-new mt-auto">APEX METHOD TRAINING (AMT)</h3>
+            <p class="prog-card-desc-new" style="max-width: 600px;">Délègue la conception de tes séances et reste affûté 365 jours par an. Un programme structuré et performant mis à jour mensuellement.</p>
+            
+            <div class="prog-features-columns">
+              <ul class="prog-features-list-new">
+                <li><span class="icon-apex"></span> Nouveau programme chaque mois</li>
+                <li><span class="icon-apex"></span> 5 séances/semaine (adaptable)</li>
+              </ul>
+              <ul class="prog-features-list-new">
+                <li><span class="icon-apex"></span> IA Nutrition & Calcul métabolisme</li>
+                <li><span class="icon-apex"></span> Suivi des dépenses quotidiennes</li>
+              </ul>
+            </div>
+            
+            <div class="mt-6" style="max-width: 300px;">
+                <a href="#quiz" class="btn btn-outline-bronze w-full text-center">S'abonner à AMT</a>
             </div>
           </div>
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ELITE COACHING: PAPA STRONG -->
+  <section id="elite-coaching" class="elite-coaching-section">
+    <div class="container">
+      <div class="prog-elite-card card-full elite-section" data-tier="elite">
+        <div class="elite-bg-glow"></div>
+        <div class="elite-content">
+          <div class="elite-header">
+            <span class="elite-badge"><span class="pill-dot"></span>ACCOMPAGNEMENT 1:1</span>
+            <div class="prog-price-tag elite-price">
+              <span class="price-val">Sur Candidature</span>
+            </div>
+          </div>
+          <h3 class="elite-title">PAPA STRONG</h3>
+          <p class="elite-desc">Réservé aux hommes et pères qui veulent une transformation radicale et encadrée de A à Z. Coaching privé, nutrition millimétrée et mentorat direct avec Alexandre.</p>
+          
+          <div class="elite-grid">
+            <div class="elite-feature">
+              <h4>STRUCTURE 4 MOIS</h4>
+              <p>4 cycles progressifs : Fondation, Construction, Transformation, Évolution.</p>
+            </div>
+            <div class="elite-feature">
+              <h4>MENTORAT VIDÉO</h4>
+              <p>Formation hebdomadaire exclusive : Mindset, Entraînement, Nutrition et Vie quotidienne.</p>
+            </div>
+            <div class="elite-feature">
+              <h4>NUTRITION MILLIMÉTRÉE</h4>
+              <p>Plan alimentaire 100% personnalisé et ajusté en continu selon ton évolution.</p>
+            </div>
+            <div class="elite-feature">
+              <h4>ACCÈS DIRECT</h4>
+              <p>Suivi personnel et ajustements tactiques pour garantir les résultats.</p>
+            </div>
+          </div>
+          
+          <div class="elite-cta-wrap">
+            <a href="#calendly" class="btn btn-solid-bronze btn-large">RÉSERVER UN APPEL STRATÉGIQUE</a>
+            <span class="elite-disclaimer">Places extrêmement limitées. Entretien préalable obligatoire.</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 

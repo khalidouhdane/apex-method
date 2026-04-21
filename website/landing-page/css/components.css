@@ -98,6 +98,20 @@ body:hover .cursor-follower.hovering {
   background-clip: text;
 }
 
+.text-gradient-prog {
+  background: linear-gradient(98deg, #D38955 -2.22%, #98572A 86.22%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-prog div,
+.text-gradient-prog span {
+  background: linear-gradient(98deg, #D38955 -2.22%, #98572A 86.22%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .section-sub {
   font-size: clamp(15px, 1.8vw, 18px);
   color: var(--text-dim);
@@ -111,29 +125,43 @@ body:hover .cursor-follower.hovering {
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 600;
-  padding: 16px 32px;
-  border-radius: var(--radius-xl);
-  border: none;
-  cursor: none;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  cursor: pointer;
   transition: all 0.35s var(--ease-out);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   position: relative;
   overflow: hidden;
 }
 
-.btn-primary {
-  background: var(--bronze-base);
-  color: var(--surface-base);
+.btn-solid-bronze {
+  background: var(--cta-gradient);
+  color: var(--white);
+  border: none;
 }
 
-.btn-primary:hover {
-  background: var(--bronze-light);
+.btn-solid-bronze:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(196, 149, 106, 0.25);
+  box-shadow: 0 4px 12px rgba(196, 149, 106, 0.3);
+}
+
+.btn-outline-bronze {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--bronze-base);
+}
+
+.btn-outline-bronze:hover {
+  background: var(--bronze-glow-soft);
+  border-color: var(--bronze-light);
+  transform: translateY(-2px);
 }
 
 .btn-ghost {
@@ -147,22 +175,9 @@ body:hover .cursor-follower.hovering {
   color: var(--white);
 }
 
-.btn-outline {
-  background: transparent;
-  color: var(--bronze-base);
-  border: 1px solid rgba(196, 149, 106, 0.3);
-  padding: 12px 24px;
-  font-size: 14px;
-}
-
-.btn-outline:hover {
-  border-color: var(--bronze-base);
-  background: var(--bronze-glow-soft);
-}
-
 .btn-large {
-  padding: 20px 44px;
-  font-size: 17px;
+  padding: 18px 40px;
+  font-size: 16px;
 }
 
 /* ========================================

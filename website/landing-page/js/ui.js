@@ -95,34 +95,33 @@
 
   /**
    * initProgramFilters
-   * Handles the Salle/Maison toggle logic for the program grid.
+   * Handles the Tous/Maison/Salle/Abonnement toggle logic for the program grid.
    */
   APEX.initProgramFilters = function() {
     const filterBtns = document.querySelectorAll('.filter-btn-new');
     const slider = document.querySelector('.filter-slider-new');
-    const subCards = document.querySelectorAll('.sub-card');
     
-    // ORION Dynamic Content
-    const orionDesc = document.getElementById('orion-desc');
-    const orionSpec1 = document.getElementById('orion-spec-1');
-    const orionSpec2 = document.getElementById('orion-spec-2');
+    // Select only the cards inside the slider
+    const sliderCards = document.querySelectorAll('.programs-slider-new .prog-hero-card');
 
-    const contentMap = {
-      salle: {
-        desc: "Que tu sois chez toi ou en salle, ORION est le moteur principal de la méthode APEX. 3 cycles de progression pour détruire tes limites, fondre le gras superflu et forger un corps athlétique et fonctionnel. C'est la fondation.",
-        spec1: "Programmation Force & Hypertrophie",
-        spec2: "Optimisation morpho-anatomique",
-        sliderX: 'calc(100% + 6px)'
-      },
-      maison: {
-        desc: "L'efficacité APEX sans quitter ton salon. Une programmation optimisée pour des résultats maximum avec un minimum de matériel (haltères/élastiques).",
-        spec1: "Focus Conditionnement & Tonicité",
-        spec2: "Flexibilité d'entraînement totale",
-        sliderX: '0'
+    if (filterBtns.length === 0) return;
+
+    // Initialize slider position
+    function updateSlider(btn) {
+      if (slider) {
+        slider.style.width = `${btn.offsetWidth}px`;
+        slider.style.transform = `translateX(${btn.offsetLeft}px)`;
       }
-    };
+    }
 
-    filterBtns.forEach(btn => {
+    // Set initial position based on active button
+    const activeBtn = document.querySelector('.filter-btn-new.active') || filterBtns[0];
+    if (activeBtn) {
+      // Need a small timeout to let the DOM render the button widths
+      setTimeout(() => updateSlider(activeBtn), 50);
+    }
+
+    filterBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         const loc = btn.getAttribute('data-location');
         
@@ -131,49 +130,96 @@
         btn.classList.add('active');
 
         // 2. Move Slider
-        if (slider) {
-          slider.style.transform = loc === 'salle' ? 'translateX(calc(100% + 4px))' : 'translateX(0)';
-        }
+        updateSlider(btn);
 
-        // 3. Filter Secondary Cards (LÉO hide/show) smoothly
-        subCards.forEach(card => {
-          const type = card.getAttribute('data-location-type');
-          if (type === 'maison' && loc === 'salle') {
-             gsap.to(card, { 
-               opacity: 0, 
-               scale: 0.95, 
-               minWidth: 0, 
-               flexBasis: 0, 
-               padding: 0, 
-               margin: 0, 
-               borderWidth: 0, 
-               duration: 0.4, 
-               ease: 'power2.inOut',
-               onComplete: () => card.classList.add('hidden') 
-             });
-          } else if (type === 'maison' && loc === 'maison') {
-             card.classList.remove('hidden');
-             gsap.fromTo(card, 
-               { opacity: 0, scale: 0.95, minWidth: 0, flexBasis: 0, padding: 0, margin: 0, borderWidth: 0 }, 
-               { opacity: 1, scale: 1, minWidth: 300, flexBasis: '100%', padding: 40, margin: 0, borderWidth: 1, duration: 0.4, ease: 'power2.inOut', clearProps: 'all' }
-             );
-          }
-        });
-
-        // 4. Swap ORION Content with cinematic transition
-        const data = contentMap[loc];
-        const targets = [orionDesc, orionSpec1, orionSpec2];
-        
-        gsap.to(targets, { 
-          opacity: 0, y: 10, duration: 0.2, stagger: 0.05, 
+        // 3. Filter Logic
+        gsap.to(sliderCards, {
+          opacity: 0,
+          y: 10,
+          duration: 0.3,
+          ease: 'power2.inOut',
           onComplete: () => {
-            orionDesc.innerText = data.desc;
-            orionSpec1.innerText = data.spec1;
-            orionSpec2.innerText = data.spec2;
-            gsap.to(targets, { opacity: 1, y: 0, duration: 0.4, stagger: 0.05 });
-          } 
+            
+            // Hide everything first
+            sliderCards.forEach(c => {
+              c.classList.add('hidden');
+              c.style.display = 'none';
+            });
+            
+            // Logic based on filter selection
+            if (loc === 'tous') {
+              sliderCards.forEach(c => {
+                c.classList.remove('hidden');
+                c.style.display = '';
+              });
+            } 
+            else {
+              sliderCards.forEach(c => {
+                if (c.dataset.locationType === loc) {
+                  c.classList.remove('hidden');
+                  c.style.display = '';
+                }
+              });
+            }
+
+            // Animate visible ones back in
+            const visibleCards = Array.from(sliderCards).filter(c => !c.classList.contains('hidden'));
+            
+            // Scroll slider to start when filter changes
+            const sliderContainer = document.querySelector('.programs-slider-new');
+            if (sliderContainer) {
+              sliderContainer.scrollTo({ left: 0, behavior: 'smooth' });
+            }
+
+            if (visibleCards.length > 0) {
+              gsap.to(visibleCards, {
+                opacity: 1,
+                y: 0,
+                duration: 0.4,
+                stagger: 0.1,
+                ease: 'power2.out',
+                clearProps: 'all'
+              });
+            }
+          }
         });
       });
     });
+
+    // Add drag-to-scroll functionality for desktop
+    const sliderContainer = document.querySelector('.programs-slider-new');
+    if (sliderContainer) {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      sliderContainer.addEventListener('mousedown', (e) => {
+        isDown = true;
+        sliderContainer.classList.add('dragging'); // Optional styling
+        startX = e.pageX - sliderContainer.offsetLeft;
+        scrollLeft = sliderContainer.scrollLeft;
+        
+        // Temporarily disable snap during drag for smooth feeling
+        sliderContainer.style.scrollSnapType = 'none';
+      });
+
+      sliderContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+        sliderContainer.style.scrollSnapType = 'x mandatory';
+      });
+
+      sliderContainer.addEventListener('mouseup', () => {
+        isDown = false;
+        sliderContainer.style.scrollSnapType = 'x mandatory';
+      });
+
+      sliderContainer.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - sliderContainer.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll speed multiplier
+        sliderContainer.scrollLeft = scrollLeft - walk;
+      });
+    }
   };
 })();

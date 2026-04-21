@@ -112,6 +112,7 @@
       { y: '0%', duration: 1, stagger: 0.08, ease: "power4.out" }, 4.3);
 
     APEX.initSectionAnimations();
+    APEX.initMetricsAnimations();
     APEX.initBrandDivider();
     APEX.initResultsSlider();
     APEX.initStyleStudio();
@@ -263,12 +264,13 @@
       });
 
       progTl.to(split.chars, { opacity: 1, y: 0, rotateX: 0, stagger: 0.02, duration: 0.8, ease: 'power3.out' });
-      progTl.from('.prog-char-wrap', { scale: 0.8, opacity: 0, duration: 1.2, ease: 'power4.out' }, 0.2);
-      progTl.from('.prog-light-ring', { scale: 0.5, opacity: 0, duration: 1.5, ease: 'expo.out' }, 0.4);
-      progTl.from('.prog-card-featured', { x: 40, opacity: 0, duration: 1, ease: 'power3.out' }, 0.6);
+      progTl.from('.program-filters-new', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' }, 0.4);
     }
 
-    APEX.reveal('.sub-card', { trigger: '.programs-flex-row', stagger: 0.15 });
+    // Scroll reveal for program tiers
+    APEX.reveal('.prog-tier-label', { trigger: '.programs', stagger: 0.2 });
+    APEX.reveal('.prog-hero-card', { trigger: '.programs', stagger: 0.15 });
+    APEX.reveal('.prog-elite-card', { trigger: '.programs', y: 30 });
     APEX.reveal('.app-text-col', { trigger: '.app-section-new' });
     APEX.reveal('.phone-mockup-new', { trigger: '.app-visual-col', fromRotation: 5 });
     
@@ -277,6 +279,74 @@
     
     APEX.reveal('.about-img-frame', { trigger: '.about' });
     APEX.reveal('.quiz-card', { trigger: '.quiz-section' });
+  };
+
+  APEX.initMetricsAnimations = function() {
+    const section = document.querySelector('.apex-metrics-section');
+    if (!section) return;
+
+    // 1. Reveal cards with stagger
+    gsap.fromTo('.metric-card', 
+      { opacity: 0, y: 60 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1.2, 
+        stagger: 0.15, 
+        ease: 'expo.out',
+        scrollTrigger: {
+          trigger: '.metrics-grid',
+          start: 'top 85%',
+          once: true
+        }
+      }
+    );
+
+    // 2. Animate Counters
+    const numbers = document.querySelectorAll('.metric-number');
+    numbers.forEach((el, index) => {
+      const text = el.innerText;
+      const targetVal = parseInt(text.replace(/[^0-9]/g, ''));
+      const suffix = text.replace(/[0-9]/g, '');
+
+      if (!isNaN(targetVal)) {
+        let proxy = { val: 0 };
+        gsap.to(proxy, {
+          val: targetVal,
+          duration: 2.5,
+          delay: index * 0.15, // Sync with card stagger
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.metrics-grid',
+            start: 'top 85%',
+            once: true
+          },
+          onUpdate: () => {
+            el.innerText = Math.floor(proxy.val) + suffix;
+          }
+        });
+      }
+    });
+    
+    // 3. Header Animation
+    const headerText = document.querySelector('.apex-metrics-section .nos-offres');
+    if (headerText && typeof SplitText !== 'undefined') {
+      const split = new SplitText(headerText, { type: 'chars, words' });
+      gsap.set(split.chars, { opacity: 0, y: 30, rotateX: -60 });
+      gsap.to(split.chars, {
+        opacity: 1, 
+        y: 0, 
+        rotateX: 0, 
+        stagger: 0.02, 
+        duration: 0.8, 
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.apex-metrics-section',
+          start: 'top 85%',
+          once: true
+        }
+      });
+    }
   };
 
   APEX.reveal = function(selector, vars = {}) {
