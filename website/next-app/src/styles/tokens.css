@@ -1,0 +1,182 @@
+/* ========================================
+   APEX METHOD — Design System Tokens
+   3-Tier Architecture: Primitives → Semantics → Components
+   ======================================== */
+
+/* FONTS */
+@font-face {
+  font-family: 'Platform';
+  src: url('/fonts/Platform-Regular.woff2') format('woff2'),
+    url('/fonts/Platform-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Platform';
+  src: url('/fonts/Platform-Bold.woff2') format('woff2'),
+    url('/fonts/Platform-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Platform';
+  src: url('/fonts/Platform-BoldItalic.woff2') format('woff2'),
+    url('/fonts/Platform-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   TIER 1: PRIMITIVES — Raw values, never used directly in components
+   ========================================================================== */
+
+:root {
+  /* Core Grays ("Obsidian" Scale) */
+  --gray-50: #FFFFFF;
+  --gray-100: #EEEDEC;
+  --gray-200: #DED6CE;
+  --gray-700: #4B4643;
+  --gray-800: #1D1815;
+  --gray-900: #1A1614;
+  --gray-950: #0F0D0B;
+
+  /* Core Bronzes ("Apex" Scale) */
+  --bronze-100: #E6B599;
+  --bronze-500: #CC8E66;
+  --bronze-700: #A66840;
+  --bronze-900: #70401F;
+
+  /* Gradients */
+  --bronze-gradient: linear-gradient(90deg, #C07133 0%, #D1935B 100%);
+  --cta-gradient: linear-gradient(90deg, #98572A 0%, #CA783F 50%, #70401F 100%);
+  --accent-gradient: linear-gradient(90deg, #C07133 0%, #D1935B 100%);
+
+  /* Derived Primitives */
+  --surface-base: var(--gray-900);
+  --surface-raised: #1A1614;
+  --bronze-base: var(--bronze-500);
+  --bronze-light: var(--bronze-100);
+  --bronze-glow-soft: rgba(204, 142, 102, 0.15);
+  --bronze-glow-strong: rgba(204, 142, 102, 0.4);
+  --border-dim: rgba(255, 255, 255, 0.08);
+  --white: #F0ECE4;
+  --text-dim: #A8A49C;
+  --text-muted: #66605C;
+
+  /* Geometry */
+  --container-max: 1280px;
+  --container-pad: clamp(24px, 5vw, 60px);
+  --section-pad: clamp(80px, 12vw, 160px);
+
+  /* Typography */
+  --font-sans: 'Aeonik', -apple-system, sans-serif;
+  --font-display: 'Platform', sans-serif;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Motion */
+  --theme-transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   TIER 2: SEMANTICS — Assign meaning to primitives by theme
+   ========================================================================== */
+
+/* DARK THEME (Default) */
+html,
+[data-theme="dark"] {
+  --sys-bg: var(--gray-950);
+  --sys-surface: var(--gray-900);
+  --sys-text-pri: rgba(255, 255, 255, 0.9);
+  --sys-text-dim: #a8a49c;
+  --sys-text-muted: #6b6762;
+  --sys-border: var(--gray-800);
+  --sys-glow-intensity: 0.08;
+
+  /* Tier 3: Component Defaults (Vivid Obsidian) */
+  --comp-glass-bg: rgba(15, 13, 11, 0.85);
+  --comp-glass-border: rgba(255, 255, 255, 0.1);
+  --comp-glass-blur: 16px;
+  --comp-glass-saturate: 180%;
+  --comp-card-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* LIGHT THEME (Lumière) */
+html[data-theme="light"] {
+  --sys-bg: var(--gray-100);
+  --sys-surface: var(--gray-50);
+  --sys-text-pri: #181716;
+  --sys-text-dim: var(--gray-700);
+  --sys-text-muted: #66605C;
+  --sys-border: rgba(0, 0, 0, 0.08);
+  --sys-glow-intensity: 0.01;
+
+  --comp-glass-bg: var(--gray-50);
+  --comp-glass-border: rgba(255, 255, 255, 1);
+  --comp-glass-blur: 0px;
+  --comp-glass-saturate: 100%;
+  --comp-card-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+}
+
+/* ==========================================================================
+   TIER 3: COMPONENT — Glass style overrides
+   ========================================================================== */
+
+html[data-theme="dark"][data-glass="crystal"] {
+  --comp-glass-bg: rgba(251, 247, 244, 0.05);
+  --comp-glass-border: rgba(251, 247, 244, 0.1);
+  --comp-glass-blur: 22px;
+  --comp-glass-saturate: 100%;
+}
+
+/* ==========================================================================
+   ORION PROGRAM SPECIFIC TOKENS
+   ========================================================================== */
+
+:root {
+  --orion-accent: var(--bronze-500);
+  --orion-glow: rgba(204, 142, 102, 0.12);
+  --orion-card-bg: rgba(26, 22, 20, 0.6);
+  --orion-hero-overlay: linear-gradient(
+    to bottom,
+    rgba(15, 13, 11, 0.3) 0%,
+    rgba(15, 13, 11, 0.1) 40%,
+    rgba(15, 13, 11, 0.8) 100%
+  );
+}

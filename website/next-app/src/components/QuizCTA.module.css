@@ -1,0 +1,89 @@
+/* QuizCTA — CSS Module */
+
+.section {
+  padding: var(--section-pad) 0;
+}
+
+.card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-xl);
+  padding: clamp(40px, 6vw, 80px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bgPattern {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    var(--bronze-glow-soft) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.desc {
+  font-size: 16px;
+  color: var(--text-dim);
+  max-width: 480px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.stepNum {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bronze-glow-soft);
+  border: 1px solid var(--bronze-glow-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--bronze-base);
+  font-size: 13px;
+}
+
+.stepLine {
+  width: 32px;
+  height: 1px;
+  background: var(--border-dim);
+}
+
+.note {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 16px;
+}

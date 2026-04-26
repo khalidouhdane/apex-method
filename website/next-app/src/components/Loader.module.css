@@ -1,0 +1,61 @@
+/* ========================================
+   APEX METHOD — Loader
+   Celestial Intro + Straight Trails
+   ======================================== */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--surface-base, #1A1614);
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.loaderHidden {
+  pointer-events: none;
+}
+
+.trailContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.trailSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.trailPath {
+  opacity: 0;
+}
+
+.loaderInner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+
+.loaderLogoSvg {
+  /* Will be positioned/animated by GSAP */
+}
+
+.loaderLogoPath {
+  fill: #FFF2E0;
+  opacity: 0;
+}
+
+.loaderPercent {
+  font-family: var(--font-display, 'Platform', sans-serif);
+  font-size: 14px;
+  letter-spacing: 0.4em;
+  color: var(--bronze-500, #CC8E66);
+  opacity: 0;
+}

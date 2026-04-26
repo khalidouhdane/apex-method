@@ -1,0 +1,193 @@
+.section {
+  padding: var(--section-pad) 0;
+  background-color: var(--sys-bg);
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 64px;
+}
+
+.frequencySelector {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255,255,255,0.03);
+  padding: 8px 24px;
+  border-radius: 100px;
+  border: 1px solid var(--border-dim);
+}
+
+.freqLabel {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.freqButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.freqBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--white);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.freqBtn:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.freqActive {
+  background: var(--orion-accent) !important;
+  color: var(--sys-bg) !important;
+  box-shadow: 0 0 15px rgba(204, 142, 102, 0.4);
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  padding: 32px 40px;
+  display: grid;
+  grid-template-columns: 200px 150px 1fr;
+  gap: 40px;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateX(10px);
+  border-color: rgba(204, 142, 102, 0.3);
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dayNum {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--orion-accent);
+}
+
+.focus {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.methodsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.methodBadge {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.05);
+  color: var(--text-dim);
+  border: 1px solid var(--border-dim);
+}
+
+.exerciseList {
+  border-left: 1px solid var(--border-dim);
+  padding-left: 40px;
+}
+
+.listTitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.exerciseList ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.exerciseList li {
+  font-size: 14px;
+  color: var(--text-dim);
+  position: relative;
+  padding-left: 12px;
+}
+
+.exerciseList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--orion-accent);
+}
+
+.adaptNote {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: right;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+  
+  .exerciseList {
+    border-left: none;
+    border-top: 1px solid var(--border-dim);
+    padding-left: 0;
+    padding-top: 24px;
+  }
+  
+  .methodsRow {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+  
+  .frequencySelector {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,110 @@
+/* ========================================
+   Footer — CSS Module
+   ======================================== */
+
+.footer {
+  padding: 80px 0 40px;
+  border-top: 1px solid var(--border-dim);
+}
+
+.footerTop {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footerLogo {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.logoText {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.logoAccent {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+.footerTagline {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+.footerLinks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.footerCol h4 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.footerCol a {
+  display: block;
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 4px 0;
+  transition: color 0.3s;
+}
+
+.footerCol a:hover {
+  color: var(--white);
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-dim);
+}
+
+.footerBottom p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.footerSocials {
+  display: flex;
+  gap: 16px;
+}
+
+.footerSocials a {
+  color: var(--text-muted);
+  transition: color 0.3s;
+}
+
+.footerSocials a:hover {
+  color: var(--bronze-base);
+}
+
+@media (max-width: 768px) {
+  .footerTop {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .footerLinks {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .footerBottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,251 @@
+.heroContainer {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: var(--sys-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 140px;
+  padding-bottom: 80px;
+}
+
+/* Background elements */
+.ambientGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, rgba(192, 113, 51, 0.15) 0%, transparent 60%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Header Section */
+.headerSection {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 800px;
+  margin-bottom: 60px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 80px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: clamp(14px, 1.5vw, 16px);
+  color: var(--text-dim);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* Fan Section */
+.fanContainer {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1200px;
+  height: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Align cards to the bottom of the container */
+  margin-bottom: 60px;
+}
+
+.fanCard {
+  position: absolute;
+  width: 220px;
+  height: 340px;
+  bottom: 0;
+  left: 50%;
+  margin-left: -110px;
+  border-radius: 20px;
+  background: var(--surface-100, #191715);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  transform-origin: bottom center;
+  will-change: transform, opacity;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.cardMediaContainer {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.cardMedia {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+  transition: opacity 0.4s ease;
+}
+
+.fanCard:hover .cardMedia {
+  opacity: 1;
+}
+
+.cardLabel {
+  font-family: var(--font-heading, inherit);
+  font-size: 13px;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* Center Play Button */
+.playSection {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  margin-top: 0px; /* Overlap the fan slightly */
+  margin-bottom: 40px;
+}
+
+.playButton {
+  width: 90px;
+  height: 70px;
+  border-radius: 16px;
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.playButton:hover {
+  background: rgba(40, 40, 40, 0.8);
+  border-color: var(--orion-accent);
+  transform: scale(1.05);
+}
+
+.playIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--white);
+}
+
+.playText {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+/* Community Section */
+.communitySection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+  margin-bottom: 40px;
+}
+
+.communityTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.communitySubtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.avatarsRow {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--sys-bg);
+  margin-left: -12px;
+  object-fit: cover;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.avatarCount {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--sys-bg);
+  margin-left: -12px;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--white);
+  backdrop-filter: blur(4px);
+}
+
+/* CTA */
+.actionSection {
+  z-index: 10;
+}
+
+@media (max-width: 1024px) {
+  .fanContainer {
+    height: 300px;
+  }
+  .fanCard {
+    width: 180px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .fanContainer {
+    height: 240px;
+    margin-bottom: 30px;
+  }
+  .fanCard {
+    width: 140px;
+    height: 220px;
+  }
+  .playSection {
+    margin-top: -40px;
+  }
+}

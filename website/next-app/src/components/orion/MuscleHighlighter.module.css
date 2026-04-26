@@ -1,0 +1,55 @@
+.card {
+  background: var(--surface-100, #191715);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  width: 100%;
+  max-width: 320px;
+}
+
+.card:hover {
+  border-color: rgba(192, 113, 51, 0.3);
+  transform: translateY(-5px);
+}
+
+.title {
+  font-family: var(--font-heading, inherit);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.modelWrapper {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .modelWrapper {
+  opacity: 1;
+}
+
+/* Specific overrides for react-body-highlighter classes */
+:global(.rbh) {
+  /* You can add custom SVG overrides here if needed */
+}
+:global(.rbh path) {
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 1.5;
+}
+:global(.rbh path:not([fill])) {
+  fill: transparent;
+}

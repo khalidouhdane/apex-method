@@ -1,0 +1,494 @@
+/* ========================================
+   Hero Section — Scroll-Pinned 3-Phase
+   ======================================== */
+
+.heroScroll {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.heroScene {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ========================================
+   ORBITAL RINGS (SVG trails)
+   ======================================== */
+.orbitalRings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transform: scale(1.2);
+  transform-origin: center center;
+}
+
+.orbitalBack {
+  z-index: 1;
+}
+
+.orbitalFront {
+  z-index: 3;
+}
+
+.trailSvg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Trail thicknesses */
+.trailCore,
+.trailGlow1,
+.trailGlow2,
+.trailGlow3 {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Back half — thin & faint */
+.orbitalBack .trailCore {
+  stroke-width: 2px;
+}
+
+.orbitalBack .trailGlow2 {
+  stroke-width: 25px;
+  filter: blur(6px);
+}
+
+/* Front half — thick & bright */
+.orbitalFront .trailCore {
+  stroke-width: 6px;
+  filter: drop-shadow(0 0 6px rgba(255, 242, 224, 0.8));
+}
+
+.orbitalFront .trailGlow1 {
+  stroke-width: 18px;
+  filter: blur(3px);
+}
+
+.orbitalFront .trailGlow2 {
+  stroke-width: 45px;
+  filter: blur(10px);
+}
+
+.orbitalFront .trailGlow3 {
+  stroke-width: 90px;
+  filter: blur(25px);
+}
+
+.trailStardust {
+  fill: none;
+  stroke: #FFF2E0;
+  stroke-width: 6px;
+  stroke-dasharray: 2 60;
+  stroke-linecap: round;
+  filter: blur(2px) drop-shadow(0 0 5px #FFE6CC);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .orbitalRings {
+    transform: scale(0.72);
+  }
+}
+
+/* ========================================
+   CHARACTER (Canvas + Placeholder)
+   ======================================== */
+.characterWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.heroCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.characterPlaceholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.silhouetteSvg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 60px var(--bronze-glow-soft, rgba(204, 142, 102, 0.15)));
+}
+
+.placeholderLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.placeholderInitials {
+  display: block;
+  font-size: 56px;
+  font-weight: 900;
+  background: var(--accent-gradient, linear-gradient(135deg, #CC8E66, #A66840));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.25;
+}
+
+.placeholderNote {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+  .characterWrap {
+    width: 100%;
+    height: 70vh;
+    top: auto;
+    bottom: 0;
+  }
+}
+
+/* ========================================
+   HERO PHASES (positioned absolutely)
+   ======================================== */
+.phase {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* --- PHASE 1: Text Blocks --- */
+.phaseText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroTextBlock {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+}
+
+.textTopCenter {
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.textRightMiddle {
+  top: 40%;
+  right: 12%;
+}
+
+.textBottomLeft {
+  bottom: 22%;
+  left: 10%;
+}
+
+.textPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--sys-surface, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--sys-border, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-xl, 100px);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--sys-text-dim, rgba(255, 255, 255, 0.5));
+  margin-bottom: 12px;
+}
+
+.pillDot {
+  width: 8px;
+  height: 8px;
+  background: #C06E35;
+  border-radius: 50%;
+}
+
+.heroHeadline {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--white, #F0ECE4);
+}
+
+.heroHeadline em {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  background: var(--bronze-gradient, linear-gradient(135deg, #CC8E66, #A66840));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (max-width: 768px) {
+  .heroHeadline {
+    font-size: clamp(28px, 8vw, 48px);
+    white-space: normal;
+  }
+  .textTopCenter {
+    top: 10%;
+    left: 50%;
+  }
+  .textRightMiddle {
+    top: 38%;
+    right: 4%;
+  }
+  .textBottomLeft {
+    bottom: 22%;
+    left: 4%;
+  }
+}
+
+/* --- PHASE 2: Stat Cards --- */
+.phaseStats {
+  opacity: 0;
+}
+
+.glassCard {
+  background: var(--comp-glass-bg, rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(var(--comp-glass-blur, 12px));
+  -webkit-backdrop-filter: blur(var(--comp-glass-blur, 12px));
+  border: 1px solid var(--comp-glass-border, rgba(255, 255, 255, 0.06));
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--comp-card-shadow, 0 8px 32px rgba(0, 0, 0, 0.3));
+}
+
+.cardPattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image:
+    repeating-radial-gradient(circle at 70% 70%, transparent, transparent 8px, rgba(196, 149, 106, 0.3) 8px, rgba(196, 149, 106, 0.3) 9px);
+  pointer-events: none;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 1;
+  padding: 24px 28px;
+}
+
+.statCard {
+  position: absolute;
+  min-width: 220px;
+  pointer-events: auto;
+}
+
+.cardTopRight {
+  top: 14%;
+  right: 25%;
+}
+
+.cardLeftMiddle {
+  top: 42%;
+  left: 22%;
+}
+
+.cardBottomRight {
+  bottom: 16%;
+  right: 24%;
+}
+
+.statBig {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 36px);
+  font-weight: 900;
+  font-style: italic;
+  background: var(--bronze-gradient, linear-gradient(135deg, #CC8E66, #A66840));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.statUnit {
+  font-size: 0.5em;
+  font-weight: 600;
+  -webkit-text-fill-color: initial;
+  background: none;
+  color: var(--text-dim);
+}
+
+.statDesc {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sys-text-dim, rgba(255, 255, 255, 0.5));
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.revealMask {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .statCard {
+    min-width: 160px;
+  }
+  .cardTopRight {
+    top: 10%;
+    right: 8%;
+  }
+  .cardLeftMiddle {
+    top: 40%;
+    left: 8%;
+  }
+  .cardBottomRight {
+    bottom: 20%;
+    right: 8%;
+  }
+}
+
+/* --- PHASE 3: Pillars --- */
+.phasePillars {
+  opacity: 0;
+}
+
+.pillarCard {
+  position: absolute;
+  width: clamp(240px, 22vw, 280px);
+  background: var(--comp-glass-bg, rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(var(--comp-glass-blur, 12px));
+  -webkit-backdrop-filter: blur(var(--comp-glass-blur, 12px));
+  border: 1px solid var(--comp-glass-border, rgba(255, 255, 255, 0.06));
+  border-radius: 20px;
+  overflow: hidden;
+  pointer-events: auto;
+  box-shadow: var(--comp-card-shadow, 0 8px 32px rgba(0, 0, 0, 0.3));
+}
+
+.pillarCard .cardContent {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.cardTL {
+  top: 18%;
+  left: 12%;
+}
+
+.cardTR {
+  top: 18%;
+  right: 12%;
+}
+
+.cardBL {
+  bottom: 14%;
+  left: 20%;
+}
+
+.cardBR {
+  bottom: 14%;
+  right: 20%;
+}
+
+.phIcon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-raised, #1e1a16);
+  border: 1px solid #3E342D;
+  border-radius: 12px;
+  color: var(--bronze-base, #CC8E66);
+  margin-bottom: 8px;
+}
+
+.pillarCard h3 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 900;
+  font-style: italic;
+  background: var(--bronze-gradient, linear-gradient(135deg, #CC8E66, #A66840));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0;
+}
+
+.pillarCard p {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: #9C928B;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .cardTL {
+    top: 8%;
+    left: 2%;
+  }
+  .cardTR {
+    top: 8%;
+    right: 2%;
+  }
+  .cardBL {
+    bottom: 8%;
+    left: 2%;
+  }
+  .cardBR {
+    bottom: 8%;
+    right: 2%;
+  }
+  .pillarCard {
+    width: clamp(160px, 45vw, 240px);
+  }
+  .pillarCard .cardContent {
+    padding: 16px;
+  }
+  .pillarCard h3 {
+    font-size: 20px;
+  }
+  .pillarCard p {
+    font-size: 13px;
+  }
+}

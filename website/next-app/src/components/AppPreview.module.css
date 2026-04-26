@@ -1,0 +1,334 @@
+/* AppPreview — CSS Module */
+
+.section {
+  padding: var(--section-pad) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
+  align-items: center;
+}
+
+/* Left Column */
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.desc {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 48px;
+  max-width: 480px;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.featureCard {
+  position: relative;
+  background: #0a0908;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 32px;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.featureCard:hover {
+  border-color: rgba(204, 142, 102, 0.4);
+}
+
+.featureCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80%;
+  background-image: radial-gradient(
+      circle at 100% 50%,
+      rgba(204, 142, 102, 0.1) 0%,
+      transparent 60%
+    ),
+    repeating-radial-gradient(
+      circle at 100% 50%,
+      transparent 0,
+      transparent 10px,
+      rgba(204, 142, 102, 0.03) 10px,
+      rgba(204, 142, 102, 0.03) 11px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.featureCard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.fullWidth {
+  grid-column: span 2;
+}
+
+.featureIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(204, 142, 102, 0.05);
+  border: 1px solid rgba(204, 142, 102, 0.2);
+  border-radius: 12px;
+  color: var(--bronze-base);
+  margin-bottom: 24px;
+}
+
+.featureTitle {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  font-style: italic;
+  color: white;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.featureDesc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* Right Column: Phone Mockup */
+.visualCol {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 700px;
+}
+
+.backdrop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 90%;
+  background: linear-gradient(135deg, #ca783f 0%, #70401f 100%);
+  border-radius: 40px;
+  z-index: 1;
+}
+
+.phoneMockup {
+  position: relative;
+  z-index: 2;
+  width: 340px;
+  height: 680px;
+  background: #1a1a1a;
+  border-radius: 44px;
+  border: 8px solid #222;
+  box-shadow: -30px 40px 80px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 2px #444;
+  transform: rotate(12deg);
+  overflow: hidden;
+}
+
+.phoneMockup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 24px;
+  background: #222;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 10;
+}
+
+.phoneScreen {
+  width: 100%;
+  height: 100%;
+  background: #0b1015;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.mockHeroImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  z-index: 1;
+}
+
+.mockHeroImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mockHeroGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(11, 16, 21, 0) 0%, #0b1015 90%);
+}
+
+.mockContent {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding: 0 24px 80px 24px;
+}
+
+.mockTitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.mockDatePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.mockTagsRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mockTag {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  font-size: 10px;
+  color: white;
+}
+
+.mockSectionLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 24px;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.mockStatsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.mockStatCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mscLabel {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.mscVal {
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+}
+
+.mscUnit {
+  font-size: 11px;
+  font-weight: normal;
+  color: var(--text-dim);
+}
+
+.mockBtnBronze {
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin-top: 24px;
+  background: linear-gradient(90deg, #98572a 0%, #ca783f 50%, #70401f 100%);
+  color: white;
+  padding: 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.mockTabBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: rgba(11, 16, 21, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 10;
+}
+
+.tabItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #666;
+}
+
+.tabActive {
+  color: white;
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .visualCol {
+    min-height: 500px;
+    justify-content: center;
+  }
+
+  .backdrop {
+    right: 0;
+    width: 100%;
+  }
+
+  .phoneMockup {
+    transform: rotate(5deg) translateY(0);
+  }
+}

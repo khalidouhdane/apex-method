@@ -1,0 +1,145 @@
+/* EliteCoaching — CSS Module */
+
+.section {
+  padding: 80px 0;
+  position: relative;
+  background: var(--gray-950);
+}
+
+.card {
+  position: relative;
+  background: #0b0a09;
+  border: 1px solid rgba(204, 142, 102, 0.2);
+  border-radius: 24px;
+  padding: 64px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.bgGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(204, 142, 102, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.priceTag {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.priceVal {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--bronze-base);
+  line-height: 1;
+}
+
+.priceType {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.desc {
+  font-size: 16px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  max-width: 600px;
+  margin-bottom: 48px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-bottom: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature h4 {
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.feature p {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ctaWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.disclaimer {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 32px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+}
