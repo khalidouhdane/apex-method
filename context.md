@@ -158,26 +158,36 @@ Alex shared an existing PDF: **"CHALLENGE GRATUIT PAPA STRONG - 14 JOURS"** (30 
 - **Key features:** Autoplay timers, direct messaging with coaches, weekly livestreams, in-app community
 - **Relevance:** Excellent model for APEX METHOD's dual pricing approach (subscription + one-time purchase programs). Shows how to balance both.
 
-## Scope of Work (Updated April 4, 2026 — Post-Meeting)
+## Scope of Work (Updated April 25, 2026 — Stack Migration)
 
 ### Alphafoundr Delivers:
 1. **Brand Identity** — Logo, color system, typography, brand guidelines (black/white/gold-copper) + program sub-identities
 2. **Website Design (Figma)** — 10-12 pages, responsive, mobile-first
-3. **Website Development (WordPress)** — BricksBuilder, WooCommerce (one-time + subscriptions), assessment flow, Calendly embed
-4. **Mobile App UX/UI Design (Figma)** — ~30-35 screens, all states, interactive prototype
-5. **Phase 1 Content Work** — Structuring landing page content and program details with the client
+3. **Full-Stack Web Platform (Next.js 15)** — Landing pages, authentication, Stripe checkout (one-time + subscriptions), client dashboard, program viewer, assessment quiz, Calendly embed
+4. **Backend Architecture (Supabase)** — Database schema, auth setup, storage buckets, Row Level Security policies, Edge Functions for webhooks
+5. **Mobile App UX/UI Design (Figma)** — ~30-35 screens, all states, interactive prototype
+6. **Phase 1 Content Work** — Structuring landing page content and program details with the client
 
 ### Digital 1001 Delivers:
-1. **Mobile App Development** — Flutter (or native TBD), connected to Hexfit API
-2. **Backend Integration** — WooCommerce → Hexfit webhooks, user account creation
-3. **App Store / Play Store Publishing**
+1. **Mobile App Development** — Flutter, connected to shared Supabase backend (same auth, DB, storage)
+2. **Mobile Auth Integration** — `supabase_flutter` package for shared JWT-based authentication
+3. **Deep Link Handling** — App redirects to website for purchases, returns after completion
+4. **App Store / Play Store Publishing**
 
-### NOT in Scope:
-- ❌ LMS / Course plugin (removed — programs delivered via mobile app, not WordPress)
+### NOT in Scope (V1):
+- ❌ Custom admin panel (Alex uses Supabase Dashboard + Stripe Dashboard for V1; custom admin is Phase 6)
 - ❌ App development (Digital 1001's scope)
-- ❌ Backend / admin panel (Hexfit dashboard — not designed by Alphafoundr)
 - ❌ PDF/Challenge redesign
 - ❌ Physical gym branding / marketing collateral
+- ❌ In-app purchases (all buying happens on the website)
+- ❌ AI morpho-analysis (V2 feature)
+
+### ❌ Deprecated Scope Items (Removed April 25, 2026):
+- ~~WordPress + BricksBuilder development~~ → Replaced by Next.js 15
+- ~~WooCommerce integration~~ → Replaced by Stripe (Checkout + Billing)
+- ~~Hexfit API integration~~ → Replaced by Supabase (custom tables, full control)
+- ~~WooCommerce → Hexfit webhooks~~ → Replaced by Stripe → Supabase webhooks
+- ~~LiteSpeed hosting~~ → Replaced by Vercel
 
 ### Programs Confirmed (from Alex's feedback, April 9, 2026):
 | Program | Type | Target | Duration | Details |
@@ -189,7 +199,7 @@ Alex shared an existing PDF: **"CHALLENGE GRATUIT PAPA STRONG - 14 JOURS"** (30 
 | **AMT** | Monthly Subscription | Men/Women | Monthly | Evolutive programs, continuous progression. Not personalized. |
 
 > **Rollout Strategy:** Start with Papa Strong + 28-day programs -> Then 90-day programs -> Then women's 90-day -> Then monthly AMT.
-> All pricing managed in WooCommerce — client controls independently.
+> All pricing managed via Stripe Dashboard — client controls independently.
 
 ### ORION Program Structure (from Alex's April 8, 2026 PDF — "APEX METHOD programmes .pdf")
 Sample gym week provided as a reference for the app's session structure.
@@ -225,13 +235,36 @@ Sample gym week provided as a reference for the app's session structure.
 4. **Assessment Quiz Logic confirmed** — Gender, Age/Weight/Height, Experience (1 to 4+ sessions/week), Health constraints, Availability (2 to 5+ sessions/week), Location (gym/home/outdoor), Goal (loss/gain/both).
 5. **Video/photo shoot** — Alex is planning to shoot 200+ short (10-12s) demo videos in 1 day. Plus 32 longer (30') follow-along videos for the 28-day programs.
 
-## Technical Decisions (Post-Meeting)
-- **Website:** WordPress + BricksBuilder (LiteSpeed/ACF) — confirmed.
-- **Payments:** WooCommerce — one-time + subscriptions. My Account page for subscription management/cancellation.
-- **App Backend:** Hexfit (MyHexFit) — likely. Supports custom exercise upload (Alex's own videos in .mp4/.gif or YouTube/Vimeo links), custom program builder (sets/reps/tempo/rest), client management, nutrition tools, and API access. White-label branding available.
+## Technical Decisions (Updated April 25, 2026 — Stack Migration)
+
+> **MAJOR CHANGE:** The entire technical stack was migrated on April 25, 2026. WordPress, BricksBuilder, WooCommerce, and Hexfit have been permanently dropped in favor of a fully custom Next.js + Supabase + Stripe architecture.
+
+### Current Stack:
+- **Web Platform:** Next.js 15 (App Router) + TypeScript — hosted on Vercel
+- **Styling:** Vanilla CSS + CSS Modules (3-tier design token system preserved)
+- **Animations:** GSAP 3.15.0 (DrawSVG, SplitText, ScrollSmoother)
+- **Auth:** Supabase Auth — JWT-based, shared between website and Flutter mobile app
+- **Database:** Supabase PostgreSQL — programs, exercises, user progress, purchases (with Row Level Security)
+- **Storage:** Supabase Storage — exercise videos (200+), follow-along videos (32), nutrition PDFs, thumbnails. Will evaluate BunnyCDN or Mux at scale.
+- **Payments:** Stripe — Checkout Sessions (one-time), Billing (subscriptions), Customer Portal (self-service management)
+- **Webhooks:** Stripe → Next.js API routes → Supabase DB (user_purchases table)
+- **Mobile App:** Flutter (Digital 1001) — connects to same Supabase project via `supabase_flutter`
 - **Community:** External (WhatsApp groups or Discord) — not in app, not in website scope.
 - **Calendly:** Embedded on website (styled to match) for Papa Strong call booking. Alex manages his own Calendly.
-- **Assessment Flow:** Multi-step questionnaire on website → program recommendation → checkout CTA.
+- **Assessment Flow:** Multi-step questionnaire on website → program recommendation → Stripe checkout CTA.
+
+### Why This Stack:
+1. **Unified auth** — Same Supabase Auth for web + mobile. Users sign up once, access both platforms.
+2. **No third-party limitations** — Hexfit's API constraints and WooCommerce's plugin ecosystem are no longer blockers.
+3. **Full data ownership** — All program content, user data, and progress lives in our Supabase PostgreSQL database.
+4. **Stripe is industry standard** — PCI compliant, 3D Secure, Apple Pay, Google Pay, subscription management out of the box.
+5. **Vercel + Next.js** — SSR for SEO landing pages, ISR for performance, API routes for server logic.
+
+### ❌ Deprecated Decisions:
+- ~~WordPress + BricksBuilder (LiteSpeed/ACF)~~ → Next.js 15 on Vercel
+- ~~WooCommerce payments~~ → Stripe
+- ~~Hexfit (MyHexFit) as app backend~~ → Supabase
+- ~~WooCommerce → Hexfit webhooks~~ → Stripe → Supabase webhooks
 
 ## Working Conventions with Digital 1001
 - **Established relationship** — Alphafoundr and Digital 1001 have worked together many times (AMG Building, etc.)
@@ -248,14 +281,17 @@ Sample gym week provided as a reference for the app's session structure.
 5. **Individualized Nutrition:** Auto-generated by the app based on BMR, goals, and morphotype. Includes specific recipes and macros.
 6. **V1 Feature List:** Alex confirmed the "Not in V1" exclusions.
 7. **Papa Strong:** Premium 1:1 coaching for dads. 1 video unlocked per week.
-8. **Program Delivery:** Via mobile app (Hexfit backend), NOT WordPress LMS.
+8. **Program Delivery:** Via mobile app AND web dashboard. Content stored in Supabase.
+9. **Backend stack:** Hexfit dropped. Supabase (PostgreSQL + Auth + Storage) is the unified backend for web + mobile. *(Resolved April 25, 2026)*
+10. **Payment integration:** WooCommerce dropped. Stripe handles one-time + subscription payments. *(Resolved April 25, 2026)*
+11. **Website CMS:** WordPress dropped. Next.js 15 is the full web platform. *(Resolved April 25, 2026)*
 
-### Needs Confirmation ❓ (Pending from Karim)
-1. **Hexfit as backend:** Confirmed? Has the team evaluated Hexfit's API capabilities for auto-generating nutrition and adapting session frequency structures?
-2. **WooCommerce → Hexfit integration:** Digital 1001 handles the webhooks?
-3. **Subscription cancellation flow:** Immediate or end-of-billing-period?
-4. **Assessment flow in app:** Website-only or also mirrored in the mobile app?
-5. **AMRAP/EMOM/TABATA UI:** These timed workout formats need specific timer UIs. Adds complexity to the session screen design. Confirm for V1.
+### Needs Confirmation ❓
+1. **Subscription cancellation flow:** Immediate or end-of-billing-period? *(Stripe supports both — need Alex's preference)*
+2. **Assessment flow in app:** Website-only or also mirrored in the mobile app?
+3. **AMRAP/EMOM/TABATA UI:** These timed workout formats need specific timer UIs. Adds complexity to the session screen design. Confirm for V1.
+4. **NEW — Video hosting budget:** Alex plans 200+ short videos + 32 long videos. Supabase Storage works initially, but may need BunnyCDN or Mux at scale. What's the expected total video size?
+5. **NEW — Scope & pricing:** The full-stack build (Next.js + Supabase + Stripe) is significantly more work than the original WordPress site. Pricing discussion needed with Alex.
 
 ## Pricing Notes
 - Previous 4-scenario proposal (proposal_3_scenarios.md) is now outdated — scope has narrowed to a single path.

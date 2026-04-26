@@ -4,3 +4,15 @@ node_modules/
 Thumbs.db
 *.log
 .env
+.env.local
+.next/
+
+# Large binary files
+*.aep
+*.mp4
+*.mov
+website/APEX METHOD HERO/
+website/Adobe After Effects Auto-Save/
+website/landing-page/Assets/AI REFERENCES/
+website/landing-page/Assets/body frames/
+parse_svgs.js
