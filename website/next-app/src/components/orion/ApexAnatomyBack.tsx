@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function ApexAnatomyBack({ 
   activeMuscles = [], 
@@ -53,15 +53,7 @@ export default function ApexAnatomyBack({
               style={{ cursor: 'crosshair', transition: 'fill 0.3s ease' }}
             />
           ))}
-          {[].map((c, i) => (
-            <circle 
-              key={'muscle-circle-'+i} 
-              cx={c.cx} cy={c.cy} r={c.r}
-              fill={activeMuscles.includes(i + 12) ? 'var(--orion-accent)' : 'transparent'}
-              onMouseEnter={() => onMuscleHover?.(i + 12)}
-              style={{ cursor: 'crosshair', transition: 'fill 0.3s ease' }}
-            />
-          ))}
+          {/* Circle muscle zones reserved for future use */}
         </g>
       </svg>
     </div>

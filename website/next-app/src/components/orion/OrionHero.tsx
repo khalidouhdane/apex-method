@@ -80,6 +80,7 @@ export default function OrionHero() {
             onComplete: () => {
               // Attach GSAP hover events after entrance to prevent conflicts
               cards.forEach((card, index) => {
+                if (!card) return;
                 const data = FAN_CARDS[index];
                 const targetX = getX(data.x);
                 const targetY = getY(data.y);

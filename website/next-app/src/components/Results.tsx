@@ -114,11 +114,12 @@ export default function Results() {
         const splitTitle = new SplitText(title, { type: 'chars' });
 
         // Pad each char to prevent italic edge clipping
-        splitTitle.chars.forEach((c: HTMLElement) => {
-          c.style.paddingRight = '0.05em';
-          c.style.marginRight = '-0.05em';
-          c.style.display = 'inline-block';
-          c.style.overflow = 'visible';
+        splitTitle.chars.forEach((c) => {
+          const el = c as HTMLElement;
+          el.style.paddingRight = '0.05em';
+          el.style.marginRight = '-0.05em';
+          el.style.display = 'inline-block';
+          el.style.overflow = 'visible';
         });
 
         gsap.set(splitTitle.chars, { opacity: 0, y: 40, rotateX: -40 });

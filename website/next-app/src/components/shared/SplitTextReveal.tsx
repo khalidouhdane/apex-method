@@ -62,14 +62,14 @@ export default function SplitTextReveal({
       });
 
       // Prevent italic edge clipping on all wrappers
-      split.chars.forEach((c: HTMLElement) => {
-        c.style.overflow = 'visible';
+      split.chars.forEach((c) => {
+        (c as HTMLElement).style.overflow = 'visible';
       });
-      split.lines.forEach((line: HTMLElement) => {
-        line.style.overflow = 'visible';
+      split.lines.forEach((line) => {
+        (line as HTMLElement).style.overflow = 'visible';
       });
-      split.words.forEach((w: HTMLElement) => {
-        w.style.overflow = 'visible';
+      split.words.forEach((w) => {
+        (w as HTMLElement).style.overflow = 'visible';
       });
 
       const targets = splitType === 'chars' ? split.chars : split.words;

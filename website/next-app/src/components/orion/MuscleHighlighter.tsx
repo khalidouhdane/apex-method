@@ -31,7 +31,7 @@ export default function MuscleHighlighter({
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.modelWrapper}>
         <Model
-          data={highlightData}
+          data={highlightData as React.ComponentProps<typeof Model>['data']}
           style={{ width: '100%', padding: '10px' }}
           highlightedColors={[highlightColor]}
           type={type}
