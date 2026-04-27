@@ -43,7 +43,6 @@ const FEATURES = [
     ),
     title: 'TIMER INTÉGRÉ',
     desc: 'AMRAP, EMOM, Tabata — tous les formats de chrono directement dans l\'app.',
-    fullWidth: true,
   },
 ];
 
@@ -136,7 +135,7 @@ export default function AppPreview() {
                 <div
                   key={i}
                   data-app-feature
-                  className={`${styles.featureCard} ${f.fullWidth ? styles.fullWidth : ''}`}
+                  className={styles.featureCard}
                 >
                   <div className={styles.featureIcon}>{f.icon}</div>
                   <h4 className={styles.featureTitle}>{f.title}</h4>

@@ -401,7 +401,7 @@ export default function Programs() {
                   ))}
                 </ul>
                 <Link
-                  href="#quiz"
+                  href="/quiz"
                   className={`btn ${
                     prog.ctaStyle === 'solid'
                       ? 'btn-solid-bronze'

@@ -1,0 +1,453 @@
+/* AppPreviewV2 — CSS Module */
+
+.section {
+  padding: var(--section-pad) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 64px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tagPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(204, 142, 102, 0.05);
+  border: 1px solid rgba(204, 142, 102, 0.2);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--bronze-base);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+
+.tagPill::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bronze-base);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: white;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.desc {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* Middle Layout */
+.middleLayout {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 40px;
+  width: 100%;
+  align-items: center;
+  position: relative;
+}
+
+/* Background Rings */
+.ringsContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  height: 1200px;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(204, 142, 102, 0.15);
+  box-shadow: 0 0 40px rgba(204, 142, 102, 0.02) inset;
+}
+
+.ring1 { width: 450px; height: 450px; }
+.ring2 { width: 650px; height: 650px; border-color: rgba(204, 142, 102, 0.1); }
+.ring3 { width: 900px; height: 900px; border-color: rgba(204, 142, 102, 0.05); }
+.ring4 { width: 1200px; height: 1200px; border-color: rgba(204, 142, 102, 0.02); }
+
+/* Center Glow */
+.glow {
+  position: absolute;
+  width: 400px;
+  height: 600px;
+  background: radial-gradient(ellipse at center, rgba(204, 142, 102, 0.15) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+/* Side Cards Columns */
+.leftCards, .rightCards {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  z-index: 2;
+  position: relative;
+}
+
+.leftCards {
+  align-items: flex-end;
+}
+
+.rightCards {
+  align-items: flex-start;
+}
+
+.featureCard {
+  width: 100%;
+  max-width: 340px;
+  position: relative;
+  background: rgba(10, 9, 8, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 32px;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.featureCard:hover {
+  border-color: rgba(204, 142, 102, 0.4);
+  transform: translateY(-4px);
+}
+
+.featureCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80%;
+  background-image: radial-gradient(
+      circle at 100% 50%,
+      rgba(204, 142, 102, 0.05) 0%,
+      transparent 60%
+    ),
+    repeating-radial-gradient(
+      circle at 100% 50%,
+      transparent 0,
+      transparent 10px,
+      rgba(204, 142, 102, 0.02) 10px,
+      rgba(204, 142, 102, 0.02) 11px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.featureCard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.featureIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(204, 142, 102, 0.05);
+  border: 1px solid rgba(204, 142, 102, 0.2);
+  border-radius: 12px;
+  color: var(--bronze-base);
+  margin-bottom: 20px;
+}
+
+.featureTitle {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  font-style: italic;
+  color: white;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.featureDesc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* Center Phone Mockup */
+.phoneWrapper {
+  position: relative;
+  z-index: 3;
+}
+
+.phoneMockup {
+  position: relative;
+  width: 320px;
+  height: 660px;
+  background: #1a1a1a;
+  border-radius: 44px;
+  border: 8px solid #222;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 2px #444;
+  overflow: hidden;
+}
+
+.phoneMockup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 24px;
+  background: #222;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 10;
+}
+
+.phoneScreen {
+  width: 100%;
+  height: 100%;
+  background: #0b1015;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.mockHeroImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  z-index: 1;
+}
+
+.mockHeroImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mockHeroGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(11, 16, 21, 0) 0%, #0b1015 90%);
+}
+
+.mockContent {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding: 0 24px 80px 24px;
+}
+
+.mockTitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.mockDatePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.mockTagsRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mockTag {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  font-size: 10px;
+  color: white;
+}
+
+.mockSectionLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 24px;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.mockStatsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.mockStatCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mscLabel {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.mscVal {
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+}
+
+.mscUnit {
+  font-size: 11px;
+  font-weight: normal;
+  color: var(--text-dim);
+}
+
+.mockBtnBronze {
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin-top: 24px;
+  background: linear-gradient(90deg, #98572a 0%, #ca783f 50%, #70401f 100%);
+  color: white;
+  padding: 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.mockTabBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: rgba(11, 16, 21, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 10;
+}
+
+.tabItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #666;
+}
+
+.tabActive {
+  color: white;
+}
+
+/* CTA Footer */
+.ctaWrapper {
+  margin-top: 64px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 4;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: linear-gradient(90deg, #98572a 0%, #ca783f 50%, #70401f 100%);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(204, 142, 102, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .middleLayout {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .leftCards, .rightCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .featureCard {
+    max-width: none;
+  }
+
+  .phoneWrapper {
+    order: -1;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .leftCards, .rightCards {
+    grid-template-columns: 1fr;
+  }
+}

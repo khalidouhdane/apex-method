@@ -29,14 +29,33 @@
 
 .filters {
   display: flex;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 6px;
-  border-radius: 40px;
+  flex-shrink: 0;
+}
+
+.filterTrack {
+  position: relative;
+  display: flex;
+  background: #191715;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  border-radius: 100px;
+  width: fit-content;
+}
+
+.filterSlider {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: calc(100% - 8px);
+  background: linear-gradient(98deg, #D38955 -2.22%, #98572A 86.22%);
+  border-radius: 100px;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .filterBtn {
+  position: relative;
   background: transparent;
   color: rgba(255, 255, 255, 0.6);
   border: none;
@@ -48,17 +67,16 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
+  z-index: 2;
 }
 
 .filterBtn:hover {
   color: #fff;
 }
 
-.activeFilter {
-  background: linear-gradient(90deg, #98572a 0%, #ca783f 50%, #70401f 100%);
+.filterBtnActive {
   color: #fff !important;
-  border-color: transparent;
 }
 
 .navButtons {
@@ -123,50 +141,35 @@
   transform: scale(1);
 }
 
-.imagesRow {
-  display: flex;
-  gap: 16px;
-  width: 100%;
-}
-
-.imgWrapper {
+.singleImageWrapper {
   position: relative;
-  flex: 1;
+  width: 100%;
   border-radius: 20px;
   overflow: hidden;
   height: 420px;
   border: 1px solid #282624;
 }
 
-.imgWrapper img {
+.singleImageWrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.badgeBlack, .badgeBronze {
+.badgeBronzeCombined {
   position: absolute;
   top: 16px;
   left: 16px;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 20px;
   font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 400;
-  letter-spacing: normal;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   z-index: 2;
-}
-
-.badgeBlack {
-  background: #0F0C0A;
-  color: #CDCCCB;
-  backdrop-filter: none;
-}
-
-.badgeBronze {
-  background: linear-gradient(90deg, #D18957 0%, #9C592B 100%);
+  background: linear-gradient(98deg, #D38955 -2.22%, #98572A 86.22%);
   color: #FAF1EB;
 }
 
@@ -256,9 +259,6 @@
   flex-shrink: 0;
 }
 
-.beforeImage {
-  filter: grayscale(100%);
-}
 
 @media (max-width: 1024px) {
   .header {
@@ -283,8 +283,5 @@
   }
   .statsGrid {
     grid-template-columns: 1fr;
-  }
-  .imagesRow {
-    gap: 8px;
   }
 }

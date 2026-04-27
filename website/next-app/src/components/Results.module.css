@@ -1,9 +1,9 @@
-/* Results / Transformations — Carousel Version */
+/* ResultsCenter — Carousel Version with Centered Active Slide */
 
 .resultsSection {
   padding: var(--section-pad) 0;
   background: transparent;
-  overflow: hidden; /* Hide horizontal overflow of the slider */
+  overflow: hidden;
 }
 
 .header {
@@ -29,14 +29,33 @@
 
 .filters {
   display: flex;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 6px;
-  border-radius: 40px;
+  flex-shrink: 0;
+}
+
+.filterTrack {
+  position: relative;
+  display: flex;
+  background: #191715;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  border-radius: 100px;
+  width: fit-content;
+}
+
+.filterSlider {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: calc(100% - 8px);
+  background: linear-gradient(98deg, #D38955 -2.22%, #98572A 86.22%);
+  border-radius: 100px;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .filterBtn {
+  position: relative;
   background: transparent;
   color: rgba(255, 255, 255, 0.6);
   border: none;
@@ -48,17 +67,16 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
+  z-index: 2;
 }
 
 .filterBtn:hover {
   color: #fff;
 }
 
-.activeFilter {
-  background: linear-gradient(90deg, #98572a 0%, #ca783f 50%, #70401f 100%);
+.filterBtnActive {
   color: #fff !important;
-  border-color: transparent;
 }
 
 .navButtons {
@@ -93,20 +111,34 @@
 .sliderContainer {
   position: relative;
   width: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+.sliderContainer:active {
+  cursor: grabbing;
 }
 
 .sliderTrack {
   display: flex;
   gap: 32px;
   width: max-content;
-  /* Will be animated via GSAP x property */
 }
 
 .slide {
-  width: 551px; /* Desktop width from Figma */
+  width: 551px; /* Desktop width */
   display: flex;
   flex-direction: column;
   gap: 16px;
+  opacity: 0.3;
+  transform: scale(0.85);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+
+.activeSlide {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .imagesRow {
@@ -246,7 +278,6 @@
   filter: grayscale(100%);
 }
 
-/* Responsive Styles */
 @media (max-width: 1024px) {
   .header {
     flex-wrap: wrap;

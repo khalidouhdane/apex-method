@@ -11,6 +11,8 @@ Thumbs.db
 *.aep
 *.mp4
 *.mov
+!website/next-app/public/**/*.mp4
+!website/next-app/public/**/*.mov
 website/APEX METHOD HERO/
 website/Adobe After Effects Auto-Save/
 website/landing-page/Assets/AI REFERENCES/

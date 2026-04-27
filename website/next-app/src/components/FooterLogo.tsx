@@ -1,0 +1,110 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+export default function FooterLogo({ className }: { className?: string }) {
+  const logoRef = useRef<SVGSVGElement>(null);
+
+  useEffect(() => {
+    if (!logoRef.current) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Paths are in the order: P, X, E, A in the original SVG, but let's query them by class or id.
+    const paths = logoRef.current.querySelectorAll('.apex-letter');
+
+    // We want the order to be A, P, E, X (which corresponds to paths[3], paths[0], paths[2], paths[1] in the original DOM order)
+    // Let's set a specific class on each path so we can animate them in the correct visual order.
+    
+    const letterA = logoRef.current.querySelector('.letter-a');
+    const letterP = logoRef.current.querySelector('.letter-p');
+    const letterE = logoRef.current.querySelector('.letter-e');
+    const letterX = logoRef.current.querySelector('.letter-x');
+
+    const letters = [letterA, letterP, letterE, letterX];
+
+    // Set initial state for a very subtle slide up
+    gsap.set(letters, { y: 15, opacity: 0 });
+
+    const ctx = gsap.context(() => {
+      // Delay initialization to ensure DOM layout and image loading are complete
+      // This prevents the trigger from firing prematurely if the footer is initially
+      // higher up in the document before content above it expands.
+      const timer = setTimeout(() => {
+        ScrollTrigger.create({
+          trigger: logoRef.current,
+          start: 'top 90%', // Trigger when top of logo reaches 90% of viewport
+          onEnter: () => {
+            gsap.to(letters, {
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              stagger: 0.25,
+              ease: 'power2.out',
+              overwrite: 'auto'
+            });
+          },
+          once: true
+        });
+      }, 500); // 500ms matches the GSAPProvider refresh timing
+
+      return () => clearTimeout(timer);
+    }, logoRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <svg
+      ref={logoRef}
+      className={className}
+      width="100%"
+      height="100%"
+      viewBox="0 0 1214 366"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <path
+        className="apex-letter letter-p"
+        d="M544.186 0H388.873L418.765 34.4911V365.438H506.281V219.654H544.743C579.861 219.654 607.732 209.669 628.287 189.561C648.842 169.523 659.085 142.572 659.085 108.78C659.085 74.9867 649.4 47.1285 630.099 28.2771C610.798 9.4257 582.16 0 544.186 0ZM560.003 134.404C554.428 140.548 546.694 143.69 536.8 143.69H506.281V76.1038H536.8C546.694 76.1038 554.428 79.0362 560.003 85.0408C565.647 91.0453 568.434 99.1444 568.434 109.338C568.434 119.532 565.647 128.259 560.003 134.404Z"
+        fill="url(#paint0_linear_788_380)"
+      />
+      <path
+        className="apex-letter letter-x"
+        d="M1214 365.438H1112.27L1040.08 254.005C1028.8 270.553 1018.27 286.611 1008.45 302.041C998.625 317.541 989.846 331.436 982.112 343.794C974.377 356.082 969.779 363.343 968.385 365.438H869.86L989.497 176.924L874.111 0H981.066L1044.82 100.331L1106.49 0H1209.75L1095.41 179.577L1214 365.438Z"
+        fill="url(#paint1_linear_788_380)"
+      />
+      <path
+        className="apex-letter letter-e"
+        d="M771.823 283.05H858.224V365.438H683.889V34.4911L653.928 0H856.691V82.3876H771.823V138.942H854.113V220.212H771.823V283.05Z"
+        fill="url(#paint2_linear_788_380)"
+      />
+      <path
+        className="apex-letter letter-a"
+        d="M216.838 0H349.575V365.438H165.416L214.817 280.327H267.773V131.541L103.89 365.438H0L238.578 25.0654L216.838 0Z"
+        fill="url(#paint3_linear_788_380)"
+      />
+      <defs>
+        <linearGradient id="paint0_linear_788_380" x1="0" y1="0" x2="1214" y2="-4.20399e-07" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#D18957" />
+          <stop offset="1" stop-color="#9C592B" />
+        </linearGradient>
+        <linearGradient id="paint1_linear_788_380" x1="0" y1="0" x2="1214" y2="-4.20399e-07" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#D18957" />
+          <stop offset="1" stop-color="#9C592B" />
+        </linearGradient>
+        <linearGradient id="paint2_linear_788_380" x1="0" y1="0" x2="1214" y2="-4.20399e-07" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#D18957" />
+          <stop offset="1" stop-color="#9C592B" />
+        </linearGradient>
+        <linearGradient id="paint3_linear_788_380" x1="0" y1="0" x2="1214" y2="-4.20399e-07" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#D18957" />
+          <stop offset="1" stop-color="#9C592B" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}

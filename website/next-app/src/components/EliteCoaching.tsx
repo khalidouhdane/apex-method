@@ -107,7 +107,7 @@ export default function EliteCoaching() {
             </div>
 
             <div className={styles.ctaWrap}>
-              <Link href="#quiz" className="btn btn-solid-bronze btn-large">
+              <Link href="/quiz" className="btn btn-solid-bronze btn-large">
                 Réserver un appel découverte
               </Link>
               <span className={styles.disclaimer}>

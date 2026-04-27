@@ -8,7 +8,7 @@
 
 .layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.15fr 0.85fr;
   gap: 120px;
   align-items: center;
 }
@@ -29,7 +29,7 @@
   color: var(--text-dim);
   line-height: 1.6;
   margin-bottom: 48px;
-  max-width: 480px;
+  max-width: 540px;
 }
 
 .featuresGrid {
@@ -78,10 +78,6 @@
 .featureCard > * {
   position: relative;
   z-index: 1;
-}
-
-.fullWidth {
-  grid-column: span 2;
 }
 
 .featureIcon {

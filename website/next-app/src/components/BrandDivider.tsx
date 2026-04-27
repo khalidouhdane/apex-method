@@ -1,13 +1,23 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Fragment } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './BrandDivider.module.css';
 
-const ITEMS = [
-  'DISCIPLINE', 'FORCE', 'NUTRITION', 'MENTAL',
-  'STRUCTURE', 'RÉSULTATS', 'APEX',
+const BrandIcon = () => (
+  <svg className={styles.icon} viewBox="0 0 66 20">
+    <path d="M11.7886 0H19.0049V20H8.99294L11.6787 15.342H14.5577V7.19908L5.64805 20H0L12.9704 1.3718L11.7886 0Z" fill="currentColor"/>
+  </svg>
+);
+
+const STATEMENTS = [
+  { text: "L'ADN DE LA ", highlight: "MÉTHODE", after: "" },
+  { text: "LA TRANSFORMATION ", highlight: "ABSOLUE", after: "" },
+  { text: "FORCE • ", highlight: "MENTAL", after: " • DISCIPLINE" },
+  { text: "CONSTELLATION ", highlight: "APEX", after: "" },
+  { text: "L'ÉLITE DU ", highlight: "PHYSIQUE", after: "" },
+  { text: "DÉPASSER SES ", highlight: "LIMITES", after: "" },
 ];
 
 export default function BrandDivider() {
@@ -70,11 +80,15 @@ export default function BrandDivider() {
     <div ref={sectionRef} className={styles.bar}>
       <div ref={trackRef} className={styles.track}>
         {/* Render items twice for seamless loop */}
-        {[...ITEMS, ...ITEMS].map((item, i) => (
-          <span key={i} className={styles.item}>
-            <span className={styles.dot}>◆</span>
-            {item}
-          </span>
+        {[...STATEMENTS, ...STATEMENTS].map((item, i) => (
+          <Fragment key={i}>
+            <span className={styles.statement}>
+              {item.text}
+              <span className={styles.highlight}>{item.highlight}</span>
+              {item.after}
+            </span>
+            <BrandIcon />
+          </Fragment>
         ))}
       </div>
     </div>

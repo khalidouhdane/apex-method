@@ -12,68 +12,61 @@ const RESULTS = [
     program: 'ORION',
     story: '"Une transformation physique qui a redéfini mon mental. Alex m\'a donné les clés du succès."',
     stats: ['-10 kg', 'MG: 20% → 16%'],
-    afterImg: '/images/results/after1.png',
-    beforeImg: '/images/results/before1.png',
+    combinedImg: '/images/results/combined_1.png',
   },
   {
     name: 'MEHDI B.',
     program: 'ORION',
     story: '"La méthode Orion est d\'une efficacité redoutable. Je ne me suis jamais senti aussi fort."',
     stats: ['-12 kg en 90j', 'Programme Orion'],
-    afterImg: '/images/results/after2.png',
-    beforeImg: '/images/results/before2.png',
+    combinedImg: '/images/results/combined_2.png',
   },
   {
     name: 'THOMAS L.',
     program: 'PAPA STRONG',
     story: '"En tant que papa, Papa Strong m\'a permis de retrouver une forme athlétique pour mes enfants."',
     stats: ['Force multipliée', 'Discipline APEX'],
-    afterImg: '/images/results/after1.png',
-    beforeImg: '/images/results/before1.png',
+    combinedImg: '/images/results/combined_1.png',
   },
   {
     name: 'KARIM B.',
     program: 'PAPA STRONG',
     story: '"Père de 3 enfants. Papa Strong m\'a remis debout. Physiquement et mentalement."',
     stats: ['+8 kg muscles', 'Papa Strong'],
-    afterImg: '/images/results/after2.png',
-    beforeImg: '/images/results/before2.png',
+    combinedImg: '/images/results/combined_2.png',
   },
   {
     name: 'JULIEN P.',
     program: 'ORION',
     story: '"La discipline quotidienne a changé mon rapport à la nourriture et au sommeil."',
     stats: ['-10 kg', '90 Jours ORION'],
-    afterImg: '/images/results/after1.png',
-    beforeImg: '/images/results/before1.png',
+    combinedImg: '/images/results/combined_1.png',
   },
   {
     name: 'YOUSSEF K.',
     program: 'LÉO',
     story: '"Léo m\'a prouvé qu\'on peut se transformer n\'importe où. Les résultats sont là."',
     stats: ['-8 kg', 'Programme Léo'],
-    afterImg: '/images/results/after2.png',
-    beforeImg: '/images/results/before2.png',
+    combinedImg: '/images/results/combined_2.png',
   },
   {
     name: 'DAVID R.',
     program: 'ORION',
     story: '"De sédentaire à athlète. Le changement est radical."',
     stats: ['-15 kg', 'Transformation Totale'],
-    afterImg: '/images/results/after1.png',
-    beforeImg: '/images/results/before1.png',
+    combinedImg: '/images/results/combined_1.png',
   },
   {
     name: 'LUC M.',
     program: 'ORION',
     story: '"La rigueur d\'Alex est ce qui fait la différence. Pas de compromis."',
     stats: ['Puissance décuplée', 'Mentalité APEX'],
-    afterImg: '/images/results/after2.png',
-    beforeImg: '/images/results/before2.png',
+    combinedImg: '/images/results/combined_2.png',
   },
 ];
 
-const FILTERS = ['TOUS', 'ORION', 'ATHENA', 'PAPA STRONG', 'LÉO'];
+const ALL_FILTERS = ['TOUS', 'ORION', 'ATHENA', 'PAPA STRONG', 'LÉO'];
+const FILTERS = ALL_FILTERS.filter(f => f === 'TOUS' || RESULTS.some(r => r.program === f));
 
 export default function ResultsCenter() {
   const [activeFilter, setActiveFilter] = useState('TOUS');
@@ -83,6 +76,9 @@ export default function ResultsCenter() {
   const trackRef = useRef<HTMLDivElement>(null);
   const autoPlayTimer = useRef<NodeJS.Timeout | null>(null);
   
+  const filterTrackRef = useRef<HTMLDivElement>(null);
+  const sliderIndicatorRef = useRef<HTMLDivElement>(null);
+  
   const isDragging = useRef(false);
   const startX = useRef(0);
   const currentX = useRef(0);
@@ -90,16 +86,19 @@ export default function ResultsCenter() {
   const filteredResults = RESULTS.filter(
     r => activeFilter === 'TOUS' || r.program === activeFilter
   );
+  
+  const filteredLengthRef = useRef(filteredResults.length);
+  filteredLengthRef.current = filteredResults.length;
 
   const startAutoPlay = useCallback(() => {
     if (autoPlayTimer.current) clearInterval(autoPlayTimer.current);
     autoPlayTimer.current = setInterval(() => {
       setActiveIndex(prev => {
-        if (prev < filteredResults.length - 1) return prev + 1;
+        if (prev < filteredLengthRef.current - 1) return prev + 1;
         return 0; // loop back to start
       });
     }, 4000);
-  }, [filteredResults.length]);
+  }, []);
 
   const stopAutoPlay = useCallback(() => {
     if (autoPlayTimer.current) clearInterval(autoPlayTimer.current);
@@ -197,7 +196,24 @@ export default function ResultsCenter() {
     });
 
     return () => ctx.revert();
-  }, [startAutoPlay]);
+  }, []); // Only run once on mount
+
+  // Handle slider indicator position
+  const updateSliderPosition = useCallback(() => {
+    if (!filterTrackRef.current || !sliderIndicatorRef.current) return;
+    const activeBtn = filterTrackRef.current.querySelector(
+      `.${styles.filterBtnActive}`
+    ) as HTMLElement | null;
+    if (!activeBtn) return;
+    const indicator = sliderIndicatorRef.current;
+    indicator.style.width = `${activeBtn.offsetWidth}px`;
+    indicator.style.transform = `translateX(${activeBtn.offsetLeft - 4}px)`;
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(updateSliderPosition, 60);
+    return () => clearTimeout(timer);
+  }, [activeFilter, updateSliderPosition]);
 
   // Reset index on filter change and restart autoplay
   useEffect(() => {
@@ -307,15 +323,18 @@ export default function ResultsCenter() {
           <h2 className={styles.title}>RESULTS</h2>
           
           <div className={styles.filters}>
-            {FILTERS.map(f => (
-              <button 
-                key={f}
-                className={`${styles.filterBtn} ${activeFilter === f ? styles.activeFilter : ''}`}
-                onClick={() => setActiveFilter(f)}
-              >
-                {f}
-              </button>
-            ))}
+            <div ref={filterTrackRef} className={styles.filterTrack}>
+              <div ref={sliderIndicatorRef} className={styles.filterSlider} />
+              {FILTERS.map(f => (
+                <button 
+                  key={f}
+                  className={`${styles.filterBtn} ${activeFilter === f ? styles.filterBtnActive : ''}`}
+                  onClick={() => setActiveFilter(f)}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className={styles.navButtons}>
@@ -356,15 +375,9 @@ export default function ResultsCenter() {
                   setActiveIndex(i);
                 }}
               >
-                <div className={styles.imagesRow}>
-                  <div className={styles.imgWrapper}>
-                    <div className={styles.badgeBlack}>BEFORE</div>
-                    <img src={r.beforeImg} alt={`Avant - ${r.name}`} draggable={false} className={styles.beforeImage} />
-                  </div>
-                  <div className={styles.imgWrapper}>
-                    <div className={styles.badgeBronze}>AFTER</div>
-                    <img src={r.afterImg} alt={`Après - ${r.name}`} draggable={false} />
-                  </div>
+                <div className={styles.singleImageWrapper}>
+                  <div className={styles.badgeBronzeCombined}>AVANT / APRÈS</div>
+                  <img src={r.combinedImg} alt={`Avant / Après - ${r.name}`} draggable={false} />
                 </div>
                 
                 <div className={styles.infoCard}>
