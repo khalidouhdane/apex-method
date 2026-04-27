@@ -6,7 +6,6 @@ import PapaStrongPlan from '@/components/PapaStrongPlan';
 import MonthlySubscription from '@/components/MonthlySubscription';
 import AppPreview from '@/components/AppPreview';
 import Results from '@/components/Results';
-import About from '@/components/About';
 import QuizCTA from '@/components/QuizCTA';
 
 export default function Home() {
@@ -20,7 +19,6 @@ export default function Home() {
       <MonthlySubscription />
       <AppPreview />
       <Results />
-      <About />
       <QuizCTA />
     </main>
   );

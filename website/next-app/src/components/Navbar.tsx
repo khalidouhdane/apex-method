@@ -86,7 +86,7 @@ export default function Navbar() {
           <ApexLogo className={styles.logoSvg} />
         </Link>
         <div className={styles.navRight}>
-          <Link href="#quiz" className={styles.navCta}>
+          <Link href="/quiz" className={styles.navCta}>
             Trouver mon programme
           </Link>
         </div>
@@ -125,7 +125,7 @@ export default function Navbar() {
             Blog
           </Link>
           <Link
-            href="#quiz"
+            href="/quiz"
             className={styles.mobileCta}
             onClick={() => setMobileOpen(false)}
           >

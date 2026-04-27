@@ -1,0 +1,784 @@
+/* ========================================
+   APEX METHOD — Quiz Wizard Styles
+   ======================================== */
+
+/* Hide global nav, footer, and loader on quiz pages */
+:global(body:has([data-quiz-page]) #nav),
+:global(body:has([data-quiz-page]) footer),
+:global(body:has([data-quiz-page]) .loader-wrap) {
+  display: none !important;
+}
+
+/* ── Layout Shell ─────────────────────── */
+
+.quizShell {
+  min-height: 100dvh;
+  background: var(--sys-bg);
+  color: var(--sys-text-pri);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Ambient glow behind quiz */
+.quizShell::before {
+  content: '';
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  width: 800px;
+  height: 800px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(204, 142, 102, 0.06) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Top Bar (logo + close) ──────────── */
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px var(--container-pad);
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--sys-text-pri);
+  text-decoration: none;
+}
+
+.closeBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-dim);
+  background: transparent;
+  color: var(--sys-text-pri);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Progress Bar ────────────────────── */
+
+.progressWrap {
+  padding: 0 var(--container-pad);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--cta-gradient);
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.progressMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Step Content Area ───────────────── */
+
+.stepArea {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px var(--container-pad);
+  position: relative;
+  z-index: 5;
+}
+
+.stepInner {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.stepTag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bronze-base);
+  margin-bottom: 16px;
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.stepSubtitle {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* ── Option Cards (single-select) ────── */
+
+.optionGrid {
+  display: grid;
+  gap: 12px;
+}
+
+.optionGrid2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.optionGrid3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.optionCard {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  cursor: pointer;
+  text-align: center;
+  color: var(--sys-text-pri);
+  font-family: inherit;
+  transition: border-color 0.25s ease, background 0.25s ease,
+    transform 0.2s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.optionCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 100%,
+    rgba(204, 142, 102, 0.08) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.optionCard:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.optionCard:hover::before {
+  opacity: 1;
+}
+
+.optionCardActive {
+  border-color: var(--bronze-base) !important;
+  background: rgba(204, 142, 102, 0.08);
+  box-shadow: 0 0 30px rgba(204, 142, 102, 0.12),
+    inset 0 0 20px rgba(204, 142, 102, 0.04);
+}
+
+.optionCardActive::before {
+  opacity: 1;
+}
+
+.optionIcon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.optionLabel {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--sys-text-pri);
+  display: block;
+}
+
+.optionDesc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.4;
+  display: block;
+}
+
+/* Vertical card variant (for experience, availability) */
+.optionCardRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  padding: 20px 24px;
+}
+
+.optionCardRow .optionIcon {
+  font-size: 24px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+/* ── Slider Input (age, weight, height) ── */
+
+.sliderGroup {
+  margin-bottom: 32px;
+}
+
+.sliderLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.sliderLabelText {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+.sliderValue {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--sys-text-pri);
+  min-width: 70px;
+  text-align: right;
+}
+
+.sliderInput {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.sliderInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--cta-gradient);
+  border: 3px solid var(--sys-bg);
+  box-shadow: 0 0 12px rgba(204, 142, 102, 0.4);
+  cursor: grab;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sliderInput::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.2);
+  box-shadow: 0 0 20px rgba(204, 142, 102, 0.6);
+}
+
+.sliderInput::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--cta-gradient);
+  border: 3px solid var(--sys-bg);
+  box-shadow: 0 0 12px rgba(204, 142, 102, 0.4);
+  cursor: grab;
+}
+
+.sliderRange {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ── Checkbox Group (health) ─────────── */
+
+.checkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkOption {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  color: var(--sys-text-pri);
+  font-family: inherit;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.checkOption:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.checkOptionActive {
+  border-color: var(--bronze-base);
+  background: rgba(204, 142, 102, 0.06);
+}
+
+.checkBox {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid var(--border-dim);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.checkBoxChecked {
+  border-color: var(--bronze-base);
+  background: var(--cta-gradient);
+}
+
+.checkBoxChecked svg {
+  color: #fff;
+}
+
+.checkLabel {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--sys-text-pri);
+}
+
+/* ── Navigation Buttons ──────────────── */
+
+.navRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px var(--container-pad) 32px;
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  max-width: calc(640px + var(--container-pad) * 2);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.btnBack {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--sys-text-pri);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.btnBack:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.btnNext {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--cta-gradient);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btnNext:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btnNext:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btnNextFinal {
+  padding: 16px 36px;
+  font-size: 15px;
+}
+
+.btnHidden {
+  visibility: hidden;
+}
+
+/* ── Result Screen ───────────────────── */
+
+.resultScreen {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.resultBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: rgba(204, 142, 102, 0.1);
+  border: 1px solid rgba(204, 142, 102, 0.25);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bronze-base);
+  margin-bottom: 24px;
+}
+
+.resultTitle {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.resultTitleAccent {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: italic;
+}
+
+.resultSubtitle {
+  font-size: 16px;
+  color: var(--text-dim);
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* Primary recommendation card */
+.resultCard {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  text-align: left;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.resultCardImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.resultCardOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    var(--surface-raised) 100%
+  );
+  pointer-events: none;
+}
+
+.resultCardBody {
+  padding: 28px 28px 32px;
+  position: relative;
+}
+
+.resultCardPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.resultCardPill {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-dim);
+  color: var(--text-dim);
+}
+
+.resultCardName {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.resultCardSub {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.resultCardDesc {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.resultCardMeta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.resultMetaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.resultMetaLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.resultMetaValue {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.resultCardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--cta-gradient);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.resultCardCta:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Health constraint note */
+.healthNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: rgba(204, 142, 102, 0.06);
+  border: 1px solid rgba(204, 142, 102, 0.15);
+  border-radius: var(--radius-md);
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.healthNoteIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.healthNoteText {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* Alternatives */
+.altsLabel {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.altsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.altCard {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  text-align: left;
+  text-decoration: none;
+  color: var(--sys-text-pri);
+  transition: border-color 0.25s ease, transform 0.2s ease;
+}
+
+.altCard:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.altCardName {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.altCardMeta {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.altCardLink {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bronze-base);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Bottom links */
+.resultActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-bottom: 40px;
+}
+
+.resultLink {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-dim);
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.resultLink:hover {
+  color: var(--sys-text-pri);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ── Responsive ──────────────────────── */
+
+@media (max-width: 768px) {
+  .optionGrid2,
+  .optionGrid3 {
+    grid-template-columns: 1fr;
+  }
+
+  .optionCard {
+    padding: 20px 16px;
+  }
+
+  .optionCardRow {
+    padding: 16px;
+  }
+
+  .navRow {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .altsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .resultCardBody {
+    padding: 20px 20px 24px;
+  }
+
+  .resultCardMeta {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .stepArea {
+    padding: 24px 20px;
+    align-items: flex-start;
+    padding-top: 40px;
+  }
+}

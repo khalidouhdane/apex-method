@@ -4,9 +4,8 @@ import MetricsReels from '@/components/MetricsReels';
 import Programs from '@/components/Programs';
 import PapaStrongPlan from '@/components/PapaStrongPlan';
 import MonthlySubscription from '@/components/MonthlySubscription';
-import AppPreview from '@/components/AppPreview';
+import AppPreviewV2 from '@/components/AppPreviewV2';
 import ResultsCenter from '@/components/ResultsCenter';
-import About from '@/components/About';
 import QuizCTA from '@/components/QuizCTA';
 
 export default function HomeV2() {
@@ -18,9 +17,8 @@ export default function HomeV2() {
       <Programs />
       <PapaStrongPlan />
       <MonthlySubscription />
-      <AppPreview />
+      <AppPreviewV2 />
       <ResultsCenter />
-      <About />
       <QuizCTA />
     </main>
   );

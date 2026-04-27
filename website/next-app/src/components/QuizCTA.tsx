@@ -70,7 +70,7 @@ export default function QuizCTA() {
               </div>
             </div>
 
-            <Link href="#" className="btn btn-solid-bronze btn-large" id="quiz-cta">
+            <Link href="/quiz" className="btn btn-solid-bronze btn-large" id="quiz-cta">
               <span>Commencer le quiz</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />

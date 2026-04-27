@@ -29,7 +29,6 @@ export default function HeroScroll() {
   const sceneRef = useRef<HTMLDivElement>(null);
   const characterRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const placeholderRef = useRef<HTMLDivElement>(null);
   const phaseTextRef = useRef<HTMLDivElement>(null);
   const phaseStatsRef = useRef<HTMLDivElement>(null);
   const phasePillarsRef = useRef<HTMLDivElement>(null);
@@ -79,8 +78,7 @@ export default function HeroScroll() {
     processed.onload = () => {
       framesRef.current[index] = processed;
       if (isFirst) {
-        // Hide placeholder, show canvas with first frame
-        if (placeholderRef.current) placeholderRef.current.style.display = 'none';
+        // Show canvas with first frame
         if (canvasRef.current) canvasRef.current.style.display = 'block';
         drawFrame(0);
       }
@@ -321,41 +319,7 @@ export default function HeroScroll() {
             style={{ display: 'none' }}
           />
 
-          {/* Placeholder silhouette: shown until real frames arrive */}
-          <div ref={placeholderRef} className={styles.characterPlaceholder}>
-            <svg viewBox="0 0 500 750" className={styles.silhouetteSvg} aria-hidden="true">
-              <defs>
-                <linearGradient id="silGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#2a2420" />
-                  <stop offset="40%" stopColor="#1e1a16" />
-                  <stop offset="100%" stopColor="#121010" />
-                </linearGradient>
-                <radialGradient id="edgeGlow" cx="50%" cy="30%" r="60%">
-                  <stop offset="0%" stopColor="rgba(204,142,102,0.06)" />
-                  <stop offset="100%" stopColor="transparent" />
-                </radialGradient>
-              </defs>
-              {/* Body / Hoodie */}
-              <path d="M 100 280 Q 100 235 170 235 L 220 235 L 220 230 L 280 230 L 280 235 L 330 235 Q 400 235 400 280 L 410 750 L 90 750 Z" fill="url(#silGrad)" />
-              {/* Neck */}
-              <rect x="222" y="197" width="56" height="38" rx="12" fill="url(#silGrad)" />
-              {/* Head */}
-              <ellipse cx="250" cy="135" rx="62" ry="72" fill="url(#silGrad)" />
-              {/* Headphone band */}
-              <path d="M 188 105 Q 250 30 312 105" stroke="rgba(204,142,102,0.15)" strokeWidth="5" fill="none" strokeLinecap="round" />
-              {/* Headphone cups */}
-              <rect x="168" y="100" width="28" height="42" rx="10" fill="#1a1714" stroke="rgba(204,142,102,0.1)" strokeWidth="1" />
-              <rect x="304" y="100" width="28" height="42" rx="10" fill="#1a1714" stroke="rgba(204,142,102,0.1)" strokeWidth="1" />
-              {/* Hoodie collar line */}
-              <path d="M 220 235 L 250 280 L 280 235" stroke="rgba(204,142,102,0.08)" strokeWidth="1.5" fill="none" />
-              {/* Glow overlay */}
-              <ellipse cx="250" cy="300" rx="200" ry="300" fill="url(#edgeGlow)" />
-            </svg>
-            <div className={styles.placeholderLabel}>
-              <span className={styles.placeholderInitials}>AM</span>
-              <span className={styles.placeholderNote}>Alexandre Monteiro</span>
-            </div>
-          </div>
+          {/* Canvas displays chroma-keyed frames */}
         </div>
 
         {/* ===== ORBITAL RINGS — FRONT HALF ===== */}
@@ -404,7 +368,7 @@ export default function HeroScroll() {
           <div className={`${styles.heroTextBlock} ${styles.textTopCenter}`}>
             <span className={styles.textPill}>
               <span className={styles.pillDot} />
-              L&apos;identification
+              La Fondation
             </span>
             <h2 className={styles.heroHeadline} data-split>
               UN CORPS <em>FORT</em>
@@ -413,7 +377,7 @@ export default function HeroScroll() {
           <div className={`${styles.heroTextBlock} ${styles.textRightMiddle}`}>
             <span className={styles.textPill}>
               <span className={styles.pillDot} />
-              L&apos;identification
+              La Résilience
             </span>
             <h2 className={styles.heroHeadline} data-split>
               UN MENTAL <em>SOLIDE</em>
@@ -422,7 +386,7 @@ export default function HeroScroll() {
           <div className={`${styles.heroTextBlock} ${styles.textBottomLeft}`}>
             <span className={styles.textPill}>
               <span className={styles.pillDot} />
-              L&apos;identification
+              L&apos;Élévation
             </span>
             <h2 className={styles.heroHeadline} data-split>
               UNE VIE <em>MAÎTRISÉE</em>

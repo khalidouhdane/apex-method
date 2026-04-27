@@ -73,23 +73,46 @@ const RESULTS = [
   },
 ];
 
-const FILTERS = ['TOUS', 'ORION', 'ATHENA', 'PAPA STRONG', 'LÉO'];
+const ALL_FILTERS = ['TOUS', 'ORION', 'ATHENA', 'PAPA STRONG', 'LÉO'];
+const FILTERS = ALL_FILTERS.filter(f => f === 'TOUS' || RESULTS.some(r => r.program === f));
 
 export default function Results() {
   const [activeFilter, setActiveFilter] = useState('TOUS');
   const [activeIndex, setActiveIndex] = useState(0);
-  const trackRef = useRef<HTMLDivElement>(null);
+  
   const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const autoPlayTimer = useRef<NodeJS.Timeout | null>(null);
+  
+  const filterTrackRef = useRef<HTMLDivElement>(null);
+  const sliderIndicatorRef = useRef<HTMLDivElement>(null);
+  
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const currentX = useRef(0);
   
   const filteredResults = RESULTS.filter(
     r => activeFilter === 'TOUS' || r.program === activeFilter
   );
+  
+  const filteredLengthRef = useRef(filteredResults.length);
+  filteredLengthRef.current = filteredResults.length;
 
   const startAutoPlay = useCallback(() => {
-    // Logic for auto-play could be added here
+    if (autoPlayTimer.current) clearInterval(autoPlayTimer.current);
+    autoPlayTimer.current = setInterval(() => {
+      setActiveIndex(prev => {
+        if (prev < filteredLengthRef.current - 1) return prev + 1;
+        return 0; // loop back to start
+      });
+    }, 4000);
   }, []);
 
-  // Entrance Animation & Intersection AutoPlay
+  const stopAutoPlay = useCallback(() => {
+    if (autoPlayTimer.current) clearInterval(autoPlayTimer.current);
+  }, []);
+
+  // Handle Entrance Animation & Intersection
   useEffect(() => {
     if (typeof window === 'undefined' || !sectionRef.current) return;
     gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -101,16 +124,13 @@ export default function Results() {
       const slider = sectionRef.current?.querySelector(`.${styles.sliderContainer}`) as HTMLElement | null;
 
       if (title && filterBtns && slider) {
-        // Temporarily switch to solid bronze so SplitText chars inherit a visible color
-        // (gradient will be restored via split.revert() + clearing inline styles)
-
-        // 2. Temporarily switch to solid bronze so SplitText chars inherit a visible color
+        // 1. Temporarily switch to solid bronze so SplitText chars inherit a visible color
         title.style.background = 'none';
         title.style.webkitBackgroundClip = 'initial';
         title.style.webkitTextFillColor = 'initial';
         title.style.color = '#D18957';
 
-        // 3. Now split — chars will have solid color, no gradient conflict
+        // 2. Now split — chars will have solid color, no gradient conflict
         const splitTitle = new SplitText(title, { type: 'chars' });
 
         // Pad each char to prevent italic edge clipping
@@ -144,9 +164,9 @@ export default function Results() {
           stagger: 0.04,
           ease: 'power3.out',
           onComplete: () => {
-            // 4. Revert SplitText — this restores the original DOM node
+            // 3. Revert SplitText — restores original DOM
             splitTitle.revert();
-            // 5. Restore gradient CSS on the now-clean element
+            // 4. Clear inline overrides so CSS module gradient takes over
             title.style.background = '';
             title.style.webkitBackgroundClip = '';
             title.style.webkitTextFillColor = '';
@@ -173,6 +193,7 @@ export default function Results() {
           ease: 'power3.out'
         }, "-=0.3");
       } else {
+        // Fallback
         ScrollTrigger.create({
           trigger: sectionRef.current,
           start: 'top 50%',
@@ -183,37 +204,124 @@ export default function Results() {
     });
 
     return () => ctx.revert();
-  }, [startAutoPlay]);
+  }, []); // Only run once on mount
 
-  // Handle slide animation
+  // Handle slider indicator position
+  const updateSliderPosition = useCallback(() => {
+    if (!filterTrackRef.current || !sliderIndicatorRef.current) return;
+    const activeBtn = filterTrackRef.current.querySelector(
+      `.${styles.filterBtnActive}`
+    ) as HTMLElement | null;
+    if (!activeBtn) return;
+    const indicator = sliderIndicatorRef.current;
+    indicator.style.width = `${activeBtn.offsetWidth}px`;
+    indicator.style.transform = `translateX(${activeBtn.offsetLeft - 4}px)`;
+  }, []);
+
   useEffect(() => {
-    if (!trackRef.current) return;
+    const timer = setTimeout(updateSliderPosition, 60);
+    return () => clearTimeout(timer);
+  }, [activeFilter, updateSliderPosition]);
+
+  // Reset index on filter change and restart autoplay
+  useEffect(() => {
+    setActiveIndex(0);
+    startAutoPlay();
+    return () => stopAutoPlay();
+  }, [activeFilter, startAutoPlay, stopAutoPlay]);
+
+  // Handle slide centering animation
+  useEffect(() => {
+    if (!trackRef.current || isDragging.current) return;
     
     const isMobile = window.innerWidth <= 768;
-    const slideWidth = isMobile ? window.innerWidth * 0.85 : 580;
+    const slideWidth = isMobile ? window.innerWidth * 0.85 : 551;
     const gap = isMobile ? 16 : 32;
     
-    const offset = -(activeIndex * (slideWidth + gap));
+    // Calculate offset to place active slide perfectly in center of screen
+    const centerOffset = (window.innerWidth - slideWidth) / 2;
+    const targetX = centerOffset - (activeIndex * (slideWidth + gap));
     
     gsap.to(trackRef.current, {
-      x: offset,
+      x: targetX,
       duration: 0.8,
       ease: "power3.inOut",
-      overwrite: "auto"
+      overwrite: "auto",
+      onUpdate: () => {
+         if (!trackRef.current) return;
+         const transform = window.getComputedStyle(trackRef.current).transform;
+         if (transform !== 'none') {
+           const matrix = new DOMMatrix(transform);
+           currentX.current = matrix.m41;
+         }
+      }
     });
   }, [activeIndex, filteredResults.length]);
 
-  // Reset index on filter change
-  useEffect(() => {
-    setActiveIndex(0);
-  }, [activeFilter]);
-
   const handleNext = () => {
+    stopAutoPlay();
     if (activeIndex < filteredResults.length - 1) setActiveIndex(activeIndex + 1);
   };
 
   const handlePrev = () => {
+    stopAutoPlay();
     if (activeIndex > 0) setActiveIndex(activeIndex - 1);
+  };
+
+  // Drag mechanics
+  const onPointerDown = (e: React.PointerEvent) => {
+    isDragging.current = true;
+    startX.current = e.clientX;
+    stopAutoPlay();
+    gsap.killTweensOf(trackRef.current);
+    
+    if (trackRef.current) {
+      const transform = window.getComputedStyle(trackRef.current).transform;
+      if (transform !== 'none') {
+        const matrix = new DOMMatrix(transform);
+        currentX.current = matrix.m41;
+      }
+    }
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!isDragging.current || !trackRef.current) return;
+    const delta = e.clientX - startX.current;
+    gsap.set(trackRef.current, { x: currentX.current + delta });
+  };
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    
+    const delta = e.clientX - startX.current;
+    
+    if (delta < -50 && activeIndex < filteredResults.length - 1) {
+      setActiveIndex(prev => prev + 1);
+    } else if (delta > 50 && activeIndex > 0) {
+      setActiveIndex(prev => prev - 1);
+    } else {
+      // Snap back if threshold not met
+      setActiveIndex(activeIndex); 
+      
+      const isMobile = window.innerWidth <= 768;
+      const slideWidth = isMobile ? window.innerWidth * 0.85 : 551;
+      const gap = isMobile ? 16 : 32;
+      const centerOffset = (window.innerWidth - slideWidth) / 2;
+      const targetX = centerOffset - (activeIndex * (slideWidth + gap));
+      
+      gsap.to(trackRef.current, {
+        x: targetX,
+        duration: 0.5,
+        ease: "power3.out"
+      });
+    }
+  };
+
+  const onPointerLeave = (e: React.PointerEvent) => {
+    if (isDragging.current) {
+      onPointerUp(e);
+    }
   };
 
   return (
@@ -223,15 +331,18 @@ export default function Results() {
           <h2 className={styles.title}>RESULTS</h2>
           
           <div className={styles.filters}>
-            {FILTERS.map(f => (
-              <button 
-                key={f}
-                className={`${styles.filterBtn} ${activeFilter === f ? styles.activeFilter : ''}`}
-                onClick={() => setActiveFilter(f)}
-              >
-                {f}
-              </button>
-            ))}
+            <div ref={filterTrackRef} className={styles.filterTrack}>
+              <div ref={sliderIndicatorRef} className={styles.filterSlider} />
+              {FILTERS.map(f => (
+                <button 
+                  key={f}
+                  className={`${styles.filterBtn} ${activeFilter === f ? styles.filterBtnActive : ''}`}
+                  onClick={() => setActiveFilter(f)}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className={styles.navButtons}>
@@ -253,45 +364,56 @@ export default function Results() {
             </button>
           </div>
         </div>
+      </div>
 
-        <div className={styles.sliderContainer}>
-          <div className={styles.sliderTrack} ref={trackRef}>
-            {filteredResults.map((r, i) => {
-              const isActive = i === activeIndex;
-              return (
-                <div key={`${r.name}-${i}`} className={`${styles.slide} ${isActive ? styles.activeSlide : ''}`}>
-                  <div className={styles.imagesRow}>
-                    <div className={styles.imgWrapper}>
-                      <div className={styles.badgeBlack}>BEFORE</div>
-                      <img src={r.beforeImg} alt={`Avant - ${r.name}`} draggable={false} className={styles.beforeImage} />
-                    </div>
-                    <div className={styles.imgWrapper}>
-                      <div className={styles.badgeBronze}>AFTER</div>
-                      <img src={r.afterImg} alt={`Après - ${r.name}`} draggable={false} />
-                    </div>
+      <div className={styles.sliderContainer}
+           onPointerDown={onPointerDown}
+           onPointerMove={onPointerMove}
+           onPointerUp={onPointerUp}
+           onPointerLeave={onPointerLeave}>
+        <div className={styles.sliderTrack} ref={trackRef}>
+          {filteredResults.map((r, i) => {
+            const isActive = i === activeIndex;
+            return (
+              <div 
+                key={`${r.name}-${i}`} 
+                className={`${styles.slide} ${isActive ? styles.activeSlide : ''}`}
+                onClick={() => {
+                  stopAutoPlay();
+                  setActiveIndex(i);
+                }}
+              >
+                <div className={styles.imagesRow}>
+                  <div className={styles.imgWrapper}>
+                    <div className={styles.badgeBlack}>BEFORE</div>
+                    <img src={r.beforeImg} alt={`Avant - ${r.name}`} draggable={false} className={styles.beforeImage} />
                   </div>
-                  
-                  <div className={styles.infoCard}>
-                    <div className={styles.infoTop}>
-                      <div className={styles.infoLeft}>
-                        <h3 className={styles.name}>{r.name}</h3>
-                        <p className={styles.programText}>{r.program}</p>
-                      </div>
-                      <p className={styles.story}>{r.story}</p>
-                    </div>
-                    <div className={styles.statsGrid}>
-                      {r.stats.map((s, j) => (
-                        <div key={j} className={styles.statItem}>
-                           <div className={styles.dot}></div>
-                          {s}
-                        </div>
-                      ))}
-                    </div>
+                  <div className={styles.imgWrapper}>
+                    <div className={styles.badgeBronze}>AFTER</div>
+                    <img src={r.afterImg} alt={`Après - ${r.name}`} draggable={false} />
                   </div>
                 </div>
-              );
-            })}
-          </div>
+                
+                <div className={styles.infoCard}>
+                  <div className={styles.infoTop}>
+                    <div className={styles.infoLeft}>
+                      <h3 className={styles.name}>{r.name}</h3>
+                      <p className={styles.programText}>{r.program}</p>
+                    </div>
+                    <p className={styles.story}>{r.story}</p>
+                  </div>
+                  <div className={styles.statsGrid}>
+                    {r.stats.map((s, j) => (
+                      <div key={j} className={styles.statItem}>
+                         <div className={styles.dot}></div>
+                        {s}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

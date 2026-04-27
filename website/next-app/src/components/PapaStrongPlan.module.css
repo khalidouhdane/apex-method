@@ -1,13 +1,14 @@
 .section {
   padding: var(--section-pad) 0;
   position: relative;
+  overflow: hidden; /* For parallax bounds */
 }
 
 .container {
   display: grid;
   grid-template-columns: 1fr 400px;
   gap: 60px;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 /* Left Column */
@@ -32,65 +33,32 @@
   color: white;
 }
 
-.priceBlock {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 16px;
-}
-
-.toggle {
-  display: flex;
-  background: #191715;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 4px;
-  border-radius: 100px;
-}
-
-.toggleBtn, .toggleBtnActive {
-  background: transparent;
-  border: none;
-  padding: 8px 20px;
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--text-dim);
-  cursor: pointer;
-  border-radius: 100px;
-  transition: all 0.3s;
-}
-
-.toggleBtnActive {
-  background: linear-gradient(98deg, #D38955 -2.22%, #98572A 86.22%);
-  color: white;
-}
-
-.price {
-  font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 800;
-  color: white;
-  line-height: 1;
-}
-
 /* Info Box */
 .infoBox {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 40px;
-  background: transparent;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   padding: 32px;
   margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.infoBox::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(211, 137, 85, 0.5), transparent);
 }
 
 .infoBoxLeft {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  min-width: 200px;
+  min-width: 180px;
 }
 
 .infoBoxTitle {
@@ -109,7 +77,7 @@
 
 .infoBoxRight p {
   color: var(--text-dim);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.6;
   margin: 0;
 }
@@ -118,53 +86,140 @@
 .featuresGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 48px 32px;
 }
 
 .featureItem {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+  align-items: flex-start;
+  z-index: 1;
 }
 
-.featureItem h4 {
+.featureNumber {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(211, 137, 85, 0.15);
+  user-select: none;
+  font-style: italic;
+  margin-top: -4px;
+}
+
+.featureContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.featureContent h4 {
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 700;
   color: white;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  margin: 0;
 }
 
-.featureItem p {
+.featureContent p {
   font-size: 14px;
   color: var(--text-dim);
   line-height: 1.6;
+  margin: 0;
 }
 
 /* Right Column */
 .rightCol {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 
-.imageCard {
-  background: var(--bronze-700);
-  border-radius: 24px;
-  overflow: hidden;
+.imageCardWrapper {
+  position: relative;
+  height: 380px;
+  width: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  height: 500px;
-  position: relative;
+  border-radius: 24px;
+  clip-path: inset(-150px 0px 0px 0px round 24px);
 }
 
-.alexImg {
+.imageCardBg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  background: linear-gradient(145deg, #AE6536 0%, #66391A 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 1;
+}
+
+.alexImgOut {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  transform: scale(1.35);
+  transform-origin: bottom center;
+  margin-bottom: 0;
+  pointer-events: none;
+}
+
+.priceBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.toggle {
+  display: flex;
+  background: #0F0D0B;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px;
+  border-radius: 100px;
+  width: 100%;
+}
+
+.toggleBtn, .toggleBtnActive {
+  background: transparent;
+  border: none;
+  padding: 10px 16px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-radius: 100px;
+  transition: all 0.3s;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.toggleBtnActive {
+  background: linear-gradient(98deg, #D38955 -2.22%, #98572A 86.22%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(152, 87, 42, 0.2);
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
 }
 
 .ctaButton {
@@ -183,11 +238,31 @@
   font-weight: 600;
   letter-spacing: 0.05em;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(98deg, rgba(211, 137, 85, 0.1) -2.22%, rgba(152, 87, 42, 0.1) 86.22%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.ctaButton:hover::before {
+  opacity: 1;
 }
 
 .ctaButton:hover {
-  background: rgba(204, 142, 102, 0.1);
   border-color: rgba(204, 142, 102, 0.8);
+}
+
+.ctaButton span, .ctaButton svg {
+  position: relative;
+  z-index: 1;
 }
 
 /* Responsive */
@@ -197,23 +272,29 @@
   }
   
   .headerRow {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
-  }
-  
-  .priceBlock {
-    align-items: flex-start;
+    margin-bottom: 32px;
   }
   
   .infoBox {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
+  }
+  
+  .rightCol {
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
   }
 }
 
 @media (max-width: 640px) {
   .featuresGrid {
     grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .toggle {
+    flex-direction: column;
   }
 }
+
