@@ -74,12 +74,30 @@ export default function PapaStrongPlan() {
         <div className={styles.leftCol}>
           <div className={styles.headerRow}>
             <h2 className={styles.title}>
-              <SplitTextReveal text="L'EXPÉRIENCE" delay={0} />
+              <SplitTextReveal as="span" delay={0}>L'EXPÉRIENCE</SplitTextReveal>
               <br/>
               <span className="text-gradient-prog" style={{ fontStyle: 'italic', display: 'inline-block' }}>
-                <SplitTextReveal text="PREMIUM" delay={0.2} isGradient={true} />
+                <SplitTextReveal as="span" delay={0.2}>PREMIUM</SplitTextReveal>
               </span>
             </h2>
+
+            <div className={styles.priceBlock}>
+              <div className={styles.toggle}>
+                <button 
+                  className={paymentPlan === 'unique' ? styles.toggleBtnActive : styles.toggleBtn}
+                  onClick={() => setPaymentPlan('unique')}
+                >
+                  PAIEMENT UNIQUE
+                </button>
+                <button 
+                  className={paymentPlan === 'split' ? styles.toggleBtnActive : styles.toggleBtn}
+                  onClick={() => setPaymentPlan('split')}
+                >
+                  PAIEMENT EN 3 FOIS
+                </button>
+              </div>
+              <div className={styles.price}>{paymentPlan === 'unique' ? '590 Euro' : '197 Euro / mois'}</div>
+            </div>
           </div>
 
           <div className={styles.infoBox} ref={infoBoxRef}>
@@ -142,32 +160,12 @@ export default function PapaStrongPlan() {
             />
           </div>
           
-          <div className={styles.offerBlock}>
-            <div className={styles.priceBlock}>
-              <div className={styles.toggle}>
-                <button 
-                  className={paymentPlan === 'unique' ? styles.toggleBtnActive : styles.toggleBtn}
-                  onClick={() => setPaymentPlan('unique')}
-                >
-                  PAIEMENT UNIQUE
-                </button>
-                <button 
-                  className={paymentPlan === 'split' ? styles.toggleBtnActive : styles.toggleBtn}
-                  onClick={() => setPaymentPlan('split')}
-                >
-                  PAIEMENT EN 3 FOIS
-                </button>
-              </div>
-              <div className={styles.price}>{paymentPlan === 'unique' ? '590 Euro' : '197 Euro / mois'}</div>
-            </div>
-
-            <Link href="#appel" className={styles.ctaButton}>
-              <span>Réserver Un Appel Stratégique</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </Link>
-          </div>
+          <Link href="#appel" className={styles.ctaButton}>
+            <span>Réserver Un Appel Stratégique</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 17L17 7M17 7H7M17 7V17" />
+            </svg>
+          </Link>
         </div>
 
       </div>
